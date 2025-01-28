@@ -1,6 +1,15 @@
-const App = () => {
-  return <h1>Empty Pizza Box Media Match!</h1>;
+import { useContext, useState, useEffect } from 'react'
+import { Routes, Route, useNavigate } from 'react-router'
 
-};
+import NavBar from './components/NavBar/NavBar'
+
+const App = () => {
+
+  return
+    <>
+      <NavBar />
+
+    </>
+}
 
 export default App
