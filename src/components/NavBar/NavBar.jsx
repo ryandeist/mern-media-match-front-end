@@ -9,7 +9,7 @@ const NavBar = () => {
   const handleSignOut = () => {
     localStorage.removeItem('token')
     setUser(null)
-  };
+  }
 
   return (
     <nav>
