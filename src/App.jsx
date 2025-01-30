@@ -1,7 +1,8 @@
-import { useContext, useState, useEffect } from 'react'
-import { Routes, Route, useNavigate } from 'react-router'
-import { showGame } from './services/userService'
-import NavBar from './components/NavBar/NavBar'
+import { useContext, useState, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router';
+import { showGame } from './services/userService';
+import NavBar from './components/NavBar/NavBar';
+import Landing  from './components/Landing/Landing';
 import './App.css'
 import { UserContext } from './contexts/UserContext';
 
@@ -19,7 +20,7 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <h1>Hello world</h1>
+      <Landing />
       <button onClick={fetchData}>Fetch Data</button>
     </>
   );
