@@ -1,23 +1,25 @@
-import { useContext, useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router';
-import { showGame } from './services/userService';
-import NavBar from './components/NavBar/NavBar';
-import Landing from './components/Landing/Landing';
-import SignUpForm from './components/SignUpForm/SignUpForm';
-import SignInForm from './components/SignInForm/SignInForm';
-import SettingsComponent from './components/SettingsComponent/SettingsComponent'
-import CardComponent from './components/CardComponent/CardComponent';
+import { useContext, useState, useEffect } from 'react'
+import { Routes, Route, useNavigate } from 'react-router'
+import { showGame } from './services/userService'
+import NavBar from './components/NavBar/NavBar'
+import Landing  from './components/Landing/Landing'
+import './App.css'
 import { UserContext } from './contexts/UserContext'
-import './App.css';
+import SettingsComponent from './components/SettingsComponent/SettingsComponent'
+import CardComponent from './components/CardComponent/CardComponent'
+import CardDetails from './components/CardDetails/CardDetails'
 
 const App = () => {
   // hooks
   const { user } = useContext(UserContext)
+  const navigate = useNavigate();
+
   // state variable
   const [settings, setSettings] = useState([])
   const [gameData, setGameData] = useState([])
 
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedGame, setSelectedGame] = useState(null)
 
   useEffect(() => {
     // fetch function
@@ -35,17 +37,45 @@ const App = () => {
     console.log('Fetched Data', fetchedData)
     setGameData(fetchedData)
   }
-  return (
 
+  // handler functions 
+  const handleCardClick = (game) => {
+    setSelectedGame(game)
+    setIsModalOpen(!isModalOpen)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(!isModalOpen)
+    setSelectedGame(null)
+  }
+
+  return (
+  // prevent background scrolling
+      if (isModalOpen) {
+        document.body.classList.add('active-modal')
+    } else {
+        document.body.classList.remove('active-modal')
+    }
+
+  return (
     <>
       <NavBar />
       <Routes>
         <Route path="/" element={user ? (
-          <>
-            <CardComponent gameData={gameData} />
-            <button onClick={fetchData}>Fetch Data</button>
-            <SettingsComponent settings={settings} setSettings={setSettings} />
-          </>
+         <>
+          <CardComponent 
+            gameData={gameData}
+            onCardClick={handleCardClick}
+          />
+          {isModalOpen && (
+            <CardDetails
+              gameData={selectedGame}
+              onClose={handleCloseModal}
+              isModalOpen={isModalOpen}
+            />
+          <button onClick={fetchData}>Fetch Data</button>
+          <SettingsComponent settings={settings} setSettings={setSettings} />
+        </>  
         ) : (
           <Landing />
         )} />
