@@ -1,22 +1,28 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
-import SignUp from './components/SignUp'
-import SignIn from './components/SignIn'
+import { useContext, useState, useEffect } from 'react'
+import { Routes, Route, useNavigate } from 'react-router'
+import { showGame } from './services/userService'
+import NavBar from './components/NavBar/NavBar'
+import './App.css'
+import { UserContext } from './contexts/UserContext';
 
 const App = () => {
-  return (
-    <Router>
-      <nav>
-        <Link to="/sign-up">Sign Up</Link>
-        <Link to="/sign-in">Sign In</Link>
-      </nav>
-      <Routes>
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/" element={<h1>Empty Pizza Box Media Match!</h1>} />
-      </Routes>
-    </Router>
-  )
-}
+  // state variable
+  const [settings, setSettings] = useState(["Indie"])
 
-export default App
+  const fetchData = async () => {
+    const data = await showGame( settings )
+    console.log('Data:', data)
+  }
+
+  const { user } = useContext(UserContext);
+
+  return (
+    <>
+      <NavBar />
+      <h1>Hello world</h1>
+      <button onClick={fetchData}>Fetch Data</button>
+    </>
+  );
+};
+
+export default App;
