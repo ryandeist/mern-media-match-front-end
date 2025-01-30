@@ -22,11 +22,17 @@ const App = () => {
   }
 
   return (
+
     <>
       <NavBar />
-      <Landing />
-      <button onClick={fetchData}>Fetch Data</button>
-      <SettingsComponent settings={settings} setSettings={setSettings}/>
+      {!user ?  (
+        <Landing />
+      ) :  (
+        <>
+          <button onClick={fetchData}>Fetch Data</button>
+          <SettingsComponent settings={settings} setSettings={setSettings} />
+        </>  
+      )}
     </>
   );
 };
