@@ -14,7 +14,7 @@ import CardDetails from './components/CardDetails/CardDetails'
 const App = () => {
   // hooks
   const { user } = useContext(UserContext)
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // state variable
   const [settings, setSettings] = useState([])
