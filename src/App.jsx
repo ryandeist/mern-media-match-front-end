@@ -16,22 +16,22 @@ const App = () => {
   // state variable
   const [settings, setSettings] = useState([])
   const [gameData, setGameData] = useState([])
-  
+
   const navigate = useNavigate();
 
-  useEffect(()=> {
+  useEffect(() => {
     // fetch function
     const fetchData = async () => {
-      const fetchedData = await showGame( settings )
+      const fetchedData = await showGame(settings)
       console.log('Fetched Data', fetchedData)
       setGameData(fetchedData)
     }
     fetchData()
   }, [settings])
-  
+
   // fetch function
   const fetchData = async () => {
-    const fetchedData = await showGame( settings )
+    const fetchedData = await showGame(settings)
     console.log('Fetched Data', fetchedData)
     setGameData(fetchedData)
   }
@@ -41,14 +41,14 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={user ? (
-         <>
-          <CardComponent gameData={gameData} />
-          <button onClick={fetchData}>Fetch Data</button>
-          <SettingsComponent settings={settings} setSettings={setSettings} />
-        </>  
+          <>
+            <CardComponent gameData={gameData} />
+            <button onClick={fetchData}>Fetch Data</button>
+            <SettingsComponent settings={settings} setSettings={setSettings} />
+          </>
         ) : (
           <Landing />
-          )} />
+        )} />
         <Route path="/sign-up" element={<SignUpForm />} />
         <Route path="/sign-in" element={<SignInForm />} />
       </Routes>

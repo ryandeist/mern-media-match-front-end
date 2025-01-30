@@ -8,56 +8,55 @@ const SignInForm = () => {
   const [message, setMessage] = useState('');
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
+  const { username, password } = formData; 
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setMessage('');
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage('');
-
-    if (!formData.username.includes('@')) {
-      setMessage('Invalid username');
-      return;
-    }
-
     try {
-      const user = await signIn(formData);
-      setUser(user);
+      const signedInUser = await signIn(formData);
+
+      setUser(signedInUser);
       navigate('/');
     } catch (error) {
       setMessage(error.message);
-    }
+    };
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Sign In</h2>
-      {message && <p style={{ color: 'red' }}>{message}</p>}
+    <>
+    <h2>Sign In</h2>
+    <p style={{ color: "red" }}>{message}</p>
+    <form autoComplete="off" onSubmit={handleSubmit}>
       <div>
-        <label>Username:</label>
+        <label htmlFor="username">Username:</label>
         <input
           type="text"
           name="username"
-          value={formData.username}
+          id="username"
+          value={username}
           onChange={handleChange}
           required
         />
       </div>
       <div>
-        <label>Password:</label>
+        <label htmlFor="password">Password:</label>
         <input
           type="password"
           name="password"
-          value={formData.password}
+          id="password"
+          value={password}
           onChange={handleChange}
           required
         />
       </div>
       <button type="submit">Sign In</button>
     </form>
+    </>
   );
 };
 
