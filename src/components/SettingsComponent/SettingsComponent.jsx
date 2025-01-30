@@ -1,8 +1,11 @@
+// imports
 import { useState } from "react"
 import gameGenres from "../../data/gameGenres"
 
-
+// component
 const SettingsComponent = ({ settings, setSettings }) => {
+
+    //handler functions
     const handleCheckboxChange = async (evt) => {
         await setSettings((prev) => {
             if (prev.includes(evt.target.name)) {
@@ -14,7 +17,9 @@ const SettingsComponent = ({ settings, setSettings }) => {
     }
     // want to send settings to settings db
     // want to have to save to do that
+    // make a save button and add handleSubmit logic
 
+    // return
     return (
         <div>
             <div>
@@ -49,4 +54,5 @@ const SettingsComponent = ({ settings, setSettings }) => {
     )
 }
 
+// export
 export default SettingsComponent
