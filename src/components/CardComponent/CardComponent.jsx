@@ -1,19 +1,20 @@
 // import
 import { useState } from "react"
-
+import './CardComponent.css'
 // component
 const CardComponent = (props) => {
 
-    const showProp = () => {
-        console.log(props)
-    }
+    const card = props.gameData[0] 
     // return 
     return (
-        <div>
-            <img src={props.gameData[0]?.cover} alt="cover image for product"/>
-                {props.gameData[0]?.name}
-                {props.gameData[0]?.parentalRating}
-                ${props.gameData[0]?.price}
+        <div className="card">
+            {/* <h3>{card.name} ({card.releaseDate.slice(0,4)})</h3> */}
+            <img className="card-image" src={card?.cover} alt="cover image for product"/>
+            {/* <div className="card-info">
+                <p className="rating">{card.parentalRating}</p>
+                <p className="price">${card.price}</p>                
+            </div> */}
+            <button className="see-more-btn">See More</button>
         </div>
     )
 }
