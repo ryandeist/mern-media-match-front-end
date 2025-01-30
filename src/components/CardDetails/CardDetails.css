@@ -1,0 +1,109 @@
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.card-details-modal {
+    background: white;
+    padding: 15px;
+    width: 70%;
+    max-width: 450px;
+    position: relative;
+    border-radius: 8px;
+    overflow: auto;
+    transition: all 0.3 ease;
+    max-height: 90vh;
+}
+.card-details-modal::-webkit-scrollbar {
+    display: none; 
+}
+
+.card-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.card-modal-header h2 {
+    margin: 0;
+}
+
+.card-modal-header button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.card-modal-header button:hover {
+    color: #FF5C5C;
+}
+  
+.card-modal-cover {
+    width: 60%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    margin: 10px 0;
+    border: 1px solid black;
+}
+  
+.ratings-price {
+    display: flex;
+    gap: 20px; 
+    margin-top: 10px; 
+    justify-content: space-evenly;
+}
+  
+.info-item {
+    display: flex;
+    flex-direction: column; 
+}
+  
+.info-item h3 {
+    margin: 0; 
+    font-size: 14px;
+}
+  
+.info-item p {
+    margin: 0; 
+    font-size: 13px; 
+}
+
+.card-modal-info .info-item {
+    margin-bottom: 15px; 
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+  
+.remove-btn, .add-to-cart-btn {
+    background-color: #FF5C5C; 
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50px;
+    text-align: center;
+    width: 30%;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 15px; 
+    transition: background-color 0.3s ease;
+}
+  
+.remove-btn:hover, .add-to-cart-btn:hover {
+    background-color: #FF3B3B;
+}

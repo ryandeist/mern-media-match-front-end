@@ -5,16 +5,21 @@ import './CardComponent.css'
 const CardComponent = (props) => {
 
     const card = props.gameData[0] 
+
+    // handler functions
+    const handleClick = () => {
+        props.onCardClick(card)
+    }
     // return 
     return (
         <div className="card">
-            {/* <h3>{card.name} ({card.releaseDate.slice(0,4)})</h3> */}
-            <img className="card-image" src={card?.cover} alt="cover image for product"/>
+            <h3>{card.title || "Untitled"}</h3>
+            <img className="card-image" src={card?.cover} alt="cover image"/>
             {/* <div className="card-info">
                 <p className="rating">{card.parentalRating}</p>
                 <p className="price">${card.price}</p>                
             </div> */}
-            <button className="see-more-btn">See More</button>
+            <button className="see-more-btn" onClick={handleClick}>See More</button>
         </div>
     )
 }
