@@ -36,7 +36,7 @@ const App = () => {
 
     <>
       <NavBar />
-      {user ?  (
+      {!user ?  (
         <Landing />
       ) :  (
         <>
