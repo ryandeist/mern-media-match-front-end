@@ -12,6 +12,8 @@ import CardDetails from './components/CardDetails/CardDetails'
 const App = () => {
   // hooks
   const { user } = useContext(UserContext)
+  const navigate = useNavigate();
+
   // state variable
   const [settings, setSettings] = useState([])
   const [gameData, setGameData] = useState([])
@@ -46,6 +48,7 @@ const App = () => {
     setSelectedGame(null)
   }
 
+  return (
   // prevent background scrolling
       if (isModalOpen) {
         document.body.classList.add('active-modal')
@@ -56,10 +59,9 @@ const App = () => {
   return (
     <>
       <NavBar />
-      {user ?  (
-        <Landing />
-      ) :  (
-        <>
+      <Routes>
+        <Route path="/" element={user ? (
+         <>
           <CardComponent 
             gameData={gameData}
             onCardClick={handleCardClick}
@@ -70,11 +72,15 @@ const App = () => {
               onClose={handleCloseModal}
               isModalOpen={isModalOpen}
             />
-          )}
           <button onClick={fetchData}>Fetch Data</button>
           <SettingsComponent settings={settings} setSettings={setSettings} />
         </>  
-      )}
+        ) : (
+          <Landing />
+          )} />
+        <Route path="/sign-up" element={<SignUpForm />} />
+        <Route path="/sign-in" element={<SignInForm />} />
+      </Routes>
     </>
   );
 };
