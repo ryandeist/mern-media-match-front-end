@@ -18,6 +18,7 @@ const NavBar = (props) => {
           <li>Welcome, {user.username}</li>
           <li><Link to={`/users/${user._id}`}>Dashboard</Link></li>
           <li><Link to={`/users/${user._id}/shoppingCart`}>Shopping Cart</Link></li>
+          <li><Link to={`/users/${user._id}/library`}>Library</Link></li>
           <li><button onClick={()=>props.setIsDrawerOpen(true)} className="navbar-settings-btn">Settings</button></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>

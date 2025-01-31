@@ -90,6 +90,7 @@ const App = () => {
               setIsDrawerOpen={setIsDrawerOpen} />}
             />
             <Route path='users/:userId/shoppingCart' element={<ProductList />} />
+            <Route path='users/:userId/library' element={<ProductList />} />
           </>
         ) : (
           <>

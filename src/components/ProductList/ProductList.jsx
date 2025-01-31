@@ -1,7 +1,11 @@
+import { useLocation } from "react-router";
+
 const ProductList = () => {
+    const location = useLocation();
+
     return (
         <>
-            <h1>This is the product list component</h1>
+            <h1>This is the {location.pathname} route</h1>
         </>
     )
 };
