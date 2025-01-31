@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router'
-import { showGame } from './services/userService'
+import { showSettings } from './services/userService'
+import { showGame } from './services/apiService'
 import NavBar from './components/NavBar/NavBar'
 import Landing from './components/Landing/Landing'
 import './App.css'
@@ -23,6 +24,16 @@ const App = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedGame, setSelectedGame] = useState(null)
+
+  useEffect(() => {
+    // fetch function
+    const fetchSettings = async () => {
+      const fetchedSettings = await showSettings()
+      console.log('saved settings', fetchSettings)
+      setSettings(fetchedSettings || [])
+    }
+    fetchSettings()
+  }, [])
 
   useEffect(() => {
     // fetch function
