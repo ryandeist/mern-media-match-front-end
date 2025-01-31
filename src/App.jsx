@@ -1,17 +1,16 @@
-import { useContext, useState, useEffect } from 'react'
-import { Routes, Route, useNavigate } from 'react-router'
-import { showSettings } from './services/userService'
-import { showGame } from './services/apiService'
-import NavBar from './components/NavBar/NavBar'
-import Landing from './components/Landing/Landing'
 import './App.css'
+import { Routes, Route, useNavigate } from 'react-router'
+import { useContext, useState, useEffect } from 'react'
 import { UserContext } from './contexts/UserContext'
-import SettingsComponent from './components/SettingsComponent/SettingsComponent'
-import SignUpForm from './components/SignUpForm/SignUpForm'
-import SignInForm from './components/SignInForm/SignInForm'
+import { showGame } from './services/apiService'
+import { showSettings } from './services/userService'
 import CardComponent from './components/CardComponent/CardComponent'
 import CardDetails from './components/CardDetails/CardDetails'
+import Landing from './components/Landing/Landing'
+import NavBar from './components/NavBar/NavBar'
 import SettingsDrawer from './components/SettingsDrawer/SettingsDrawer'
+import SignUpForm from './components/SignUpForm/SignUpForm'
+import SignInForm from './components/SignInForm/SignInForm'
 
 const App = () => {
   // hooks
@@ -25,15 +24,15 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedGame, setSelectedGame] = useState(null)
 
-  useEffect(() => {
-    // fetch function
-    const fetchSettings = async () => {
-      const fetchedSettings = await showSettings()
-      console.log('saved settings', fetchSettings)
-      setSettings(fetchedSettings || [])
-    }
-    fetchSettings()
-  }, [])
+  // useEffect(() => {
+  //   // fetch function
+  //   const fetchSettings = async () => {
+  //     const fetchedSettings = await showSettings()
+  //     console.log('saved settings', fetchSettings)
+  //     setSettings(fetchedSettings || [])
+  //   }
+  //   fetchSettings()
+  // }, [])
 
   useEffect(() => {
     // fetch function
