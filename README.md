@@ -14,3 +14,5 @@ Currently, two official plugins are available:
 * <a target="_blank" href="https://icons8.com/icon/2772/retro-tv">Retro TV</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 * <a target="_blank" href="https://icons8.com/icon/12654/musical-note">Music Note</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 * <a target="_blank" href="https://icons8.com/icon/624/documentary">movie camera</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+* https://mui.com/material-ui/api/drawer/ materail UI for drawer component
+* IGDB for Game API

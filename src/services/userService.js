@@ -4,7 +4,7 @@ export const index = async () => {
   try {
     const res = await fetch(BASE_URL, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-    });
+    })
 
     const data = await res.json()
 
@@ -17,12 +17,4 @@ export const index = async () => {
     console.log(err)
     throw new Error(err)
   }
-}
-
-export const showSettings = async () => {
-  
-}
-
-export const updateSettings = async () => {
-
 }
