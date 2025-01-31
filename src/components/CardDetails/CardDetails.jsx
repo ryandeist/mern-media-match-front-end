@@ -23,7 +23,7 @@ const CardDetails = ({ gameData, onClose}) => {
                       {gameData.totalRating 
                       ? (
                         <div className="info-item">
-                          <h3>Overall Rating:</h3>
+                          <h3>Total Rating:</h3>
                           <p className='rating'>{gameData.totalRating/10}/10</p>
                         </div>
                       )
