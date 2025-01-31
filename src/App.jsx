@@ -10,6 +10,7 @@ import SignUpForm from './components/SignUpForm/SignUpForm'
 import SignInForm from './components/SignInForm/SignInForm'
 import CardComponent from './components/CardComponent/CardComponent'
 import CardDetails from './components/CardDetails/CardDetails'
+import SettingsDrawer from './components/SettingsDrawer/SettingsDrawer'
 
 const App = () => {
   // hooks
@@ -19,7 +20,7 @@ const App = () => {
   // state variable
   const [settings, setSettings] = useState([])
   const [gameData, setGameData] = useState([])
-
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedGame, setSelectedGame] = useState(null)
 
@@ -60,7 +61,7 @@ const App = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar setIsDrawerOpen={setIsDrawerOpen} />
       <Routes>
         <Route path="/" element={user ? (
           <>
@@ -79,6 +80,12 @@ const App = () => {
             )}
             <button onClick={fetchData}>Fetch Data</button>
             <SettingsComponent settings={settings} setSettings={setSettings} />
+            <SettingsDrawer 
+              settings={settings} 
+              setSettings={setSettings}
+              isDrawerOpen={isDrawerOpen}
+              setIsDrawerOpen={setIsDrawerOpen}
+            />
           </>
         ) : (
           <Landing />

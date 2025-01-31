@@ -28,7 +28,7 @@ const SettingsComponent = ({ settings, setSettings }) => {
                     Video Games
                     <input 
                       type="checkbox" 
-                      name="Video Games"
+                      name="VideoGames"
                       checked={true}
                       disabled 
                     />
