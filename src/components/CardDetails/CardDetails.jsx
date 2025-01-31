@@ -1,14 +1,17 @@
 // imports
 import './CardDetails.css'
+import VideoGames from '../../assets/Video_Games.png'
 
 const CardDetails = ({ gameData, onClose}) => {
     if (!gameData) return null
     
+    let media = gameData.media.split(" ").join("")
+    console.log("media", media)
     return (
         <div className="modal-overlay">
             <div className="card-details-modal">
                 <div className="card-modal-header">
-                  {/* <img src={`../../assets/${gameData.media}.png`} alt="" />  trying to dynamically render an icon to indicate media type*/}
+                  <img src={media} alt="" /> 
                   <h2>{gameData.title} {gameData.releaseDate ? `(${gameData.releaseDate.slice(0,4)})` : null}</h2>
                   <button onClick={onClose}>X</button>
                 </div>
