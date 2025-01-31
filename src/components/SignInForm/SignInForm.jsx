@@ -1,47 +1,63 @@
-import React, { useState } from 'react'
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router';
+import { UserContext } from '../../contexts/UserContext';
+import { signIn } from '../../services/authService';
 
-const SignIn = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+const SignInForm = () => {
+  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [message, setMessage] = useState('');
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  const { username, password } = formData; 
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setError('')
-    if (!email.includes('@')) {
-      setError('Invalid email address')
-      return
-    }
+  const handleChange = (e) => {
+    setMessage('');
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    // Handle sign in logic here
-    // Example: Call your API to sign in the user
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const signedInUser = await signIn(formData);
+
+      setUser(signedInUser);
+      navigate('/');
+    } catch (error) {
+      setMessage(error.message);
+    };
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Sign In</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <>
+    <h2>Sign In</h2>
+    <p style={{ color: "red" }}>{message}</p>
+    <form autoComplete="off" onSubmit={handleSubmit}>
       <div>
-        <label>Email:</label>
+        <label htmlFor="username">Username:</label>
         <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          name="username"
+          id="username"
+          value={username}
+          onChange={handleChange}
           required
         />
       </div>
       <div>
-        <label>Password:</label>
+        <label htmlFor="password">Password:</label>
         <input
           type="password"
+          name="password"
+          id="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handleChange}
           required
         />
       </div>
       <button type="submit">Sign In</button>
     </form>
-  )
-}
+    </>
+  );
+};
 
-export default SignIn
+export default SignInForm;

@@ -7,8 +7,8 @@ const Landing = () => {
     return (
         <>
             <h1>This the landing page for new users</h1>
-            <button onClick={() => navigate('/auth/sign-up')}>Sign Up</button>
-            <button onClick={() => navigate('/auth/sign-in')}>Sign In</button>
+            <button onClick={() => navigate('/sign-up')}>Sign Up</button>
+            <button onClick={() => navigate('/sign-in')}>Sign In</button>
         </>
     );
 };
