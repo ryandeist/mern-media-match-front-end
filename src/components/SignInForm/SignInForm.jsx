@@ -21,7 +21,7 @@ const SignInForm = () => {
       const signedInUser = await signIn(formData);
 
       setUser(signedInUser);
-      navigate('/');
+      navigate(`/users/${signedInUser._id}`);
     } catch (error) {
       setMessage(error.message);
     };
