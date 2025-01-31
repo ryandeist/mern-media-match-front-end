@@ -8,3 +8,9 @@
 body.active-modal {
   overflow-y: hidden;
 }
+
+.card-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}

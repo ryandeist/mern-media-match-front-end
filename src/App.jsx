@@ -1,15 +1,16 @@
-import { useContext, useState, useEffect } from 'react'
-import { Routes, Route, useNavigate } from 'react-router'
-import { showGame } from './services/userService'
-import NavBar from './components/NavBar/NavBar'
-import Landing from './components/Landing/Landing'
 import './App.css'
+import { Routes, Route, useNavigate } from 'react-router'
+import { useContext, useState, useEffect } from 'react'
 import { UserContext } from './contexts/UserContext'
-import SettingsComponent from './components/SettingsComponent/SettingsComponent'
-import SignUpForm from './components/SignUpForm/SignUpForm'
-import SignInForm from './components/SignInForm/SignInForm'
+import { showGame } from './services/apiService'
+import { showSettings } from './services/userService'
 import CardComponent from './components/CardComponent/CardComponent'
 import CardDetails from './components/CardDetails/CardDetails'
+import Landing from './components/Landing/Landing'
+import NavBar from './components/NavBar/NavBar'
+import SettingsDrawer from './components/SettingsDrawer/SettingsDrawer'
+import SignUpForm from './components/SignUpForm/SignUpForm'
+import SignInForm from './components/SignInForm/SignInForm'
 
 const App = () => {
   // hooks
@@ -19,9 +20,19 @@ const App = () => {
   // state variable
   const [settings, setSettings] = useState([])
   const [gameData, setGameData] = useState([])
-
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedGame, setSelectedGame] = useState(null)
+
+  // useEffect(() => {
+  //   // fetch function
+  //   const fetchSettings = async () => {
+  //     const fetchedSettings = await showSettings()
+  //     console.log('saved settings', fetchSettings)
+  //     setSettings(fetchedSettings || [])
+  //   }
+  //   fetchSettings()
+  // }, [])
 
   useEffect(() => {
     // fetch function
@@ -60,14 +71,16 @@ const App = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar setIsDrawerOpen={setIsDrawerOpen} />
       <Routes>
         <Route path="/" element={user ? (
           <>
-            <CardComponent
-              gameData={gameData}
-              onCardClick={handleCardClick}
-            />
+            <div className='card-container'>
+              <CardComponent
+                gameData={gameData}
+                onCardClick={handleCardClick}
+              />
+            </div>
             {isModalOpen && (
               <CardDetails
                 gameData={selectedGame}
@@ -76,7 +89,12 @@ const App = () => {
               />
             )}
             <button onClick={fetchData}>Fetch Data</button>
-            <SettingsComponent settings={settings} setSettings={setSettings} />
+            <SettingsDrawer 
+              settings={settings} 
+              setSettings={setSettings}
+              isDrawerOpen={isDrawerOpen}
+              setIsDrawerOpen={setIsDrawerOpen}
+            />
           </>
         ) : (
           <Landing />

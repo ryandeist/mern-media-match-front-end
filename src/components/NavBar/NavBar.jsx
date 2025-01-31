@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { Link } from 'react-router';
 import { UserContext } from '../../contexts/UserContext';
+import './NavBar.css'
 
-const NavBar = () => {
+const NavBar = (props) => {
   const { user, setUser } = useContext(UserContext);
 
   const handleSignOut = () => {
@@ -11,11 +12,12 @@ const NavBar = () => {
   }
 
   return (
-    <nav>
+    <nav className='navbar'>
       {user ? (
         <ul>
           <li>Welcome, {user.username}</li>
           <li><Link to='/'>Dashboard</Link></li>
+          <li><button onClick={()=>props.setIsDrawerOpen(true)} className="navbar-settings-btn">Settings</button></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>
       ) : (
