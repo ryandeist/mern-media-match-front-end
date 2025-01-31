@@ -5,16 +5,15 @@ import NavBar from './components/NavBar/NavBar'
 import Landing from './components/Landing/Landing'
 import './App.css'
 import { UserContext } from './contexts/UserContext'
-import SettingsComponent from './components/SettingsComponent/SettingsComponent'
 import SignUpForm from './components/SignUpForm/SignUpForm'
 import SignInForm from './components/SignInForm/SignInForm'
-import CardComponent from './components/CardComponent/CardComponent'
-import CardDetails from './components/CardDetails/CardDetails'
+import ProductList from './components/ProductList/ProductList'
+import UserHomePage from './components/UserHomePage/UserHomePage'
 
 const App = () => {
   // hooks
   const { user } = useContext(UserContext)
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // state variable
   const [settings, setSettings] = useState([])
@@ -26,8 +25,9 @@ const App = () => {
   useEffect(() => {
     // fetch function
     const fetchData = async () => {
+      if (user) {navigate(`/users/${user._id}`)}
       const fetchedData = await showGame(settings)
-      console.log('Fetched Data', fetchedData)
+      console.log('UseEffect Fetched Data triggered')
       setGameData(fetchedData)
     }
     fetchData()
@@ -36,7 +36,7 @@ const App = () => {
   // fetch function
   const fetchData = async () => {
     const fetchedData = await showGame(settings)
-    console.log('Fetched Data', fetchedData)
+    console.log('Function Fetched Data', fetchedData)
     setGameData(fetchedData)
   }
 
@@ -62,30 +62,29 @@ const App = () => {
     <>
       <NavBar />
       <Routes>
-        <Route path="/" element={user ? (
+        <Route path="/" element={<Landing />} />
+        {user ? (
           <>
-            <CardComponent
-              gameData={gameData}
-              onCardClick={handleCardClick}
-            />
-            {isModalOpen && (
-              <CardDetails
-                gameData={selectedGame}
-                onClose={handleCloseModal}
-                isModalOpen={isModalOpen}
-              />
-            )}
-            <button onClick={fetchData}>Fetch Data</button>
-            <SettingsComponent settings={settings} setSettings={setSettings} />
+            <Route path='users/:userId' element={<UserHomePage 
+              settings={settings} 
+              setSettings={setSettings} 
+              fetchData={fetchData} 
+              selectedGame={selectedGame} 
+              onClose={handleCloseModal} 
+              isModalOpen={isModalOpen} 
+              gameData={gameData} 
+              onCardClick={handleCardClick}/> } />
+            <Route path='users/:userId/shoppingCart' element={<ProductList />} />
           </>
         ) : (
-          <Landing />
-        )} />
-        <Route path="/sign-up" element={<SignUpForm />} />
-        <Route path="/sign-in" element={<SignInForm />} />
+          <>
+            <Route path="/sign-up" element={<SignUpForm />} />
+            <Route path="/sign-in" element={<SignInForm />} />
+          </>
+        )}
       </Routes>
     </>
   );
 };
 
-export default App;
+      export default App;
