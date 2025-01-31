@@ -5,7 +5,7 @@ import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContext"
 const media = import.meta.glob('../../assets/*.png')
 
-const CardDetails = ({ gameData, onClose }) => {
+const CardDetails = ({ gameData, onClose, setGameData, setIsModalOpen }) => {
   const { user } = useContext(UserContext)
 
   if (!gameData) return null
@@ -23,7 +23,8 @@ const CardDetails = ({ gameData, onClose }) => {
     try {
       const newCartItem = await addToCart(user._id, gameData)
       console.log(newCartItem)
-      // setGameData
+      setGameData((prev) => prev.filter((game) => game.id !== gameData.id))
+      setTimeout(setIsModalOpen(false), "0500")
     } catch (error) {
       console.log(error)
     }

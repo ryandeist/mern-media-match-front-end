@@ -23,7 +23,7 @@ const UserHomePage = (props) => {
         // fetch function
         const fetchData = async () => {
             const fetchedData = await showGame(settings)
-            console.log('UseEffect Fetched Data triggered')
+            console.log('UseEffect Fetched Data triggered', fetchedData)
             setGameData(fetchedData)
         }
         fetchData()
@@ -32,7 +32,6 @@ const UserHomePage = (props) => {
     // fetch function
     const fetchData = async () => {
         const fetchedData = await showGame(settings)
-        console.log('Function Fetched Data', fetchedData)
         setGameData(fetchedData)
     }
 
@@ -58,7 +57,7 @@ const UserHomePage = (props) => {
             <div className="card-container">
                 <CardComponent gameData={gameData} onCardClick={handleCardClick} />
             </div>
-            {isModalOpen && (<CardDetails gameData={selectedGame} onClose={handleCloseModal} isModalOpen={isModalOpen} />)}
+            {isModalOpen && (<CardDetails gameData={selectedGame} onClose={handleCloseModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setGameData={setGameData} />)}
             <button onClick={fetchData}>Fetch Data</button>
             <SettingsDrawer
                 settings={settings}
