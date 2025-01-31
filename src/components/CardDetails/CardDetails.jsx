@@ -1,17 +1,31 @@
 // imports
 import './CardDetails.css'
-import VideoGames from '../../assets/Video_Games.png'
+import Books from '../../assets/Books.png'
+import Movies from '../../assets/Movies.png'
+import VideoGames from '../../assets/VideoGames.png'
 
+
+const media = import.meta.glob('../../assets/*.png')
+   
 const CardDetails = ({ gameData, onClose}) => {
     if (!gameData) return null
-    
-    let media = gameData.media.split(" ").join("")
-    console.log("media", media)
-    return (
+
+    // dynamically render icon
+    let currentMedia = ""
+    for (const key of Object.keys(media)) {
+        if (key === `../../assets/${gameData.media}.png`) {
+            currentMedia = `/src/assets/${gameData.media}.png`
+            console.log("14", gameData.media)
+            console.log(VideoGames)
+            break
+        }
+    }
+
+     return (
         <div className="modal-overlay">
             <div className="card-details-modal">
                 <div className="card-modal-header">
-                  <img src={media} alt="" /> 
+                  <img className="card-modal-icon" src={currentMedia} alt={gameData.media} /> 
                   <h2>{gameData.title} {gameData.releaseDate ? `(${gameData.releaseDate.slice(0,4)})` : null}</h2>
                   <button onClick={onClose}>X</button>
                 </div>
