@@ -79,7 +79,6 @@ const App = () => {
               />
             )}
             <button onClick={fetchData}>Fetch Data</button>
-            <SettingsComponent settings={settings} setSettings={setSettings} />
             <SettingsDrawer 
               settings={settings} 
               setSettings={setSettings}
