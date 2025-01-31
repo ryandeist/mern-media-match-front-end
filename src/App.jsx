@@ -15,7 +15,7 @@ import SignInForm from './components/SignInForm/SignInForm'
 const App = () => {
   // hooks
   const { user } = useContext(UserContext)
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // state variable
   const [settings, setSettings] = useState([])

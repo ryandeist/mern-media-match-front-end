@@ -1,5 +1,4 @@
 // import
-import { useState } from "react"
 import './CardComponent.css'
 // component
 const CardComponent = (props) => {
