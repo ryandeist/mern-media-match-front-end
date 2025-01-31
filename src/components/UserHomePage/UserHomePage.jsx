@@ -1,7 +1,7 @@
-import { useContext, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import { useState, useEffect } from 'react'
+// import { useNavigate } from 'react-router'
 import { showGame } from '../../services/apiService'
-import { UserContext } from '../../contexts/UserContext'
+// import { UserContext } from '../../contexts/UserContext'
 import CardComponent from "../CardComponent/CardComponent"
 import CardDetails from "../CardDetails/CardDetails"
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
@@ -9,8 +9,8 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
 
 const UserHomePage = (props) => {
     // hooks
-    const { user } = useContext(UserContext)
-    const navigate = useNavigate();
+    // const { user } = useContext(UserContext)
+    // const navigate = useNavigate();
 
     // state variable
     const [settings, setSettings] = useState([])
@@ -22,7 +22,6 @@ const UserHomePage = (props) => {
     useEffect(() => {
         // fetch function
         const fetchData = async () => {
-            if (user) { navigate(`/users/${user._id}`) }
             const fetchedData = await showGame(settings)
             console.log('UseEffect Fetched Data triggered')
             setGameData(fetchedData)
