@@ -64,10 +64,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={user ? (
           <>
-            <CardComponent
-              gameData={gameData}
-              onCardClick={handleCardClick}
-            />
+            <div className='card-container'>
+              <CardComponent
+                gameData={gameData}
+                onCardClick={handleCardClick}
+              />
+            </div>
             {isModalOpen && (
               <CardDetails
                 gameData={selectedGame}
