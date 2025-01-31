@@ -1,11 +1,12 @@
 // imports
-import { useState } from "react"
+import { useParams } from "react-router"
+import { showSettings } from "../../services/settingsService"
 import gameGenres from "../../data/gameGenres"
 import './SettingsComponent.css'
 
 // component
 const SettingsComponent = ({ settings, setSettings }) => {
-
+    const { userId } = useParams()
     //handler functions
     const handleCheckboxChange = async (evt) => {
         await setSettings((prev) => {
@@ -17,9 +18,10 @@ const SettingsComponent = ({ settings, setSettings }) => {
         })
     }
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault()
-        console.log("add crud")
+        const savedSettings = await showSettings(userId)
+        console.log(savedSettings)
 
     }
     // want to send settings to settings db
