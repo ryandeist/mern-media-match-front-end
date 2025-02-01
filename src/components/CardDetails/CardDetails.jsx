@@ -3,10 +3,12 @@ import './CardDetails.css'
 import { addToCart } from '../../services/cartService'
 import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContext"
+import { useLocation } from 'react-router'
 const media = import.meta.glob('../../assets/*.png')
 
 const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset }) => {
   const { user } = useContext(UserContext)
+  const location = useLocation
 
   if (!selectedGame) return null
 
@@ -88,10 +90,25 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
               : null
             }
           </div>
-          <div className="modal-buttons">
-            <button className="remove-btn" onClick={() => handleAddToCart('remove')}>Remove</button>
-            <button className="add-to-cart-btn" onClick={() => handleAddToCart('add')}>Add to Cart</button>
-          </div>
+          { 
+            location.pathname === "/library" 
+            ? <div className="modal-buttons">
+                <button className="remove-btn" >Remove from Library</button>
+                <button className="add-to-cart-btn">Review</button>
+
+              </div>
+
+                : location.pathname === "/cart" 
+                ? <div className="modal-buttons">
+                    <button className="remove-btn" >Remove from Cart</button>
+                    <button className="add-to-cart-btn">Purchase</button>
+                  </div>
+
+                  : <div className="modal-buttons">
+                      <button className="remove-btn" onClick={() => handleAddToCart('remove')}>Remove</button>
+                      <button className="add-to-cart-btn" onClick={() => handleAddToCart('add')}>Add to Cart</button>
+                    </div>
+          }
         </div>
       </div>
   )
