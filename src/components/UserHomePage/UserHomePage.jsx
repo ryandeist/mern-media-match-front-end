@@ -1,7 +1,7 @@
-import { useContext, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import { useState, useEffect } from 'react'
+// import { useNavigate } from 'react-router'
 import { showGame } from '../../services/apiService'
-import { UserContext } from '../../contexts/UserContext'
+// import { UserContext } from '../../contexts/UserContext'
 import CardComponent from "../CardComponent/CardComponent"
 import CardDetails from "../CardDetails/CardDetails"
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
@@ -9,12 +9,13 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
 
 const UserHomePage = (props) => {
     // hooks
-    const { user } = useContext(UserContext)
-    const navigate = useNavigate();
+    // const { user } = useContext(UserContext)
+    // const navigate = useNavigate();
 
     // state variable
     const [settings, setSettings] = useState([])
     const [gameData, setGameData] = useState([])
+    const [reset, setReset] = useState(false)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [selectedGame, setSelectedGame] = useState(null)
@@ -22,19 +23,18 @@ const UserHomePage = (props) => {
     useEffect(() => {
         // fetch function
         const fetchData = async () => {
-            if (user) { navigate(`/users/${user._id}`) }
             const fetchedData = await showGame(settings)
-            console.log('UseEffect Fetched Data triggered')
+            console.log('UseEffect Fetched Data triggered', fetchedData)
             setGameData(fetchedData)
         }
         fetchData()
-    }, [settings])
+    }, [settings, reset])
 
     // fetch function
     const fetchData = async () => {
-        const fetchedData = await showGame(settings)
-        console.log('Function Fetched Data', fetchedData)
-        setGameData(fetchedData)
+        // const fetchedData = await showGame(settings)
+        // setGameData(fetchedData)
+        console.log('leftover game', gameData)
     }
 
     // handler functions 
@@ -59,7 +59,7 @@ const UserHomePage = (props) => {
             <div className="card-container">
                 <CardComponent gameData={gameData} onCardClick={handleCardClick} />
             </div>
-            {isModalOpen && (<CardDetails gameData={selectedGame} onClose={handleCloseModal} isModalOpen={isModalOpen} />)}
+            {isModalOpen && (<CardDetails gameArray={gameData} gameData={selectedGame} onClose={handleCloseModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setGameData={setGameData} setReset={setReset} reset={reset} />)}
             <button onClick={fetchData}>Fetch Data</button>
             <SettingsDrawer
                 settings={settings}
