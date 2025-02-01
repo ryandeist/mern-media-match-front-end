@@ -1,49 +1,75 @@
 // imports
-import { useState } from "react"
+import { useParams } from "react-router"
+import { createSettings, updateSettings } from "../../services/settingsService"
 import gameGenres from "../../data/gameGenres"
 import './SettingsComponent.css'
 
 // component
-const SettingsComponent = ({ settings, setSettings }) => {
+const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings }) => {
+    const { userId } = useParams() // consider using context?
 
     //handler functions
     const handleCheckboxChange = async (evt) => {
         await setSettings((prev) => {
-            if (prev.includes(evt.target.name)) {
-                return prev.filter(genre => genre !== evt.target.name)
+            if (evt.target.name === "media") { // change to media when rendering dynamically
+                const selectedMedia = evt.target.value
+                const updatedMedia = prev.media.includes(selectedMedia) 
+                  ? prev.media.filter(media => media !== selectedMedia)
+                  : [...prev.media, selectedMedia]
+
+                return {
+                    ...prev,
+                    media: updatedMedia
+                }
             } else {
-                return [...prev, evt.target.name]
+                const updatedGenres = [...prev.genre]
+                if (updatedGenres.includes(evt.target.name)) {
+                    return {
+                        ...prev,
+                        genre: updatedGenres.filter(genre => genre !== evt.target.name),
+                    }
+                } else {
+                    return {
+                        ...prev,
+                        genre: [...updatedGenres, evt.target.name],
+                    }
+                }
             }
         })
     }
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault()
-        console.log("add crud")
-
+        if(!isSettings || (settings.media.length === 0 && settings.genre.length === 0)) {
+            await createSettings(userId, settings)
+            setIsSettings(true)
+        } else {
+            await updateSettings(userId, settings)
+        }
     }
-    // want to send settings to settings db
-    // want to have to save to do that
-    // make a save button and add handleSubmit logic
 
     // return
     return (
         <form onSubmit={handleSubmit} className="settings-form">
             <div className="settings-section">
                 <h3 className="section-heading">Medium</h3>
+                {/* wrap the label with media.map((mediaType) => ))} */}
                 <label className="checkbox-label large-checkbox">
                     <input 
                       type="checkbox" 
-                      name="VideoGames"
-                      checked={true}
-                      disabled 
+                      name="media" // change to "media" when more options incorporated 
+                      onChange={handleCheckboxChange}
+                      checked={settings.media ? settings.media.includes("VideoGames") : false } // {settings.media.includes(mediaOption)}
+                      value="VideoGames" //change to {mediaType}
+                    //   disabled={initSettings.media.length > 0}// will remove when more options available
                     />
-                    Video Games
+                    Video Games {/* mediaOption */}
                 </label>
+                 {/* close media map here */}
             </div>
             <div className="settings-sections">
-                <h3 className="section-heading">Genres</h3> 
-                <div className="checkbox-grid">  
+                <h3 className="section-heading">Genres</h3>
+                <div className="checkbox-grid">
                     {gameGenres.map((genre) => (
                         <label key={genre.id} htmlFor={genre.name} className="checkbox-label">
                             <input 
@@ -51,7 +77,7 @@ const SettingsComponent = ({ settings, setSettings }) => {
                               name={genre.name} 
                               id={genre.id}
                               onChange={handleCheckboxChange}
-                              checked={settings.includes(genre.name)}
+                              checked={settings.genre ? settings.genre.includes(genre.name) : false }
                             />
                             {genre.name}
                         </label>

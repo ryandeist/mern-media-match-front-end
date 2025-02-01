@@ -3,7 +3,7 @@ import './CardComponent.css'
 // component
 const CardComponent = (props) => {
 
-    const card = props.gameData[0] 
+    const card = props.gameData[0]
 
     // handler functions
     const handleClick = () => {
