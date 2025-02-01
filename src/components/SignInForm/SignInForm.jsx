@@ -1,31 +1,31 @@
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router';
-import { UserContext } from '../../contexts/UserContext';
-import { signIn } from '../../services/authService';
+import { useState, useContext } from 'react'
+import { useNavigate } from 'react-router'
+import { UserContext } from '../../contexts/UserContext'
+import { signIn } from '../../services/authService'
 
 const SignInForm = () => {
-  const [formData, setFormData] = useState({ username: '', password: '' });
-  const [message, setMessage] = useState('');
-  const { setUser } = useContext(UserContext);
-  const navigate = useNavigate();
-  const { username, password } = formData; 
+  const [formData, setFormData] = useState({ username: '', password: '' })
+  const [message, setMessage] = useState('')
+  const { setUser } = useContext(UserContext)
+  const navigate = useNavigate()
+  const { username, password } = formData
 
   const handleChange = (e) => {
-    setMessage('');
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setMessage('')
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const signedInUser = await signIn(formData);
+      const signedInUser = await signIn(formData)
 
-      setUser(signedInUser);
-      navigate(`/users/${signedInUser._id}`);
+      setUser(signedInUser)
+      navigate('/')
     } catch (error) {
-      setMessage(error.message);
-    };
-  };
+      setMessage(error.message)
+    }
+  }
 
   return (
     <>
@@ -57,7 +57,7 @@ const SignInForm = () => {
       <button type="submit">Sign In</button>
     </form>
     </>
-  );
-};
+  )
+}
 
-export default SignInForm;
+export default SignInForm

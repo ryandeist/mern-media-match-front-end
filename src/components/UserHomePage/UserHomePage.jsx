@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
+// import { useNavigate } from 'react-router'
 import { showGame } from '../../services/apiService'
 import { UserContext } from '../../contexts/UserContext'
 import { showSettings } from '../../services/settingsService'
@@ -11,7 +11,7 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
 const UserHomePage = (props) => {
     // hooks
     const { user } = useContext(UserContext)
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     // state variable
     const [settings, setSettings] = useState({
@@ -25,7 +25,7 @@ const UserHomePage = (props) => {
     const [reset, setReset] = useState(false)
 
     useEffect(() => {
-        if (user) { navigate(`/users/${user._id}`) }
+        // if (user) { navigate(`/users/${user._id}`) }
     
         const fetchSettings = async () => {
           const fetchedSettings = await showSettings(user._id)
@@ -42,7 +42,7 @@ const UserHomePage = (props) => {
             } else {
                 setSettings({
                     media: [],
-                    genre: []
+                    genre: [],
                 })
                 setIsSettings(false)
             }
