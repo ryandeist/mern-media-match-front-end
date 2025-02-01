@@ -1,14 +1,25 @@
-import { Drawer, Box, Typography, IconButton } from "@mui/material";
-import { useState } from "react";
-import SettingsComponent from "../SettingsComponent/SettingsComponent";
+// import
+import { Drawer, Box, Typography,  } from "@mui/material"
+import { useNavigate } from "react-router"
+import SettingsComponent from "../SettingsComponent/SettingsComponent"
 
-
+// component
 const SettingsDrawer = ({ isDrawerOpen, setIsDrawerOpen, settings, setSettings, isSettings, setIsSettings }) => {
+    // hooks
+    const navigate = useNavigate()
+
+    // handler functions
+    const handleCloseDrawer = () => {
+      setIsDrawerOpen(false)
+      navigate('/')
+    }
+
+    // return
     return (
       <Drawer
         anchor='left'
         open={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
+        onClose={() => handleCloseDrawer()}
       >
           <Box 
             p={2}
@@ -25,5 +36,5 @@ const SettingsDrawer = ({ isDrawerOpen, setIsDrawerOpen, settings, setSettings, 
     )
 }
 
-
+// export
 export default SettingsDrawer 

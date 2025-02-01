@@ -1,9 +1,13 @@
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/users/`
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/settings`
 
 export const showSettings = async (userId) => {
   try {
-    const res = await fetch(`${BASE_URL}/${userId}/settings`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    const res = await fetch(BASE_URL, {
+        method: 'GET',
+        headers: { 
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          userid: userId,
+        },
     })
     const savedSettings = await res.json()
     if (savedSettings.err) {
@@ -17,13 +21,16 @@ export const showSettings = async (userId) => {
 
 export const updateSettings = async (userId, settings) => {
   try {
-    const res = await fetch(`${BASE_URL}/${userId}/settings`, {
+    const res = await fetch(BASE_URL, {
         method: 'PUT',
         headers: { 
             Authorization: `Bearer ${localStorage.getItem('token')}`, 
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(settings)
+        body: JSON.stringify({
+          settings: settings,
+          userId: userId,
+        })
     })
 
     if (res.err) {
@@ -37,13 +44,16 @@ export const updateSettings = async (userId, settings) => {
 
 export const createSettings = async (userId, settings) => {
   try {
-    const res = await fetch(`${BASE_URL}/${userId}/settings`, {
+    const res = await fetch(BASE_URL, {
         method: 'POST',
         headers: { 
             Authorization: `Bearer ${localStorage.getItem('token')}`, 
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(settings)
+        body: JSON.stringify({
+          userId: userId,
+          settings: settings,
+        })
     })
     return res.json()    
   } catch (err) {
