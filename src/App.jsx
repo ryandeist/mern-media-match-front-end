@@ -1,10 +1,9 @@
 import './App.css'
-import { Routes, Route, useNavigate } from 'react-router'
-import { useContext, useState, useEffect } from 'react'
+import { Routes, Route, useNavigate, useParams } from 'react-router'
+import { useContext, useState } from 'react'
 import { UserContext } from './contexts/UserContext'
 import Landing from './components/Landing/Landing'
 import NavBar from './components/NavBar/NavBar'
-
 import SignUpForm from './components/SignUpForm/SignUpForm'
 import SignInForm from './components/SignInForm/SignInForm'
 import ProductList from './components/ProductList/ProductList'
@@ -14,12 +13,11 @@ const App = () => {
   // hooks
   const { user } = useContext(UserContext)
   const navigate = useNavigate()
-  // state variable
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   useEffect(() => {
     if (user) { navigate(`/users/${user._id}`) }
-  },[user])
+  }, [user])
 
   return (
     <>
