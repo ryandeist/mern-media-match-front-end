@@ -46,7 +46,6 @@ const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings })
         } else {
             await updateSettings(userId, settings)
         }
-        
     }
 
     // return
