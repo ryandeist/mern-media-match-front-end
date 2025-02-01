@@ -7,7 +7,7 @@ import './SettingsComponent.css'
 // component
 const SettingsComponent = ({ settings, setSettings }) => {
     const { userId } = useParams()
-    
+
     //handler functions
     const handleCheckboxChange = async (evt) => {
         await setSettings((prev) => {
@@ -48,15 +48,18 @@ const SettingsComponent = ({ settings, setSettings }) => {
         <form onSubmit={handleSubmit} className="settings-form">
             <div className="settings-section">
                 <h3 className="section-heading">Medium</h3>
+                {/* wrap the label with media.map((mediaType) => ))} */}
                 <label className="checkbox-label large-checkbox">
                     <input 
                       type="checkbox" 
-                      name="VideoGames"
-                      checked={true}
-                      disabled 
+                      name="VideoGames" // change to "media" when more options incorporated 
+                      checked={true} // {settings.media.includes(mediaOption)}
+                      // value={mediaType}
+                      disabled // will remove when more options available
                     />
-                    Video Games
+                    Video Games {/* mediaOption */}
                 </label>
+                 {/* close media map here */}
             </div>
             <div className="settings-sections">
                 <h3 className="section-heading">Genres</h3> 
