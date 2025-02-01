@@ -1,5 +1,5 @@
-import { useContext, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import { useState, useEffect } from 'react'
+// import { useNavigate } from 'react-router'
 import { showGame } from '../../services/apiService'
 import { showSettings } from '../../services/settingsService'
 import { UserContext } from '../../contexts/UserContext'
@@ -19,6 +19,7 @@ const UserHomePage = (props) => {
         genre: [],
     })
     const [gameData, setGameData] = useState([])    
+    const [reset, setReset] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isSettings, setIsSettings] = useState(false)
     const [selectedGame, setSelectedGame] = useState(null)
@@ -61,20 +62,18 @@ const UserHomePage = (props) => {
           try {
             const fetchedData = await showGame(settings.genre)
             setGameData(fetchedData)
-            console.log('un', settings)
             
           } catch (err) {
             console.log('Error fetching card data:', err)
           }
         }
         fetchData()
-      }, [settings])
+      }, [settings, reset])
 
     // fetch function
     const fetchData = async () => {
         const fetchedData = await showGame(settings.genre)
         setGameData(fetchedData)
-        console.log(settings)
     }
 
     // handler functions 
@@ -99,7 +98,7 @@ const UserHomePage = (props) => {
             <div className="card-container">
                 <CardComponent gameData={gameData} onCardClick={handleCardClick} />
             </div>
-            {isModalOpen && (<CardDetails gameData={selectedGame} onClose={handleCloseModal} isModalOpen={isModalOpen} />)}
+            {isModalOpen && (<CardDetails gameArray={gameData} gameData={selectedGame} onClose={handleCloseModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setGameData={setGameData} setReset={setReset} reset={reset} />)}
             <button onClick={fetchData}>Fetch Data</button>
             <SettingsDrawer
                 settings={settings}

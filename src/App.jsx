@@ -13,11 +13,11 @@ const App = () => {
   // hooks
   const { user } = useContext(UserContext)
   const navigate = useNavigate()
-
-
-  // state variable
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
+  useEffect(() => {
+    if (user) { navigate(`/users/${user._id}`) }
+  }, [user])
 
   return (
     <>

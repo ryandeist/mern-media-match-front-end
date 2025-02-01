@@ -6,7 +6,7 @@ import './SettingsComponent.css'
 
 // component
 const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings }) => {
-    const { userId } = useParams()
+    const { userId } = useParams() // consider using context?
 
     //handler functions
     const handleCheckboxChange = async (evt) => {
@@ -68,8 +68,8 @@ const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings })
                  {/* close media map here */}
             </div>
             <div className="settings-sections">
-                <h3 className="section-heading">Genres</h3> 
-                <div className="checkbox-grid">  
+                <h3 className="section-heading">Genres</h3>
+                <div className="checkbox-grid">
                     {gameGenres.map((genre) => (
                         <label key={genre.id} htmlFor={genre.name} className="checkbox-label">
                             <input 
