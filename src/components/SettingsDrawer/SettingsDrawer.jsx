@@ -3,7 +3,7 @@ import { useState } from "react";
 import SettingsComponent from "../SettingsComponent/SettingsComponent";
 
 
-const SettingsDrawer = ({ isDrawerOpen, setIsDrawerOpen, settings, setSettings }) => {
+const SettingsDrawer = ({ isDrawerOpen, setIsDrawerOpen, settings, setSettings, isSettings, setIsSettings }) => {
     return (
       <Drawer
         anchor='left'
@@ -18,7 +18,7 @@ const SettingsDrawer = ({ isDrawerOpen, setIsDrawerOpen, settings, setSettings }
           >
             <Typography variant='h6' component='div'>
                 Settings
-                <SettingsComponent settings={settings} setSettings={setSettings}/>
+                <SettingsComponent settings={settings} setSettings={setSettings} isSettings={isSettings} setIsSettings={setIsSettings} />
             </Typography>
           </Box>
       </Drawer>

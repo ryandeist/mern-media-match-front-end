@@ -15,11 +15,12 @@ const UserHomePage = (props) => {
 
     // state variable
     const [settings, setSettings] = useState({
-        media: ["VideoGames"],
+        media: [],
         genre: [],
     })
     const [gameData, setGameData] = useState([])    
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isSettings, setIsSettings] = useState(false)
     const [selectedGame, setSelectedGame] = useState(null)
 
 
@@ -29,22 +30,22 @@ const UserHomePage = (props) => {
     
         const fetchSettings = async () => {
           const fetchedSettings = await showSettings(user._id)
-          console.log('Fetched Settings:', fetchedSettings)
 
           try {
             if (fetchedSettings && fetchedSettings.settings && fetchedSettings.settings.length > 0) {
                 const fetchedMedia = fetchedSettings.settings[0].media || []
                 const fetchedGenres = fetchedSettings.settings[0].genre || []
-                console.log(fetchedGenres)
                 setSettings({
                     media: fetchedMedia,
                     genre: fetchedGenres,
                 })
+                setIsSettings(true)
             } else {
                 setSettings({
-                    media: ["VideoGames"],
+                    media: [],
                     genre: []
-                });
+                })
+                setIsSettings(false)
             }
           } catch (err) {
             console.log('Error fetching settings:', err)
@@ -72,8 +73,8 @@ const UserHomePage = (props) => {
     // fetch function
     const fetchData = async () => {
         const fetchedData = await showGame(settings.genre)
-        console.log('Function Fetched Data', fetchedData)
         setGameData(fetchedData)
+        console.log(settings)
     }
 
     // handler functions 
@@ -103,6 +104,8 @@ const UserHomePage = (props) => {
             <SettingsDrawer
                 settings={settings}
                 setSettings={setSettings}
+                isSettings={isSettings}
+                setIsSettings={setIsSettings}
                 isDrawerOpen={props.isDrawerOpen}
                 setIsDrawerOpen={props.setIsDrawerOpen}
             />

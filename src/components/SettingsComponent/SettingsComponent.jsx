@@ -1,17 +1,17 @@
 // imports
 import { useParams } from "react-router"
-import { updateSettings } from "../../services/settingsService"
+import { createSettings, updateSettings } from "../../services/settingsService"
 import gameGenres from "../../data/gameGenres"
 import './SettingsComponent.css'
 
 // component
-const SettingsComponent = ({ settings, setSettings }) => {
+const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings }) => {
     const { userId } = useParams()
 
     //handler functions
     const handleCheckboxChange = async (evt) => {
         await setSettings((prev) => {
-            if (evt.target.name === "media") {
+            if (evt.target.name === "media") { // change to media when rendering dynamically
                 const selectedMedia = evt.target.value
                 const updatedMedia = prev.media.includes(selectedMedia) 
                   ? prev.media.filter(media => media !== selectedMedia)
@@ -40,7 +40,13 @@ const SettingsComponent = ({ settings, setSettings }) => {
 
     const handleSubmit = async (evt) => {
         evt.preventDefault()
-        await updateSettings(userId, settings)
+        if(!isSettings || (settings.media.length === 0 && settings.genre.length === 0)) {
+            await createSettings(userId, settings)
+            setIsSettings(true)
+        } else {
+            await updateSettings(userId, settings)
+        }
+        
     }
 
     // return
@@ -52,10 +58,11 @@ const SettingsComponent = ({ settings, setSettings }) => {
                 <label className="checkbox-label large-checkbox">
                     <input 
                       type="checkbox" 
-                      name="VideoGames" // change to "media" when more options incorporated 
-                      checked={true} // {settings.media.includes(mediaOption)}
-                      // value={mediaType}
-                      disabled // will remove when more options available
+                      name="media" // change to "media" when more options incorporated 
+                      onChange={handleCheckboxChange}
+                      checked={settings.media ? settings.media.includes("VideoGames") : false } // {settings.media.includes(mediaOption)}
+                      value="VideoGames" //change to {mediaType}
+                    //   disabled={initSettings.media.length > 0}// will remove when more options available
                     />
                     Video Games {/* mediaOption */}
                 </label>
