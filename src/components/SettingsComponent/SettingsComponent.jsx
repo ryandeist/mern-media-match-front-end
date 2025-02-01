@@ -5,7 +5,7 @@ import gameGenres from "../../data/gameGenres"
 import './SettingsComponent.css'
 
 // component
-const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings }) => {
+const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings, setIsDrawerOpen }) => {
     const { userId } = useParams() // consider using context?
 
     //handler functions
@@ -46,6 +46,7 @@ const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings })
         } else {
             await updateSettings(userId, settings)
         }
+        setIsDrawerOpen(false)
     }
 
     // return
