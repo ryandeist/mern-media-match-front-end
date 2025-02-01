@@ -22,13 +22,14 @@ const CardDetails = ({ gameArray, gameData, onClose, setGameData, setIsModalOpen
       break
     }
   }
-  const handleAddToCart = async (e) => {
-    e.preventDefault()
+  const handleAddToCart = async (buttonName) => {
+    // e.preventDefault()
     try {
-      await addToCart(user._id, gameData)
+
+      if (buttonName === 'add') await addToCart(user._id, gameData)
       setGameData((prev) => prev.filter((game) => game.id !== gameData.id))
       console.log('remaining games', gameArray)
-      setTimeout(setIsModalOpen(false), "0500")
+      setTimeout(setIsModalOpen(false), "1500")
       if (gameArray.length === 1) {
         setReset(!reset)
       }
@@ -38,7 +39,6 @@ const CardDetails = ({ gameArray, gameData, onClose, setGameData, setIsModalOpen
   }
 
   return (
-    <form onSubmit={handleAddToCart}>
       <div className="modal-overlay">
         <div className="card-details-modal">
           <div>
@@ -94,12 +94,11 @@ const CardDetails = ({ gameArray, gameData, onClose, setGameData, setIsModalOpen
             }
           </div>
           <div className="modal-buttons">
-            <button className="remove-btn">Remove</button>
-            <button className="add-to-cart-btn" type='submit' onClick={() => console.log(gameData)}>Add to Cart</button>
+            <button className="remove-btn" onClick={() => handleAddToCart('remove')}>Remove</button>
+            <button className="add-to-cart-btn" onClick={() => handleAddToCart('add')}>Add to Cart</button>
           </div>
         </div>
       </div>
-    </form>
   )
 }
 
