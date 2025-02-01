@@ -71,7 +71,7 @@ const UserHomePage = (props) => {
 
     // fetch function
     const fetchData = async () => {
-        const fetchedData = await showGame(settings)
+        const fetchedData = await showGame(settings.genre)
         console.log('Function Fetched Data', fetchedData)
         setGameData(fetchedData)
     }
