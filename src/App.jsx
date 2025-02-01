@@ -1,6 +1,6 @@
 import './App.css'
 import { Routes, Route, useNavigate, useParams } from 'react-router'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { UserContext } from './contexts/UserContext'
 import Landing from './components/Landing/Landing'
 import NavBar from './components/NavBar/NavBar'

@@ -18,7 +18,7 @@ const SettingsDrawer = ({ isDrawerOpen, setIsDrawerOpen, settings, setSettings, 
           >
             <Typography variant='h6' component='div'>
                 Settings
-                <SettingsComponent settings={settings} setSettings={setSettings} isSettings={isSettings} setIsSettings={setIsSettings} />
+                <SettingsComponent settings={settings} setSettings={setSettings} isSettings={isSettings} setIsSettings={setIsSettings} setIsDrawerOpen={setIsDrawerOpen} />
             </Typography>
           </Box>
       </Drawer>
