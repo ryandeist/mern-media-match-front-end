@@ -1,12 +1,14 @@
 // imports
+import { useContext } from "react"
 import { useParams } from "react-router"
+import { UserContext } from "../../contexts/UserContext"
 import { createSettings, updateSettings } from "../../services/settingsService"
 import gameGenres from "../../data/gameGenres"
 import './SettingsComponent.css'
 
 // component
 const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings, setIsDrawerOpen }) => {
-    const { userId } = useParams() // consider using context?
+    const { user } = useContext(UserContext)
 
     //handler functions
     const handleCheckboxChange = async (evt) => {
@@ -41,10 +43,10 @@ const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings, s
     const handleSubmit = async (evt) => {
         evt.preventDefault()
         if(!isSettings || (settings.media.length === 0 && settings.genre.length === 0)) {
-            await createSettings(userId, settings)
+            await createSettings(user._id, settings)
             setIsSettings(true)
         } else {
-            await updateSettings(userId, settings)
+            await updateSettings(user._id, settings)
         }
         setIsDrawerOpen(false)
     }

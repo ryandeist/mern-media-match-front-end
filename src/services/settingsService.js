@@ -1,8 +1,8 @@
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/users/`
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/settings`
 
 export const showSettings = async (userId) => {
   try {
-    const res = await fetch(`${BASE_URL}/${userId}/settings`, {
+    const res = await fetch(BASE_URL, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     })
     const savedSettings = await res.json()
@@ -17,7 +17,7 @@ export const showSettings = async (userId) => {
 
 export const updateSettings = async (userId, settings) => {
   try {
-    const res = await fetch(`${BASE_URL}/${userId}/settings`, {
+    const res = await fetch(BASE_URL, {
         method: 'PUT',
         headers: { 
             Authorization: `Bearer ${localStorage.getItem('token')}`, 
@@ -37,7 +37,7 @@ export const updateSettings = async (userId, settings) => {
 
 export const createSettings = async (userId, settings) => {
   try {
-    const res = await fetch(`${BASE_URL}/${userId}/settings`, {
+    const res = await fetch(BASE_URL, {
         method: 'POST',
         headers: { 
             Authorization: `Bearer ${localStorage.getItem('token')}`, 
