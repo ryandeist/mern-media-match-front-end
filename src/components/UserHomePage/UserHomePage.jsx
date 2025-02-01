@@ -14,7 +14,10 @@ const UserHomePage = (props) => {
     const navigate = useNavigate()
 
     // state variable
-    const [settings, setSettings] = useState([])
+    const [settings, setSettings] = useState({
+        media: ["VideoGames"],
+        genre: [],
+    })
     const [gameData, setGameData] = useState([])    
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [selectedGame, setSelectedGame] = useState(null)
@@ -25,10 +28,24 @@ const UserHomePage = (props) => {
         if (user) { navigate(`/users/${user._id}`) }
     
         const fetchSettings = async () => {
+          const fetchedSettings = await showSettings(user._id)
+          console.log('Fetched Settings:', fetchedSettings)
+
           try {
-            const fetchedSettings = await showSettings(user._id)
-            const fetchedGenres = fetchedSettings.settings[0].genre
-            setSettings(fetchedGenres || [])        
+            if (fetchedSettings && fetchedSettings.settings && fetchedSettings.settings.length > 0) {
+                const fetchedMedia = fetchedSettings.settings[0].media || []
+                const fetchedGenres = fetchedSettings.settings[0].genre || []
+                console.log(fetchedGenres)
+                setSettings({
+                    media: fetchedMedia,
+                    genre: fetchedGenres,
+                })
+            } else {
+                setSettings({
+                    media: ["VideoGames"],
+                    genre: []
+                });
+            }
           } catch (err) {
             console.log('Error fetching settings:', err)
           }
@@ -41,8 +58,10 @@ const UserHomePage = (props) => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const fetchedData = await showGame(settings)
+            const fetchedData = await showGame(settings.genre)
             setGameData(fetchedData)
+            console.log('un', settings)
+            
           } catch (err) {
             console.log('Error fetching card data:', err)
           }

@@ -5,42 +5,48 @@ export const showSettings = async (userId) => {
     const res = await fetch(`${BASE_URL}/${userId}/settings`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     })
-    
     const savedSettings = await res.json()
-
     if (savedSettings.err) {
         throw new Error(savedSettings.err)
     }
-  
     return savedSettings
-    
   } catch (err) {
     console.log(err)
-    throw new Error(err)
   }
 }
 
-
-export const updateSettings = async () => {
+export const updateSettings = async (userId, settings) => {
   try {
-    const res = await fetch(BASE_URL, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    const res = await fetch(`${BASE_URL}/${userId}/settings`, {
+        method: 'PUT',
+        headers: { 
+            Authorization: `Bearer ${localStorage.getItem('token')}`, 
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(settings)
     })
-// return res.json()    
+
+    if (res.err) {
+        throw new Error(res.err)
+    }
+    return res.json()    
   } catch (err) {
     console.log(err)
-    throw new Error(err)
   }
 }
 
-export const createSettings = async () => {
+export const createSettings = async (userId, settings) => {
   try {
-    const res = await fetch(BASE_URL, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    const res = await fetch(`${BASE_URL}/${userId}/settings`, {
+        method: 'POST',
+        headers: { 
+            Authorization: `Bearer ${localStorage.getItem('token')}`, 
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(settings)
     })
-// return res.json()    
+    return res.json()    
   } catch (err) {
     console.log(err)
-    throw new Error(err)
   }
 }

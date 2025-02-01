@@ -1,32 +1,47 @@
 // imports
 import { useParams } from "react-router"
-import { showSettings } from "../../services/settingsService"
+import { updateSettings } from "../../services/settingsService"
 import gameGenres from "../../data/gameGenres"
 import './SettingsComponent.css'
 
 // component
 const SettingsComponent = ({ settings, setSettings }) => {
     const { userId } = useParams()
+    
     //handler functions
     const handleCheckboxChange = async (evt) => {
         await setSettings((prev) => {
-            if (prev.includes(evt.target.name)) {
-                return prev.filter(genre => genre !== evt.target.name)
+            if (evt.target.name === "media") {
+                const selectedMedia = evt.target.value
+                const updatedMedia = prev.media.includes(selectedMedia) 
+                  ? prev.media.filter(media => media !== selectedMedia)
+                  : [...prev.media, selectedMedia]
+
+                return {
+                    ...prev,
+                    media: updatedMedia
+                }
             } else {
-                return [...prev, evt.target.name]
+                const updatedGenres = [...prev.genre]
+                if (updatedGenres.includes(evt.target.name)) {
+                    return {
+                        ...prev,
+                        genre: updatedGenres.filter(genre => genre !== evt.target.name),
+                    }
+                } else {
+                    return {
+                        ...prev,
+                        genre: [...updatedGenres, evt.target.name],
+                    }
+                }
             }
         })
     }
 
     const handleSubmit = async (evt) => {
         evt.preventDefault()
-        const savedSettings = await showSettings(userId)
-        console.log(savedSettings)
-
+        await updateSettings(userId, settings)
     }
-    // want to send settings to settings db
-    // want to have to save to do that
-    // make a save button and add handleSubmit logic
 
     // return
     return (
@@ -53,7 +68,7 @@ const SettingsComponent = ({ settings, setSettings }) => {
                               name={genre.name} 
                               id={genre.id}
                               onChange={handleCheckboxChange}
-                              checked={settings.includes(genre.name)}
+                              checked={settings.genre ? settings.genre.includes(genre.name) : false }
                             />
                             {genre.name}
                         </label>
