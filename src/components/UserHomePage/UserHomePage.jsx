@@ -15,6 +15,7 @@ const UserHomePage = (props) => {
     // state variable
     const [settings, setSettings] = useState([])
     const [gameData, setGameData] = useState([])
+    const [reset, setReset] = useState(false)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [selectedGame, setSelectedGame] = useState(null)
@@ -27,12 +28,13 @@ const UserHomePage = (props) => {
             setGameData(fetchedData)
         }
         fetchData()
-    }, [settings])
+    }, [settings, reset])
 
     // fetch function
     const fetchData = async () => {
-        const fetchedData = await showGame(settings)
-        setGameData(fetchedData)
+        // const fetchedData = await showGame(settings)
+        // setGameData(fetchedData)
+        console.log('leftover game', gameData)
     }
 
     // handler functions 
@@ -57,7 +59,7 @@ const UserHomePage = (props) => {
             <div className="card-container">
                 <CardComponent gameData={gameData} onCardClick={handleCardClick} />
             </div>
-            {isModalOpen && (<CardDetails gameData={selectedGame} onClose={handleCloseModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setGameData={setGameData} />)}
+            {isModalOpen && (<CardDetails gameArray={gameData} gameData={selectedGame} onClose={handleCloseModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setGameData={setGameData} setReset={setReset} reset={reset} />)}
             <button onClick={fetchData}>Fetch Data</button>
             <SettingsDrawer
                 settings={settings}

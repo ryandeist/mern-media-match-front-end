@@ -5,7 +5,11 @@ import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContext"
 const media = import.meta.glob('../../assets/*.png')
 
-const CardDetails = ({ gameData, onClose, setGameData, setIsModalOpen }) => {
+
+/////////////////////////////note: FIX GAME ARRAY AND GAME DATA MAKE ALL INSTANCES OF GAME DATA === SELECTEDGAME AND GAMEARRAY TO GAMEDATA////
+
+
+const CardDetails = ({ gameArray, gameData, onClose, setGameData, setIsModalOpen, setReset, reset }) => {
   const { user } = useContext(UserContext)
 
   if (!gameData) return null
@@ -21,10 +25,13 @@ const CardDetails = ({ gameData, onClose, setGameData, setIsModalOpen }) => {
   const handleAddToCart = async (e) => {
     e.preventDefault()
     try {
-      const newCartItem = await addToCart(user._id, gameData)
-      console.log(newCartItem)
+      await addToCart(user._id, gameData)
       setGameData((prev) => prev.filter((game) => game.id !== gameData.id))
+      console.log('remaining games', gameArray)
       setTimeout(setIsModalOpen(false), "0500")
+      if (gameArray.length === 1) {
+        setReset(!reset)
+      }
     } catch (error) {
       console.log(error)
     }
