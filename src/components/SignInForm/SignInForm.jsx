@@ -1,32 +1,39 @@
+// imports
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { signIn } from '../../services/authService'
 
+// component
 const SignInForm = () => {
-  const [formData, setFormData] = useState({ username: '', password: '' })
-  const [message, setMessage] = useState('')
+  // hooks
   const { setUser } = useContext(UserContext)
   const navigate = useNavigate()
+
+  // state variables
+  const [formData, setFormData] = useState({ username: '', password: '' })
+  const [message, setMessage] = useState('')
   const { username, password } = formData
 
+  // handler functions
   const handleChange = (e) => {
     setMessage('')
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async (evt) => {
+    evt.preventDefault()
     try {
       const signedInUser = await signIn(formData)
 
       setUser(signedInUser)
       navigate('/')
-    } catch (error) {
-      setMessage(error.message)
+    } catch (err) {
+      setMessage(err.message)
     }
   }
 
+  // return
   return (
     <>
     <h2>Sign In</h2>
@@ -60,4 +67,5 @@ const SignInForm = () => {
   )
 }
 
+// export
 export default SignInForm
