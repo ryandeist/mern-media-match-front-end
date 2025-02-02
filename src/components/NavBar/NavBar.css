@@ -1,6 +1,13 @@
+.navbar {
+
+}
+
 .navbar ul {
     list-style: none;
     padding-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .navbar li {

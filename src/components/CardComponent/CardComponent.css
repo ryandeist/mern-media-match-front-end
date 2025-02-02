@@ -1,16 +1,17 @@
 .card {
-    width: 300px; 
+    width: 300px;
     background-color: white;
-    border-radius: 20px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
     padding: 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
-  
+
 .card:hover {
     transform: translateY(-10px);
 }
@@ -19,7 +20,7 @@
     font-size: 1.25rem;
     margin: 0;
     font-weight: bold;
-    text-align: center; 
+    text-align: center;
 }
 
 .card-image {
@@ -27,13 +28,13 @@
     height: auto;
     border-radius: 10px;
     object-fit: cover;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 
 .card-info {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 
 .card-info p {
@@ -42,7 +43,7 @@
 }
 
 .rating {
-    color: #888; 
+    color: #888;
 }
 
 .price {
@@ -50,7 +51,7 @@
 }
 
 .see-more-btn {
-    background-color: #FF5C5C; 
+    background-color: #FF5C5C;
     color: white;
     border: none;
     padding: 10px;
@@ -59,7 +60,7 @@
     width: 100%;
     font-size: 1rem;
     cursor: pointer;
-    margin-top: 15px; 
+    margin-top: 15px;
     transition: background-color 0.3s ease;
 }
 
