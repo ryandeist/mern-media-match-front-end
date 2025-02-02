@@ -7,19 +7,14 @@ import { SettingsContext } from "../../contexts/SettingsContext"
 // component
 const SettingsDrawer = () => {
     // hooks
-    const { isDrawerOpen, setIsDrawerOpen } = useContext(SettingsContext)
-
-    // handler functions
-    const handleCloseDrawer = () => {
-      setIsDrawerOpen(false)
-    }
+    const { isDrawerOpen, handleSeeSettings } = useContext(SettingsContext)
 
     // return
     return (
       <Drawer
         anchor='left'
         open={isDrawerOpen}
-        onClose={() => handleCloseDrawer()}
+        onClose={() => handleSeeSettings()}
       >
           <Box 
             p={2}

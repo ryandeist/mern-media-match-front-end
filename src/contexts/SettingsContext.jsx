@@ -13,7 +13,11 @@ const SettingsProvider = ({ children }) => {
         genre: [],
     })
 
-    const value = { isDrawerOpen, setIsDrawerOpen, isSettings, setIsSettings, settings, setSettings }
+    const handleSeeSettings = () => {
+        setIsDrawerOpen(!isDrawerOpen)
+    }
+
+    const value = { isDrawerOpen, setIsDrawerOpen, isSettings, setIsSettings, settings, setSettings, handleSeeSettings }
 
     return (
         <SettingsContext.Provider value={value}>
