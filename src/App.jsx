@@ -49,7 +49,7 @@ const App = () => {
     setIsModalOpen(!isModalOpen)
     setSelectedGame(null)
   }
-
+   ///////////////// add catch all * link
   // return
   return (
     <>
@@ -87,12 +87,22 @@ const App = () => {
               setIsModalOpen={setIsModalOpen}
               selectedGame={selectedGame}
             />} />
+            <Route path='/*' element={<UserHomePage
+              handleCardClick={handleCardClick}
+              handleCloseModal={handleCloseModal}
+              isDrawerOpen={isDrawerOpen}
+              setIsDrawerOpen={setIsDrawerOpen}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+              selectedGame={selectedGame}
+            />} />
           </>
         ) : (
           <>
             <Route path="/" element={<Landing />} />
             <Route path="/sign-up" element={<SignUpForm />} />
             <Route path="/sign-in" element={<SignInForm />} />
+            <Route path="/*" element={<Landing />} />
           </>
         )}
       </Routes>
