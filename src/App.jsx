@@ -1,42 +1,102 @@
 // imports
-import './ProductList.css'
-import { useState } from "react"
-import { useLocation } from "react-router"
-import CardComponent from "../CardComponent/CardComponent"
-import CardDetails from "../CardDetails/CardDetails"
+import './App.css'
+import { useContext, useState } from 'react'
+import { useLocation, Route, Routes } from 'react-router'
+import { UserContext } from './contexts/UserContext'
+import Landing from './components/Landing/Landing'
+import NavBar from './components/NavBar/NavBar'
+import SignUpForm from './components/SignUpForm/SignUpForm'
+import SignInForm from './components/SignInForm/SignInForm'
+import ProductList from './components/ProductList/ProductList'
+import UserHomePage from './components/UserHomePage/UserHomePage'
+import { getEntireCart } from './services/cartService'
 
 // component
-const ProductList = ({ onCardClick, onClose, productsList, setProductList, selectedGame }) => {
-    // hooks
-    const location = useLocation()
+const App = () => {
+  // hooks
+  const location = useLocation()
+  const { user } = useContext(UserContext)
+  
 
-    // handler functions
-    const handleClick = () => {
-        onCardClick({
-            title: "hi",
-            parentalRating: "3",
-            genres: ["1", "2"]
-        })
+  // state variables
+  const [cart, setCart] = useState([])
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedGame, setSelectedGame] = useState(null)
+
+  // use effect
+
+  useEffect(() => {
+    const fetchCart = async () => {
+        try {
+        const cartData = await getEntireCart(user._id)
+        setCart(cartData.cart)
+        } catch (err) {
+        console.log('Error Fetching Cart', err)
+        }
     }
+    fetchCart()
+  },[location])
 
-    // return
-    if (!productsList) return <div>Loading...</div>
-    return (
-        <>
-            <h1>This is the {location.pathname} route</h1>
-            <div className="product-list">
-                {productsList.map((product) => (
-                    <CardComponent gameData={product} key={product.id} onCardClick={handleClick} className="product-list-card" />
-                ))}
-            </div>
-            <button onClick={handleClick}>See Card Details</button>
-            {isModalOpen && <CardDetails 
-                onClose={onClose}
-                selectedGame={selectedGame}
-            />}
-        </>
-    )
+
+  // handler functions
+  const handleCardClick = (game) => {
+    setSelectedGame(game)
+    setIsModalOpen(!isModalOpen)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(!isModalOpen)
+    setSelectedGame(null)
+  }
+
+  // return
+  return (
+    <>
+      <NavBar setIsDrawerOpen={setIsDrawerOpen} />
+      <Routes>
+        {user ? (
+          <>
+            <Route path='/' element={<UserHomePage
+              handleCardClick={handleCardClick}
+              handleCloseModal={handleCloseModal}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+              selectedGame={selectedGame}
+            />} />
+            <Route path='/cart' element={<ProductList 
+              onCardClick={handleCardClick}
+              onClose={handleCloseModal}
+              productsList={cart} 
+              setProductsList={setCart}
+              selectedGame={selectedGame}
+            />} />
+            <Route path='/library' element={<ProductList 
+              onCardClick={handleCardClick}   
+              onClose={handleCloseModal} 
+              selectedGame={selectedGame}        
+            />} />
+            <Route path='/settings' element={<UserHomePage
+              handleCardClick={handleCardClick}
+              handleCloseModal={handleCloseModal}
+              isDrawerOpen={isDrawerOpen}
+              setIsDrawerOpen={setIsDrawerOpen}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+              selectedGame={selectedGame}
+            />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<Landing />} />
+            <Route path="/sign-up" element={<SignUpForm />} />
+            <Route path="/sign-in" element={<SignInForm />} />
+          </>
+        )}
+      </Routes>
+    </>
+  )
 }
 
 // export
-export default ProductList
+export default App
