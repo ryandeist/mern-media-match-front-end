@@ -9,6 +9,7 @@ const CardComponent = ({ gameData, onCardClick }) => {
     const location = useLocation()
     let card
     // source of truth
+    let card
     if (location.pathname === '/cart' || location.pathname === '/library' ) {
         card = gameData
     } else {

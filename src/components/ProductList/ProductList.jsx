@@ -1,12 +1,11 @@
 // imports
 import './ProductList.css'
-import { useState } from "react"
 import { useLocation } from "react-router"
 import CardComponent from "../CardComponent/CardComponent"
 import CardDetails from "../CardDetails/CardDetails"
 
 // component
-const ProductList = ({ onCardClick, onClose, productsList, setProductList, selectedGame }) => {
+const ProductList = ({ isModalOpen, onCardClick, onClose, productsList, setProductList, selectedGame }) => {
     // hooks
     const location = useLocation()
 

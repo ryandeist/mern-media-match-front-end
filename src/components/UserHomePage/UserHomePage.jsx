@@ -66,15 +66,6 @@ const UserHomePage = ({ handleCardClick, handleCloseModal, isDrawerOpen, setIsDr
         fetchData()
       }, [settings, reset])
 
-
-    // fetch function
-    const fetchData = async () => {
-        const fetchedData = await showGame(settings.genre)
-        setGameData(fetchedData)
-    }
-
-    // handler functions 
-
     // prevent background scrolling
     if (isModalOpen) {
         document.body.classList.add('active-modal')
@@ -90,20 +81,18 @@ const UserHomePage = ({ handleCardClick, handleCloseModal, isDrawerOpen, setIsDr
             </div>
             {isModalOpen && (<CardDetails
               gameData={gameData} 
-              selectedGame={selectedGame} 
-              onClose={handleCloseModal} 
-              isModalOpen={isModalOpen} 
+              setGameData={setGameData}
               setIsModalOpen={setIsModalOpen} 
+              onClose={handleCloseModal} 
               reset={reset}
-              setReset={setReset}
-              setGameData={setGameData}   
+              setReset={setReset}   
+              selectedGame={selectedGame} 
             />)}
-            <button onClick={fetchData}>Fetch Data</button>
             <SettingsDrawer
-                isSettings={isSettings}
-                setIsSettings={setIsSettings}
                 isDrawerOpen={isDrawerOpen}
                 setIsDrawerOpen={setIsDrawerOpen}
+                isSettings={isSettings}
+                setIsSettings={setIsSettings}
                 settings={settings}
                 setSettings={setSettings}
             />
