@@ -1,7 +1,6 @@
 // imports
 import './SettingsComponent.css'
 import { useContext, useState } from "react"
-import { useNavigate } from "react-router"
 import { UserContext } from "../../contexts/UserContext"
 import { SettingsContext } from '../../contexts/SettingsContext'
 import { createSettings, updateSettings } from "../../services/settingsService"
@@ -12,7 +11,6 @@ const SettingsComponent = () => {
     // hooks
     const { user } = useContext(UserContext)
     const { setIsDrawerOpen, isSettings, setIsSettings, settings, setSettings } = useContext(SettingsContext)
-    const navigate = useNavigate()
 
     // state variables
     const [newSettings, setNewSettings] = useState(settings)
@@ -57,8 +55,6 @@ const SettingsComponent = () => {
         }
         setSettings(newSettings)
         setIsDrawerOpen(false)
-        navigate('/')
-
     }
 
     // return

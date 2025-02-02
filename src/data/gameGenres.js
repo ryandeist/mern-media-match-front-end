@@ -21,7 +21,7 @@ const gameGenres = [
     { id: 32, name: "Indie" },
     { id: 33, name: "Arcade" },
     { id: 34, name: "Visual Novel" },
-    { id: 35, name: "Card & Board Game" },
+    // { id: 35, name: "Card & Board Game" }, '&' seems to break fetch from API
     { id: 36, name: "MOBA" },
 ]
 

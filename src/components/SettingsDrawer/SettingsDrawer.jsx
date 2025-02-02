@@ -1,20 +1,17 @@
 // import
 import { Drawer, Box, Typography,  } from "@mui/material"
 import { useContext } from "react"
-import { useNavigate } from "react-router"
 import SettingsComponent from "../SettingsComponent/SettingsComponent"
 import { SettingsContext } from "../../contexts/SettingsContext"
 
 // component
 const SettingsDrawer = () => {
     // hooks
-    const navigate = useNavigate()
     const { isDrawerOpen, setIsDrawerOpen } = useContext(SettingsContext)
 
     // handler functions
     const handleCloseDrawer = () => {
       setIsDrawerOpen(false)
-      navigate('/')
     }
 
     // return

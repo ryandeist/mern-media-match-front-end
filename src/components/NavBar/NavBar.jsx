@@ -1,7 +1,7 @@
 // imports
 import './NavBar.css'
 import { useContext } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { Link } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { SettingsContext } from '../../contexts/SettingsContext'
 
@@ -10,7 +10,6 @@ const NavBar = () => {
   // hooks
   const { user, setUser } = useContext(UserContext)
   const { setIsDrawerOpen } = useContext(SettingsContext)
-  const navigate = useNavigate()
 
   // handler functions
   const handleSignOut = () => {
@@ -20,7 +19,6 @@ const NavBar = () => {
 
   const handleSettingButtonClick = () => {
     setIsDrawerOpen(true)
-    navigate('/settings')
   }
   
   // return

@@ -3,6 +3,7 @@ import './ProductList.css'
 import { useLocation } from "react-router"
 import CardComponent from "../CardComponent/CardComponent"
 import CardDetails from "../CardDetails/CardDetails"
+import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
 
 // component
 const ProductList = ({ isModalOpen, onCardClick, onClose, productsList, setProductList, selectedGame }) => {
@@ -33,6 +34,7 @@ const ProductList = ({ isModalOpen, onCardClick, onClose, productsList, setProdu
                 onClose={onClose}
                 selectedGame={selectedGame}
             />}
+            <SettingsDrawer />
         </>
     )
 }

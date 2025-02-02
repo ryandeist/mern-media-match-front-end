@@ -24,7 +24,6 @@ const App = () => {
   const [selectedGame, setSelectedGame] = useState(null)
 
   // use effect
-
   useEffect(() => {
     const fetchCart = async () => {
         try {
@@ -35,7 +34,7 @@ const App = () => {
         }
     }
     fetchCart()
-  },[location])
+  },[location, user._id])
 
 
   // handler functions
@@ -48,7 +47,7 @@ const App = () => {
     setIsModalOpen(!isModalOpen)
     setSelectedGame(null)
   }
-   ///////////////// add catch all * link
+
   // return
   return (
     <>
