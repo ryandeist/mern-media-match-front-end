@@ -2,6 +2,7 @@
 import { useContext, useState, useEffect } from 'react'
 import { showGame } from '../../services/apiService'
 import { UserContext } from '../../contexts/UserContext'
+import { SettingsContext } from '../../contexts/SettingsContext'
 import { showSettings } from '../../services/settingsService'
 import CardComponent from "../CardComponent/CardComponent"
 import CardDetails from "../CardDetails/CardDetails"
@@ -12,6 +13,7 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
 const UserHomePage = ({ handleCardClick, handleCloseModal, isModalOpen, setIsModalOpen, selectedGame }) => {
     // hooks
     const { user } = useContext(UserContext)
+    const { setIsSettings } = useContext(SettingsContext)
 
     // state variable
     const [settings, setSettings] = useState({
@@ -19,7 +21,6 @@ const UserHomePage = ({ handleCardClick, handleCloseModal, isModalOpen, setIsMod
         genre: [],
     })
     const [gameData, setGameData] = useState([])
-    const [isSettings, setIsSettings] = useState(false)
     const [reset, setReset] = useState(false)
 
     // use effects
@@ -89,8 +90,6 @@ const UserHomePage = ({ handleCardClick, handleCloseModal, isModalOpen, setIsMod
               selectedGame={selectedGame} 
             />)}
             <SettingsDrawer
-                isSettings={isSettings}
-                setIsSettings={setIsSettings}
                 settings={settings}
                 setSettings={setSettings}
             />
