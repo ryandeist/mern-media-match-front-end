@@ -3,13 +3,15 @@ import './SettingsComponent.css'
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router"
 import { UserContext } from "../../contexts/UserContext"
+import { SettingsContext } from '../../contexts/SettingsContext'
 import { createSettings, updateSettings } from "../../services/settingsService"
 import gameGenres from "../../data/gameGenres"
 
 // component
-const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings, setIsDrawerOpen }) => {
+const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings }) => {
     // hooks
     const { user } = useContext(UserContext)
+    const { setIsDrawerOpen } = useContext(SettingsContext)
     const navigate = useNavigate()
 
     // state variables

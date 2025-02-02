@@ -1,12 +1,15 @@
 // import
 import { Drawer, Box, Typography,  } from "@mui/material"
+import { useContext } from "react"
 import { useNavigate } from "react-router"
 import SettingsComponent from "../SettingsComponent/SettingsComponent"
+import { SettingsContext } from "../../contexts/SettingsContext"
 
 // component
-const SettingsDrawer = ({ isDrawerOpen, setIsDrawerOpen, settings, setSettings, isSettings, setIsSettings }) => {
+const SettingsDrawer = ({ settings, setSettings, isSettings, setIsSettings }) => {
     // hooks
     const navigate = useNavigate()
+    const { isDrawerOpen, setIsDrawerOpen } = useContext(SettingsContext)
 
     // handler functions
     const handleCloseDrawer = () => {
@@ -29,7 +32,7 @@ const SettingsDrawer = ({ isDrawerOpen, setIsDrawerOpen, settings, setSettings, 
           >
             <Typography variant='h6' component='div'>
                 Settings
-                <SettingsComponent settings={settings} setSettings={setSettings} isSettings={isSettings} setIsSettings={setIsSettings} setIsDrawerOpen={setIsDrawerOpen} />
+                <SettingsComponent settings={settings} setSettings={setSettings} isSettings={isSettings} setIsSettings={setIsSettings} />
             </Typography>
           </Box>
       </Drawer>

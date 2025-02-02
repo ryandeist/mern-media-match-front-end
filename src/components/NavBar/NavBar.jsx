@@ -3,11 +3,13 @@ import './NavBar.css'
 import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
+import { SettingsContext } from '../../contexts/SettingsContext'
 
 // component
-const NavBar = ({ setIsDrawerOpen }) => {
+const NavBar = () => {
   // hooks
   const { user, setUser } = useContext(UserContext)
+  const { setIsDrawerOpen } = useContext(SettingsContext)
   const navigate = useNavigate()
 
   // handler functions

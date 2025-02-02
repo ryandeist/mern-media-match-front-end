@@ -9,7 +9,7 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
 
 
 // component
-const UserHomePage = ({ handleCardClick, handleCloseModal, isDrawerOpen, setIsDrawerOpen, isModalOpen, setIsModalOpen, selectedGame }) => {
+const UserHomePage = ({ handleCardClick, handleCloseModal, isModalOpen, setIsModalOpen, selectedGame }) => {
     // hooks
     const { user } = useContext(UserContext)
 
@@ -89,8 +89,6 @@ const UserHomePage = ({ handleCardClick, handleCloseModal, isDrawerOpen, setIsDr
               selectedGame={selectedGame} 
             />)}
             <SettingsDrawer
-                isDrawerOpen={isDrawerOpen}
-                setIsDrawerOpen={setIsDrawerOpen}
                 isSettings={isSettings}
                 setIsSettings={setIsSettings}
                 settings={settings}
