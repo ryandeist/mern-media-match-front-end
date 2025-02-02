@@ -13,13 +13,9 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
 const UserHomePage = ({ handleCardClick, handleCloseModal, isModalOpen, setIsModalOpen, selectedGame }) => {
     // hooks
     const { user } = useContext(UserContext)
-    const { setIsSettings } = useContext(SettingsContext)
+    const { setIsSettings, settings, setSettings } = useContext(SettingsContext)
 
     // state variable
-    const [settings, setSettings] = useState({
-        media: [],
-        genre: [],
-    })
     const [gameData, setGameData] = useState([])
     const [reset, setReset] = useState(false)
 
@@ -52,7 +48,7 @@ const UserHomePage = ({ handleCardClick, handleCloseModal, isModalOpen, setIsMod
         }
 
         if (user) { fetchSettings() }
-      }, [user])
+      }, [user, setSettings, setIsSettings])
 
 
       useEffect(() => {
@@ -89,10 +85,7 @@ const UserHomePage = ({ handleCardClick, handleCloseModal, isModalOpen, setIsMod
               setReset={setReset}   
               selectedGame={selectedGame} 
             />)}
-            <SettingsDrawer
-                settings={settings}
-                setSettings={setSettings}
-            />
+            <SettingsDrawer />
         </>
     )
 }

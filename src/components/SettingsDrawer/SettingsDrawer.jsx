@@ -6,7 +6,7 @@ import SettingsComponent from "../SettingsComponent/SettingsComponent"
 import { SettingsContext } from "../../contexts/SettingsContext"
 
 // component
-const SettingsDrawer = ({ settings, setSettings }) => {
+const SettingsDrawer = () => {
     // hooks
     const navigate = useNavigate()
     const { isDrawerOpen, setIsDrawerOpen } = useContext(SettingsContext)
@@ -32,7 +32,7 @@ const SettingsDrawer = ({ settings, setSettings }) => {
           >
             <Typography variant='h6' component='div'>
                 Settings
-                <SettingsComponent settings={settings} setSettings={setSettings} />
+                <SettingsComponent />
             </Typography>
           </Box>
       </Drawer>

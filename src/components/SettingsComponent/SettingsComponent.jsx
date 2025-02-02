@@ -8,10 +8,10 @@ import { createSettings, updateSettings } from "../../services/settingsService"
 import gameGenres from "../../data/gameGenres"
 
 // component
-const SettingsComponent = ({ settings, setSettings }) => {
+const SettingsComponent = () => {
     // hooks
     const { user } = useContext(UserContext)
-    const { setIsDrawerOpen, isSettings, setIsSettings } = useContext(SettingsContext)
+    const { setIsDrawerOpen, isSettings, setIsSettings, settings, setSettings } = useContext(SettingsContext)
     const navigate = useNavigate()
 
     // state variables
