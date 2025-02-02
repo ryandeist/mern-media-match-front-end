@@ -1,6 +1,6 @@
 // imports
 import './SettingsComponent.css'
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router"
 import { UserContext } from "../../contexts/UserContext"
 import { createSettings, updateSettings } from "../../services/settingsService"
@@ -8,12 +8,16 @@ import gameGenres from "../../data/gameGenres"
 
 // component
 const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings, setIsDrawerOpen }) => {
+    // hooks
     const { user } = useContext(UserContext)
     const navigate = useNavigate()
 
+    // state variables
+    const [newSettings, setNewSettings] = useState(settings)
+
     //handler functions
     const handleCheckboxChange = async (evt) => {
-        await setSettings((prev) => {
+        await setNewSettings((prev) => {
             if (evt.target.name === "media") { // change to media when rendering dynamically
                 const selectedMedia = evt.target.value
                 const updatedMedia = prev.media.includes(selectedMedia)
@@ -44,11 +48,12 @@ const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings, s
     const handleSubmit = async (evt) => {
         evt.preventDefault()
         if (!isSettings) {
-            await createSettings(user._id, settings)
+            await createSettings(user._id, newSettings)
             setIsSettings(true)
         } else {
-            await updateSettings(user._id, settings)
+            await updateSettings(user._id, newSettings)
         }
+        setSettings(newSettings)
         setIsDrawerOpen(false)
         navigate('/')
 
@@ -65,7 +70,7 @@ const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings, s
                         type="checkbox"
                         name="media" // change to "media" when more options incorporated 
                         onChange={handleCheckboxChange}
-                        checked={settings.media ? settings.media.includes("VideoGames") : false} // {settings.media.includes(mediaOption)}
+                        checked={newSettings.media ? newSettings.media.includes("VideoGames") : false} // {settings.media.includes(mediaOption)}
                         value="VideoGames" //change to {mediaType}
                     //   disabled={initSettings.media.length > 0}// will remove when more options available
                     />
@@ -83,7 +88,7 @@ const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings, s
                                 name={genre.name}
                                 id={genre.id}
                                 onChange={handleCheckboxChange}
-                                checked={settings.genre ? settings.genre.includes(genre.name) : false}
+                                checked={newSettings.genre ? newSettings.genre.includes(genre.name) : false}
                             />
                             {genre.name}
                         </label>
