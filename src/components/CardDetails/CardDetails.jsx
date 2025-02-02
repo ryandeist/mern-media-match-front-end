@@ -72,11 +72,6 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
                 <p className='price'>${selectedGame.price}</p>
               </div>
             </div>
-
-            <div className="info-item">
-              <h3>Price:</h3>
-              <p className='price'>${selectedGame.price}</p>
-            </div>
           </div>
           {selectedGame.summary
             ? <div className="info-item">
@@ -90,13 +85,13 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
               </div>
               : null
           }
-          {/* {selectedGame.genres.length > 0
+          {selectedGame.genres.length > 0
               ? <div className="info-item">
                 <h3>Genres:</h3>
                 <p>{selectedGame.genres.map(genre => genre.name).join(', ')}</p>
               </div>
               : null
-            } */}
+            }
         </div>
         {
           location.pathname === "/library"
