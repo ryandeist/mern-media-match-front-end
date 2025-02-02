@@ -9,7 +9,7 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
 
 
 // component
-const UserHomePage = ({ isDrawerOpen, setIsDrawerOpen }) => {
+const UserHomePage = ({ handleCardClick, handleCloseModal, isDrawerOpen, setIsDrawerOpen, isModalOpen, setIsModalOpen, selectedGame }) => {
     // hooks
     const { user } = useContext(UserContext)
 
@@ -20,8 +20,6 @@ const UserHomePage = ({ isDrawerOpen, setIsDrawerOpen }) => {
     })
     const [gameData, setGameData] = useState([])
     const [isSettings, setIsSettings] = useState(false)
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const [selectedGame, setSelectedGame] = useState(null)
     const [reset, setReset] = useState(false)
 
     // use effects
@@ -76,15 +74,6 @@ const UserHomePage = ({ isDrawerOpen, setIsDrawerOpen }) => {
     }
 
     // handler functions 
-    const handleCardClick = (game) => {
-        setSelectedGame(game)
-        setIsModalOpen(!isModalOpen)
-    }
-
-    const handleCloseModal = () => {
-        setIsModalOpen(!isModalOpen)
-        setSelectedGame(null)
-    }
 
     // prevent background scrolling
     if (isModalOpen) {
@@ -99,15 +88,24 @@ const UserHomePage = ({ isDrawerOpen, setIsDrawerOpen }) => {
             <div className="card-container">
                 <CardComponent gameData={gameData} onCardClick={handleCardClick} />
             </div>
-            {isModalOpen && (<CardDetails gameData={gameData} selectedGame={selectedGame} onClose={handleCloseModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setGameData={setGameData} setReset={setReset} reset={reset} />)}
+            {isModalOpen && (<CardDetails
+              gameData={gameData} 
+              selectedGame={selectedGame} 
+              onClose={handleCloseModal} 
+              isModalOpen={isModalOpen} 
+              setIsModalOpen={setIsModalOpen} 
+              reset={reset}
+              setReset={setReset}
+              setGameData={setGameData}   
+            />)}
             <button onClick={fetchData}>Fetch Data</button>
             <SettingsDrawer
-                settings={settings}
-                setSettings={setSettings}
                 isSettings={isSettings}
                 setIsSettings={setIsSettings}
                 isDrawerOpen={isDrawerOpen}
                 setIsDrawerOpen={setIsDrawerOpen}
+                settings={settings}
+                setSettings={setSettings}
             />
         </>
     )

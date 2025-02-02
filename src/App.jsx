@@ -17,6 +17,20 @@ const App = () => {
 
   // state variables
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedGame, setSelectedGame] = useState(null)
+
+
+  // handler functions
+  const handleCardClick = (game) => {
+    setSelectedGame(game)
+    setIsModalOpen(!isModalOpen)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(!isModalOpen)
+    setSelectedGame(null)
+  }
 
   // return
   return (
@@ -25,13 +39,33 @@ const App = () => {
       <Routes>
         {user ? (
           <>
-            <Route path='/' element={<UserHomePage/>} />
-            <Route path='/cart' element={<ProductList />} />
-            <Route path='/library' element={<ProductList />} />
+            <Route path='/' element={<UserHomePage
+              handleCardClick={handleCardClick}
+              handleCloseModal={handleCloseModal}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+              selectedGame={selectedGame}
+            />} />
+            <Route path='/cart' element={<ProductList 
+              onCardClick={handleCardClick}
+              onClose={handleCloseModal}
+              selectedGame={selectedGame}
+            
+            />} />
+            <Route path='/library' element={<ProductList 
+              onCardClick={handleCardClick}   
+              onClose={handleCloseModal} 
+              selectedGame={selectedGame}        
+            />} />
             <Route path='/settings' element={<UserHomePage
+              handleCardClick={handleCardClick}
+              handleCloseModal={handleCloseModal}
               isDrawerOpen={isDrawerOpen}
-              setIsDrawerOpen={setIsDrawerOpen} />}
-            />
+              setIsDrawerOpen={setIsDrawerOpen}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+              selectedGame={selectedGame}
+            />} />
           </>
         ) : (
           <>

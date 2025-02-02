@@ -10,7 +10,7 @@ const media = import.meta.glob('../../assets/*.png')
 const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset }) => {
   // hooks
   const { user } = useContext(UserContext)
-  const location = useLocation
+  const location = useLocation()
 
   // component logic
   if (!selectedGame) return null
@@ -98,7 +98,6 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
             ? <div className="modal-buttons">
                 <button className="remove-btn" >Remove from Library</button>
                 <button className="add-to-cart-btn">Review</button>
-
               </div>
 
                 : location.pathname === "/cart" 
