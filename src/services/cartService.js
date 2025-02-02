@@ -21,3 +21,20 @@ export const addToCart = async (userId, gameData) => {
         console.log(err)
     }
 }
+
+export const getEntireCart = async (userId) => {
+    try {
+        const res = await fetch(BASE_URL, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                userid: userId,
+            },
+        })
+        const entireCart = await res.json()
+
+        return entireCart
+    } catch (err) {
+        console.log(err)
+    }
+}

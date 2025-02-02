@@ -16,9 +16,9 @@ const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings, s
         await setSettings((prev) => {
             if (evt.target.name === "media") { // change to media when rendering dynamically
                 const selectedMedia = evt.target.value
-                const updatedMedia = prev.media.includes(selectedMedia) 
-                  ? prev.media.filter(media => media !== selectedMedia)
-                  : [...prev.media, selectedMedia]
+                const updatedMedia = prev.media.includes(selectedMedia)
+                    ? prev.media.filter(media => media !== selectedMedia)
+                    : [...prev.media, selectedMedia]
 
                 return {
                     ...prev,
@@ -43,7 +43,7 @@ const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings, s
 
     const handleSubmit = async (evt) => {
         evt.preventDefault()
-        if(!isSettings) {
+        if (!isSettings) {
             await createSettings(user._id, settings)
             setIsSettings(true)
         } else {
@@ -61,29 +61,29 @@ const SettingsComponent = ({ settings, setSettings, isSettings, setIsSettings, s
                 <h3 className="section-heading">Medium</h3>
                 {/* wrap the label with media.map((mediaType) => ))} */}
                 <label className="checkbox-label large-checkbox">
-                    <input 
-                      type="checkbox" 
-                      name="media" // change to "media" when more options incorporated 
-                      onChange={handleCheckboxChange}
-                      checked={settings.media ? settings.media.includes("VideoGames") : false } // {settings.media.includes(mediaOption)}
-                      value="VideoGames" //change to {mediaType}
+                    <input
+                        type="checkbox"
+                        name="media" // change to "media" when more options incorporated 
+                        onChange={handleCheckboxChange}
+                        checked={settings.media ? settings.media.includes("VideoGames") : false} // {settings.media.includes(mediaOption)}
+                        value="VideoGames" //change to {mediaType}
                     //   disabled={initSettings.media.length > 0}// will remove when more options available
                     />
                     Video Games {/* mediaOption */}
                 </label>
-                 {/* close media map here */}
+                {/* close media map here */}
             </div>
             <div className="settings-sections">
                 <h3 className="section-heading">Genres</h3>
                 <div className="checkbox-grid">
                     {gameGenres.map((genre) => (
                         <label key={genre.id} htmlFor={genre.name} className="checkbox-label">
-                            <input 
-                              type="checkbox" 
-                              name={genre.name} 
-                              id={genre.id}
-                              onChange={handleCheckboxChange}
-                              checked={settings.genre ? settings.genre.includes(genre.name) : false }
+                            <input
+                                type="checkbox"
+                                name={genre.name}
+                                id={genre.id}
+                                onChange={handleCheckboxChange}
+                                checked={settings.genre ? settings.genre.includes(genre.name) : false}
                             />
                             {genre.name}
                         </label>
