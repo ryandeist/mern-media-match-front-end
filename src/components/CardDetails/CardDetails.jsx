@@ -1,6 +1,7 @@
 // imports
 import './CardDetails.css'
 import { addToCart, removeFromCart } from '../../services/cartService'
+import { purchase } from '../../services/libraryService'
 import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContext"
 
@@ -20,6 +21,19 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
     }
   }
 
+  const handleAddToCart = async (buttonName) => {
+    try {
+      if (buttonName === 'add') await addToCart(user._id, selectedGame)
+      setGameData((prev) => prev.filter((game) => game.id !== selectedGame.id))
+      setTimeout(setIsModalOpen(false), "1500")
+      if (gameData.length === 1) { // due to lag of "setGameData", array length will read as 1 when we are emptying it
+        setReset(!reset)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const handleRemoveFromCart = async (buttonName) => {
     try {
       if (buttonName === 'remove') await removeFromCart(user._id, selectedGame._id)
@@ -30,14 +44,11 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
     }
   }
 
-  const handleAddToCart = async (buttonName) => {
+  const handlePurchase = async (buttonName) => {
     try {
-      if (buttonName === 'add') await addToCart(user._id, selectedGame)
-      setGameData((prev) => prev.filter((game) => game.id !== selectedGame.id))
-      setTimeout(setIsModalOpen(false), "1500")
-      if (gameData.length === 1) { // due to lag of "setGameData", array length will read as 1 when we are emptying it
-        setReset(!reset)
-      }
+      if (buttonName === 'purchase') await purchase(user._id, selectedGame._id)
+        setProductsList((prev) => prev.filter((product) => product._id !== selectedGame._id))
+        setIsModalOpen(false)
     } catch (err) {
       console.log(err)
     }
@@ -103,7 +114,7 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
             : location.pathname === "/cart"
               ? <div className="modal-buttons">
                 <button className="remove-btn" onClick={() => handleRemoveFromCart('remove')}>Remove from Cart</button>
-                <button className="add-to-cart-btn">Purchase</button>
+                <button className="add-to-cart-btn" onClick={() => handlePurchase('purchase')}>Purchase</button>
               </div>
 
               : <div className="modal-buttons">

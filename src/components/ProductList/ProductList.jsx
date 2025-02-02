@@ -37,21 +37,12 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
     } else if (location.pathname === '/library') {
         console.log('useEffecting the library')
     }
-    }, [location])
+    }, [location, user._id])
 
     if (location.pathname === '/cart') {
         productsList = cart
     } else if (location.pathname === '/library') {
         productsList = library
-    }
-
-    // handler functions
-    const handleClick = () => {
-        onCardClick({
-            title: "hi",
-            parentalRating: "3",
-            genres: ["1", "2"]
-        })
     }
 
     // return
@@ -64,7 +55,6 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
                     <CardComponent gameData={product} key={product.id} onCardClick={onCardClick} selectedGame={product} className="product-list-card" />
                 ))}
             </div>
-            <button onClick={handleClick}>See Card Details</button>
             {isModalOpen && <CardDetails
                 onClose={onClose}
                 selectedGame={selectedGame}
