@@ -1,24 +1,20 @@
 // imports
 import './NavBar.css'
 import { useContext } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { Link } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
+import { SettingsContext } from '../../contexts/SettingsContext'
 
 // component
-const NavBar = ({ setIsDrawerOpen }) => {
+const NavBar = () => {
   // hooks
   const { user, setUser } = useContext(UserContext)
-  const navigate = useNavigate()
+  const { handleSeeSettings } = useContext(SettingsContext)
 
   // handler functions
   const handleSignOut = () => {
     localStorage.removeItem('token')
     setUser(null)
-  }
-
-  const handleSettingButtonClick = () => {
-    setIsDrawerOpen(true)
-    navigate('/settings')
   }
   
   // return
@@ -29,7 +25,7 @@ const NavBar = ({ setIsDrawerOpen }) => {
           <li><Link to={'/'}>Dashboard</Link></li>
           <li><Link to={'/cart'}>Cart</Link></li>
           <li><Link to={'/library'}>Library</Link></li>
-          <li><button onClick={()=>handleSettingButtonClick()} className="navbar-settings-btn">Settings</button></li>
+          <li><button onClick={()=>handleSeeSettings()} className="navbar-settings-btn">Settings</button></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>
       ) : (

@@ -20,12 +20,10 @@ const App = () => {
 
   // state variables
   const [cart, setCart] = useState([])
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedGame, setSelectedGame] = useState(null)
 
   // use effect
-
   useEffect(() => {
     const fetchCart = async () => {
         try {
@@ -36,7 +34,7 @@ const App = () => {
         }
     }
     fetchCart()
-  },[location])
+  },[location, user._id])
 
 
   // handler functions
@@ -49,11 +47,11 @@ const App = () => {
     setIsModalOpen(!isModalOpen)
     setSelectedGame(null)
   }
-   ///////////////// add catch all * link
+
   // return
   return (
     <>
-      <NavBar setIsDrawerOpen={setIsDrawerOpen} />
+      <NavBar />
       <Routes>
         {user ? (
           <>
@@ -81,8 +79,6 @@ const App = () => {
             <Route path='/settings' element={<UserHomePage
               handleCardClick={handleCardClick}
               handleCloseModal={handleCloseModal}
-              isDrawerOpen={isDrawerOpen}
-              setIsDrawerOpen={setIsDrawerOpen}
               isModalOpen={isModalOpen}
               setIsModalOpen={setIsModalOpen}
               selectedGame={selectedGame}
@@ -90,8 +86,6 @@ const App = () => {
             <Route path='/*' element={<UserHomePage
               handleCardClick={handleCardClick}
               handleCloseModal={handleCloseModal}
-              isDrawerOpen={isDrawerOpen}
-              setIsDrawerOpen={setIsDrawerOpen}
               isModalOpen={isModalOpen}
               setIsModalOpen={setIsModalOpen}
               selectedGame={selectedGame}
