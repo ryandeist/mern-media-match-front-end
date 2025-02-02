@@ -37,3 +37,18 @@ export const getEntireCart = async (userId) => {
         console.log(err)
     }
 }
+
+export const removeFromCart = async (userId, cartItemId) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${cartItemId}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                userid: userId,
+            }
+        })
+        return res.json()
+    } catch (err) {
+        console.log(err)
+    }
+}

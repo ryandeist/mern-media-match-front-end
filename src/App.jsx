@@ -64,6 +64,7 @@ const App = () => {
             />} />
             <Route path='/cart' element={<ProductList 
               isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
               onCardClick={handleCardClick}
               onClose={handleCloseModal}
               productsList={cart} 
@@ -72,6 +73,7 @@ const App = () => {
             />} />
             <Route path='/library' element={<ProductList 
               isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
               onCardClick={handleCardClick}   
               onClose={handleCloseModal} 
               selectedGame={selectedGame}        
