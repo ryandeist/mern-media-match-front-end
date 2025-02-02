@@ -1,6 +1,6 @@
 // imports
 import './App.css'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useLocation, Route, Routes } from 'react-router'
 import { UserContext } from './contexts/UserContext'
 import Landing from './components/Landing/Landing'
