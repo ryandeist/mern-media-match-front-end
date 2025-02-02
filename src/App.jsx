@@ -34,7 +34,7 @@ const App = () => {
         }
     }
     fetchCart()
-  },[location, user._id])
+  }, [location])
 
 
   // handler functions
