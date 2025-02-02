@@ -7,12 +7,12 @@ const CardComponent = ({ gameData, onCardClick }) => {
     
     // hooks
     const location = useLocation()
-  
+    let card
     // source of truth
     if (location.pathname === '/cart' || location.pathname === '/library' ) {
-        let card = gameData
+        card = gameData
     } else {
-        let card = gameData[0]
+        card = gameData[0]
     }
   
     // handler functions

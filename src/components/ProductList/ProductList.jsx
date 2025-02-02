@@ -30,10 +30,10 @@ const ProductList = ({ onCardClick, onClose, productsList, setProductList, selec
                 ))}
             </div>
             <button onClick={handleClick}>See Card Details</button>
-            {isModalOpen && <CardDetails 
+            {/* {isModalOpen && <CardDetails 
                 onClose={onClose}
                 selectedGame={selectedGame}
-            />}
+            />} */}
         </>
     )
 }
