@@ -6,7 +6,7 @@ import { UserContext } from "../../contexts/UserContext"
 
 const media = import.meta.glob('../../assets/*.png')
 
-const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset, productsList, setProductsList }) => {
+const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset, setProductsList }) => {
   const { user } = useContext(UserContext)
 
   if (!selectedGame) return null
