@@ -1,18 +1,14 @@
 // imports
 import './CardDetails.css'
-import { addToCart } from '../../services/cartService'
+import { addToCart, removeFromCart } from '../../services/cartService'
 import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContext"
-import { useLocation } from 'react-router'
+
 const media = import.meta.glob('../../assets/*.png')
 
-// component
-const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset }) => {
-  // hooks
+const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset, productsList, setProductsList }) => {
   const { user } = useContext(UserContext)
-  const location = useLocation()
 
-  // component logic
   if (!selectedGame) return null
 
   // dynamically render icon
@@ -23,7 +19,17 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
       break
     }
   }
-  // handler function
+
+  const handleRemoveFromCart = async (buttonName) => {
+    try {
+      if (buttonName === 'remove') await removeFromCart(user._id, selectedGame._id)
+      setProductsList((prev) => prev.filter((product) => product._id !== selectedGame._id))
+      setIsModalOpen(false)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const handleAddToCart = async (buttonName) => {
     try {
       if (buttonName === 'add') await addToCart(user._id, selectedGame)
@@ -32,89 +38,87 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
       if (gameData.length === 1) { // due to lag of "setGameData", array length will read as 1 when we are emptying it
         setReset(!reset)
       }
-    } catch (error) {
-      console.log(error)
+    } catch (err) {
+      console.log(err)
     }
   }
 
-  // return
   return (
-      <div className="modal-overlay">
-        <div className="card-details-modal">
-          <div>
-            <div className="card-modal-header">
-              <img className="card-modal-icon" src={currentMedia} alt={selectedGame.media} />
-              <h2>{selectedGame.title} {selectedGame.releaseDate ? `(${selectedGame.releaseDate.slice(0, 4)})` : null}</h2>
-              <button onClick={onClose}>X</button>
-            </div>
-            <img src={selectedGame.cover} alt="Cover art" className="card-modal-cover" />
-            <div className='card-modal-info'>
-              <div className='ratings-price'>
-                <div className="info-item">
-                  <h3>Parental Rating:</h3>
-                  <p className='rating'>{selectedGame.parentalRating}</p>
-                </div>
-                {selectedGame.totalRating
-                  ? (
-                    <div className="info-item">
-                      <h3>Total Rating:</h3>
-                      <p className='rating'>{selectedGame.totalRating / 10}/10</p>
-                    </div>
-                  )
-                  : null}
-                <div className="info-item">
-                  <h3>Price:</h3>
-                  <p className='price'>${selectedGame.price}</p>
-                </div>
+    <div className="modal-overlay">
+      <div className="card-details-modal">
+        <div>
+          <div className="card-modal-header">
+            <img className="card-modal-icon" src={currentMedia} alt={selectedGame.media} />
+            <h2>{selectedGame.title} {selectedGame.releaseDate ? `(${selectedGame.releaseDate.slice(0, 4)})` : null}</h2>
+            <button onClick={onClose}>X</button>
+          </div>
+          <img src={selectedGame.cover} alt="Cover art" className="card-modal-cover" />
+          <div className='card-modal-info'>
+            <div className='ratings-price'>
+              <div className="info-item">
+                <h3>Parental Rating:</h3>
+                <p className='rating'>{selectedGame.parentalRating}</p>
               </div>
-
+              {selectedGame.totalRating
+                ? (
+                  <div className="info-item">
+                    <h3>Total Rating:</h3>
+                    <p className='rating'>{selectedGame.totalRating / 10}/10</p>
+                  </div>
+                )
+                : null}
               <div className="info-item">
                 <h3>Price:</h3>
                 <p className='price'>${selectedGame.price}</p>
               </div>
             </div>
-            {selectedGame.summary
+
+            <div className="info-item">
+              <h3>Price:</h3>
+              <p className='price'>${selectedGame.price}</p>
+            </div>
+          </div>
+          {selectedGame.summary
+            ? <div className="info-item">
+              <h3>Summary:</h3>
+              <p>{selectedGame.summary}</p>
+            </div>
+            : selectedGame.storyline
               ? <div className="info-item">
                 <h3>Summary:</h3>
-                <p>{selectedGame.summary}</p>
+                <p>{selectedGame.storyline}</p>
               </div>
-              : selectedGame.storyline
-                ? <div className="info-item">
-                  <h3>Summary:</h3>
-                  <p>{selectedGame.storyline}</p>
-                </div>
-                : null
-            }
-            {selectedGame.genres.length > 0
+              : null
+          }
+          {/* {selectedGame.genres.length > 0
               ? <div className="info-item">
                 <h3>Genres:</h3>
                 <p>{selectedGame.genres.map(genre => genre.name).join(', ')}</p>
               </div>
               : null
-            }
-          </div>
-          { 
-            location.pathname === "/library" 
+            } */}
+        </div>
+        {
+          location.pathname === "/library"
             ? <div className="modal-buttons">
-                <button className="remove-btn" >Remove from Library</button>
-                <button className="add-to-cart-btn">Review</button>
+              <button className="remove-btn" >Remove from Library</button>
+              <button className="add-to-cart-btn">Review</button>
+            </div>
+
+            : location.pathname === "/cart"
+              ? <div className="modal-buttons">
+                <button className="remove-btn" onClick={() => handleRemoveFromCart('remove')}>Remove from Cart</button>
+                <button className="add-to-cart-btn">Purchase</button>
               </div>
 
-                : location.pathname === "/cart" 
-                ? <div className="modal-buttons">
-                    <button className="remove-btn" >Remove from Cart</button>
-                    <button className="add-to-cart-btn">Purchase</button>
-                  </div>
-
-                  : <div className="modal-buttons">
-                      <button className="remove-btn" onClick={() => handleAddToCart('remove')}>Remove</button>
-                      <button className="add-to-cart-btn" onClick={() => handleAddToCart('add')}>Add to Cart</button>
-                    </div>
-          }
-        </div>
+              : <div className="modal-buttons">
+                <button className="remove-btn" onClick={() => handleAddToCart('remove')}>Remove</button>
+                <button className="add-to-cart-btn" onClick={() => handleAddToCart('add')}>Add to Cart</button>
+              </div>
+        }
       </div>
+    </div>
   )
 }
 
-// export
-export default CardDetails
+export default CardDetails;
