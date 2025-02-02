@@ -4,6 +4,7 @@ import { useLocation } from "react-router"
 import CardComponent from "../CardComponent/CardComponent"
 import CardDetails from "../CardDetails/CardDetails"
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
+import Loading from '../Loading/Loading'
 
 // component
 const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, productsList, setProductsList, selectedGame }) => {
@@ -20,7 +21,7 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, produc
     }
 
     // return
-    if (!productsList) return <div>Loading...</div>
+    if (!productsList) return <Loading />
     return (
         <>
             <h1>This is the {location.pathname} route</h1>
