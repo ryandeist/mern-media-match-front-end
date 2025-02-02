@@ -3,6 +3,8 @@ import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { signIn } from '../../services/authService'
+import styles from './SignInForm.module.css'
+import VideoGames from '../../assets/VideoGames.png'
 
 // component
 const SignInForm = () => {
@@ -36,33 +38,40 @@ const SignInForm = () => {
   // return
   return (
     <>
-    <h2>Sign In</h2>
-    <p style={{ color: "red" }}>{message}</p>
-    <form autoComplete="off" onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          value={username}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={password}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button type="submit">Sign In</button>
-    </form>
+      <main className={styles.container}>
+        <section>
+          <img src={VideoGames} alt='A video game controller' />
+        </section>
+        <section>
+          <form autoComplete="off" onSubmit={handleSubmit}>
+          <h2>Sign In</h2>
+          <p style={{ color: "red" }}>{message}</p>
+            <div>
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                name="username"
+                id="username"
+                value={username}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button type="submit">Sign In</button>
+          </form>
+        </section>
+      </main>
     </>
   )
 }
