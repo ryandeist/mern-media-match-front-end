@@ -27,6 +27,14 @@
     transition: all 0.3s ease;
 }
 
+.navbar-settings-btn {
+    line-height: 1.5;
+}
+
+.navbar-settings-btn:focus {
+    outline: none;
+}
+
 .navbar a:hover,
 .navbar-settings-btn:hover {
     color: #66AFFF;
