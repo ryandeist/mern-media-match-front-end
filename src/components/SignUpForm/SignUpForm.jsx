@@ -3,6 +3,8 @@ import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { signUp } from '../../services/authService'
+import VideoGames from '../../assets/VideoGames.png'
+import styles from './SignUpForm.module.css'
 
 // components
 const SignUpForm = () => {
@@ -53,44 +55,51 @@ const SignUpForm = () => {
   // return
   return (
     <>
-      <h1>Sign Up</h1>
-      <p style={{ color: "red" }}>{message}</p>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="name"
-            name="username"
-            value={username}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="confirm">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirm"
-            name="passwordConfirm"
-            value={passwordConfirm}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button disabled={isSignUpValid()}>Sign Up</button>
-      </form>
+      <main className={styles.container}>
+        <section>
+          <img src={VideoGames} alt="A video game controller" />
+        </section>
+        <section>
+          <form onSubmit={handleSubmit}>
+            <h1>Sign Up</h1>
+            <p style={{ color: "red" }}>{message}</p>
+            <div>
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                id="name"
+                name="username"
+                value={username}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="confirm">Confirm Password:</label>
+              <input
+                type="password"
+                id="confirm"
+                name="passwordConfirm"
+                value={passwordConfirm}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button disabled={isSignUpValid()}>Sign Up</button>
+          </form>
+        </section>
+      </main>
     </>
   )
 }
