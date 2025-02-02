@@ -1,6 +1,7 @@
+// imports
 import './App.css'
-import { Routes, Route, useParams } from 'react-router'
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
+import { Routes, Route } from 'react-router'
 import { UserContext } from './contexts/UserContext'
 import Landing from './components/Landing/Landing'
 import NavBar from './components/NavBar/NavBar'
@@ -8,18 +9,16 @@ import SignUpForm from './components/SignUpForm/SignUpForm'
 import SignInForm from './components/SignInForm/SignInForm'
 import ProductList from './components/ProductList/ProductList'
 import UserHomePage from './components/UserHomePage/UserHomePage'
-import SettingsDrawer from './components/SettingsDrawer/SettingsDrawer'
 
+// component
 const App = () => {
   // hooks
   const { user } = useContext(UserContext)
-  // const navigate = useNavigate()
+
+  // state variables
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
-  // useEffect(() => {
-  //   if (user) { navigate(`/users/${user._id}`) }
-  // }, [user])
-
+  // return
   return (
     <>
       <NavBar setIsDrawerOpen={setIsDrawerOpen} />
@@ -46,4 +45,5 @@ const App = () => {
   )
 }
 
+// export
 export default App

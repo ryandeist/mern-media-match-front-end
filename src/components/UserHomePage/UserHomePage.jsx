@@ -1,5 +1,5 @@
+// imports
 import { useContext, useState, useEffect } from 'react'
-// import { useNavigate } from 'react-router'
 import { showGame } from '../../services/apiService'
 import { UserContext } from '../../contexts/UserContext'
 import { showSettings } from '../../services/settingsService'
@@ -8,10 +8,10 @@ import CardDetails from "../CardDetails/CardDetails"
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
 
 
-const UserHomePage = (props) => {
+// component
+const UserHomePage = ({ isDrawerOpen, setIsDrawerOpen }) => {
     // hooks
     const { user } = useContext(UserContext)
-    // const navigate = useNavigate()
 
     // state variable
     const [settings, setSettings] = useState({
@@ -24,6 +24,7 @@ const UserHomePage = (props) => {
     const [selectedGame, setSelectedGame] = useState(null)
     const [reset, setReset] = useState(false)
 
+    // use effects
     useEffect(() => {
         // if (user) { navigate(`/users/${user._id}`) }
     
@@ -91,6 +92,8 @@ const UserHomePage = (props) => {
     } else {
         document.body.classList.remove('active-modal')
     }
+
+    // return
     return (
         <>
             <div className="card-container">
@@ -103,11 +106,12 @@ const UserHomePage = (props) => {
                 setSettings={setSettings}
                 isSettings={isSettings}
                 setIsSettings={setIsSettings}
-                isDrawerOpen={props.isDrawerOpen}
-                setIsDrawerOpen={props.setIsDrawerOpen}
+                isDrawerOpen={isDrawerOpen}
+                setIsDrawerOpen={setIsDrawerOpen}
             />
         </>
     )
 }
 
+// export
 export default UserHomePage

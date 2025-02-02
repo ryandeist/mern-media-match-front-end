@@ -1,5 +1,4 @@
 // source of truth
-
 const gameGenres = [
     { id: 2,  name: "Point-and-click" },
     { id: 4,  name: "Fighting" },
@@ -23,7 +22,8 @@ const gameGenres = [
     { id: 33, name: "Arcade" },
     { id: 34, name: "Visual Novel" },
     { id: 35, name: "Card & Board Game" },
-    { id: 36, name: "MOBA" }
+    { id: 36, name: "MOBA" },
 ]
 
+// export
 export default gameGenres

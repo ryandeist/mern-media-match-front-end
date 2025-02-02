@@ -6,10 +6,13 @@ import { UserContext } from "../../contexts/UserContext"
 import { useLocation } from 'react-router'
 const media = import.meta.glob('../../assets/*.png')
 
+// component
 const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset }) => {
+  // hooks
   const { user } = useContext(UserContext)
   const location = useLocation
 
+  // component logic
   if (!selectedGame) return null
 
   // dynamically render icon
@@ -20,10 +23,9 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
       break
     }
   }
+  // handler function
   const handleAddToCart = async (buttonName) => {
-    // e.preventDefault()
     try {
-
       if (buttonName === 'add') await addToCart(user._id, selectedGame)
       setGameData((prev) => prev.filter((game) => game.id !== selectedGame.id))
       setTimeout(setIsModalOpen(false), "1500")
@@ -35,6 +37,7 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
     }
   }
 
+  // return
   return (
       <div className="modal-overlay">
         <div className="card-details-modal">
@@ -114,4 +117,5 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
   )
 }
 
-export default CardDetails;
+// export
+export default CardDetails

@@ -1,13 +1,14 @@
 // import
 import './CardComponent.css'
-// component
-const CardComponent = (props) => {
 
-    const card = props.gameData[0]
+// component
+const CardComponent = ({ gameData, onCardClick }) => {
+
+    const card = gameData[0]
 
     // handler functions
     const handleClick = () => {
-        props.onCardClick(card)
+        onCardClick(card)
     }
     
     // return 

@@ -1,13 +1,18 @@
-import { useLocation } from "react-router";
+// imports
+import { useLocation } from "react-router"
 
+// component
 const ProductList = () => {
-    const location = useLocation();
+    // hooks
+    const location = useLocation()
 
+    // return
     return (
         <>
             <h1>This is the {location.pathname} route</h1>
         </>
     )
-};
+}
 
-export default ProductList;
+// export
+export default ProductList
