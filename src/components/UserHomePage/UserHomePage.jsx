@@ -34,7 +34,6 @@ const UserHomePage = ({ handleCardClick, handleCloseModal, isModalOpen, setIsMod
                     media: fetchedMedia,
                     genre: fetchedGenres,
                 })
-                setIsSettings(true)
             } else {
                 setSettings({
                     media: [],
