@@ -26,7 +26,6 @@ const NavBar = ({ setIsDrawerOpen }) => {
     <nav className='navbar'>
       {user ? (
         <ul>
-          <li>Welcome, {user.username}</li>
           <li><Link to={'/'}>Dashboard</Link></li>
           <li><Link to={'/cart'}>Cart</Link></li>
           <li><Link to={'/library'}>Library</Link></li>

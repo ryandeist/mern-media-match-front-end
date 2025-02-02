@@ -1,11 +1,20 @@
 // import
 import './CardComponent.css'
+import { useLocation } from 'react-router'
 
 // component
 const CardComponent = ({ gameData, onCardClick }) => {
-
-    const card = gameData[0]
-
+    
+    // hooks
+    const location = useLocation()
+  
+    // source of truth
+    if (location.pathname === '/cart' || location.pathname === '/library' ) {
+        let card = gameData
+    } else {
+        let card = gameData[0]
+    }
+  
     // handler functions
     const handleClick = () => {
         onCardClick(card)
@@ -15,7 +24,7 @@ const CardComponent = ({ gameData, onCardClick }) => {
     if (!card) return <div>Loading...</div>
     return (
         <div className="card">
-            {/* <h3>{card?.title || "Untitled"}</h3> */}
+            <h3>{card?.title || "Untitled"}</h3>
             <img className="card-image" src={card?.cover} alt="cover image"/>
             {/* <div className="card-info">
                 <p className="rating">{card.parentalRating}</p>

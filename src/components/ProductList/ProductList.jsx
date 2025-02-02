@@ -1,9 +1,12 @@
 // imports
+import './ProductList.css'
+import { useState } from "react"
 import { useLocation } from "react-router"
+import CardComponent from "../CardComponent/CardComponent"
 import CardDetails from "../CardDetails/CardDetails"
 
 // component
-const ProductList = ({ onCardClick, selectedGame, onClose }) => {
+const ProductList = ({ onCardClick, onClose, productsList, setProductList, selectedGame }) => {
     // hooks
     const location = useLocation()
 
@@ -17,14 +20,20 @@ const ProductList = ({ onCardClick, selectedGame, onClose }) => {
     }
 
     // return
+    if (!productsList) return <div>Loading...</div>
     return (
         <>
             <h1>This is the {location.pathname} route</h1>
+            <div className="product-list">
+                {productsList.map((product) => (
+                    <CardComponent gameData={product} key={product.id} onCardClick={handleClick} className="product-list-card" />
+                ))}
+            </div>
             <button onClick={handleClick}>See Card Details</button>
-            <CardDetails 
+            {isModalOpen && <CardDetails 
                 onClose={onClose}
                 selectedGame={selectedGame}
-            />
+            />}
         </>
     )
 }
