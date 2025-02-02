@@ -4,9 +4,10 @@ import { useLocation } from "react-router"
 import CardComponent from "../CardComponent/CardComponent"
 import CardDetails from "../CardDetails/CardDetails"
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
+import Loading from '../Loading/Loading'
 
 // component
-const ProductList = ({ isModalOpen, onCardClick, onClose, productsList, setProductList, selectedGame }) => {
+const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, productsList, setProductsList, selectedGame }) => {
     // hooks
     const location = useLocation()
 
@@ -20,19 +21,22 @@ const ProductList = ({ isModalOpen, onCardClick, onClose, productsList, setProdu
     }
 
     // return
-    if (!productsList) return <div>Loading...</div>
+    if (!productsList) return <Loading />
     return (
         <>
             <h1>This is the {location.pathname} route</h1>
             <div className="product-list">
                 {productsList.map((product) => (
-                    <CardComponent gameData={product} key={product.id} onCardClick={handleClick} className="product-list-card" />
+                    <CardComponent gameData={product} key={product.id} onCardClick={onCardClick} selectedGame={product} className="product-list-card" />
                 ))}
             </div>
             <button onClick={handleClick}>See Card Details</button>
             {isModalOpen && <CardDetails 
                 onClose={onClose}
                 selectedGame={selectedGame}
+                productsList={productsList}
+                setProductsList={setProductsList}
+                setIsModalOpen={setIsModalOpen}
             />}
             <SettingsDrawer />
         </>
