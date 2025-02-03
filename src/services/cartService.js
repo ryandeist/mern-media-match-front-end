@@ -21,7 +21,7 @@ export const addToCart = async (userId, gameData) => {
     }
 }
 
-export const getEntireCart = async (userId) => {
+export const getUserCart = async (userId) => {
     try {
         const res = await fetch(BASE_URL, {
             method: 'GET',
