@@ -5,7 +5,6 @@ import { useLocation } from "react-router"
 import CardComponent from "../CardComponent/CardComponent"
 import CardDetails from "../CardDetails/CardDetails"
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
-import Loading from '../Loading/Loading'
 import { getUserCart } from '../../services/cartService'
 import { getUserLibrary } from '../../services/libraryService'
 import { UserContext } from '../../contexts/UserContext'
@@ -56,13 +55,11 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
         productsList = library
     }
 
-
-    // { Object.keys(productsList).length === 0
     // return
     if (productsList.length === 0) return <h1>Your {location.pathname.slice(1).charAt(0).toUpperCase() + location.pathname.slice(2)} is Empty</h1>
     return (
         <>
-            <h1>This is the {location.pathname} route</h1>
+            <h1>Your {location.pathname.slice(1).charAt(0).toUpperCase() + location.pathname.slice(2)}</h1>
             <div className="product-list">
                 {productsList.map((product) => (
                     <CardComponent gameData={product} key={product.id} onCardClick={onCardClick} selectedGame={product} className="product-list-card" />
