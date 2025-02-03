@@ -67,3 +67,10 @@
 .see-more-btn:hover {
     background-color: #FF3B3B;
 }
+
+@media (prefers-color-scheme: dark) {
+    .card {
+        color: #213547;
+        background-color: #ffffff;
+    }
+}
