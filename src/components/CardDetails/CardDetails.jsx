@@ -16,10 +16,8 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
   const location = useLocation()
 
   // state variables
-  const [review, setReview] = useState({
-    text: '',
-    author: '',
-  })
+  const initReviewState = { text: '', author: '', id: '' }
+  const [review, setReview] = useState(initReviewState)
 
   // use effect 
   useEffect(() => {
@@ -30,19 +28,9 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
             console.log(fetchedReview)
             setReview({
               text: fetchedReview.text,
-              author: fetchedReview.author
+              author: fetchedReview.author,
+              id: fetchedReview.id
             })
-          // using product id and review id(?)
-          // may be a good idea to rewrite the index so only need product id and user is to findOne
-          // if i use the current routs, it is
-          // const fetchedReview = await findReview(????, ?????)
-          // see your review
-          // but only need to pass product id if i go the other way
-          // i.e. // findReviews(????)
-          // pull review from db, if there is one, set Review.
-          // setReview(fetchedReview)
-
-          console.log('Prof Plum in Library with Banana')
         } catch (err) {
           console.log('Error fetching review', err)
         }
@@ -91,10 +79,6 @@ if (!selectedGame) return setIsModalOpen(false)
   const handleAddReview = async (reviewFormData) => {
     await createReview(selectedGame._id, reviewFormData.text)
     // setReview(reviewFormData)
-    // console.log(review)
-    // console.log('reviewFormData', reviewFormData)
-    // console.log('rev data txt', reviewFormData.text)
-    // console.log(selectedGame._id)
   }
 
   // may need to be passed into Review Form and rendered conditionally
@@ -104,8 +88,8 @@ if (!selectedGame) return setIsModalOpen(false)
   }
 
   const handleDeleteReview = async () => {
-    //    await deleteReview(????, ????)
-    setReview('')
+    await deleteReview(selectedGame._id, review.id)
+    setReview(initReviewState)
   }
 
   const handleRemoveFromLibrary = async () => {

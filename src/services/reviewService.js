@@ -75,7 +75,7 @@ export const updateReview = async (productId, reviewId, text) => {
 export const deleteReview = async (productId, reviewId) => {
     try {
         const res = await fetch(`${BASE_URL}/${reviewId}`, {
-            method: 'PUT',
+            method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json',
