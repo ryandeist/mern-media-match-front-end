@@ -56,8 +56,10 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
         productsList = library
     }
 
+
+    // { Object.keys(productsList).length === 0
     // return
-    if (!productsList) return <Loading />
+    if (productsList.length === 0) return <h1>Your {location.pathname.slice(1).charAt(0).toUpperCase() + location.pathname.slice(2)} is Empty</h1>
     return (
         <>
             <h1>This is the {location.pathname} route</h1>

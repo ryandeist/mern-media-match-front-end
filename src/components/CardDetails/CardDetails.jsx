@@ -10,7 +10,7 @@ import { createReview, deleteReview, findReview, findReviews, updateReview } fro
 
 const media = import.meta.glob('../../assets/*.png')
 
-  // hooks
+// hooks
 const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset }) => {
   const { user } = useContext(UserContext)
   const location = useLocation()
@@ -23,7 +23,7 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
   // use effect 
   useEffect(() => {
     if (location.pathname === '/library') {
-      const fetchReview = async() => {
+      const fetchReview = async () => {
         try {
 
           // using product id and review id(?)
@@ -44,7 +44,7 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
       fetchReview()
     }
   }, [review])
-  
+
 
   // handler functions
   const handleAddToCart = async (buttonName) => {
@@ -59,8 +59,8 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
       console.log(err)
     }
   }
-  
-    const handleRemoveFromCart = async () => {
+
+  const handleRemoveFromCart = async () => {
     try {
       await removeFromCart(user._id, selectedGame._id)
       setCart((prev) => prev.filter((product) => product._id !== selectedGame._id))
@@ -69,8 +69,8 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
       console.log(err)
     }
   }
-   
-    const handlePurchase = async () => {
+
+  const handlePurchase = async () => {
     try {
       await purchase(user._id, selectedGame)
       await removeFromCart(user._id, selectedGame._id)
@@ -82,7 +82,7 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
   }
 
   const handleAddReview = async (reviewFormData) => {
-//    await createReview(?????, reviewFormData)
+    //    await createReview(?????, reviewFormData)
     setReview(reviewFormData)
     console.log(review)
     console.log('reviewFormData', reviewFormData)
@@ -90,12 +90,12 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
 
   // may need to be passed into Review Form and rendered conditionally
   const handleEditReview = async (reviewFormData) => {
-//    await updateReview(?????, ????? , reviewFormData)
+    //    await updateReview(?????, ????? , reviewFormData)
     setReview(reviewFormData)
   }
 
   const handleDeleteReview = async () => {
-//    await deleteReview(????, ????)
+    //    await deleteReview(????, ????)
     setReview('')
   }
 
@@ -109,7 +109,7 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
       console.log(err)
     }
   }
-   // dynamically render icon
+  // dynamically render icon
   let currentMedia = ""
   for (const key of Object.keys(media)) {
     if (key === `../../assets/${selectedGame.media}.png`) {
@@ -118,7 +118,7 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
     }
   }
 
-// return
+  // return
   return (
     <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
       <div className="card-details-modal">
@@ -129,26 +129,23 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
             <button onClick={onClose} className='card-modal-close-btn'>X</button>
           </div>
           <img src={selectedGame.cover} alt="Cover art" className="card-modal-cover" />
-          { location.pathname === '/library' 
-            ? 
-              <div className='card-modal-review-section'>
-                {!review
-                  ?  
-                    <ReviewForm handleAddReview={handleAddReview} setIsModalOpen={setIsModalOpen} />
-                  : 
-                    <div>
-                      <p>{review}</p>
-                      <div className='card-modal-review-btn modal-btns'>
-                        <button onClick={() => handleEditReview()} className='edit-review-btn'>Edit Review</button>
-                        <button onClick={() => handleDeleteReview()}className='delete-review-btn'>Delete Review</button>
-                    </div>
-                      
-                    </div>
-                }
-                <div className='card-modal-review-form'>
-
+          {location.pathname === '/library'
+            ?
+            <div className='card-modal-review-section'>
+              {!review
+                ?
+                <ReviewForm handleAddReview={handleAddReview} setIsModalOpen={setIsModalOpen} />
+                :
+                <div>
+                  <p>{review}</p>
+                  <div className='card-modal-review-btn modal-btns'>
+                    <button onClick={() => handleEditReview()} className='edit-review-btn'>Edit Review</button>
+                    <button onClick={() => handleDeleteReview()} className='delete-review-btn'>Delete Review</button>
+                  </div>
                 </div>
-             
+              }
+              <div className='card-modal-review-form'>
+              </div>
             </div>
             : null
           }
@@ -167,10 +164,14 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
                   </div>
                 )
                 : null}
-              <div className="info-item">
-                <h3>Price:</h3>
-                <p className='price'>${selectedGame.price}</p>
-              </div>
+              {location.pathname !== '/library'
+                ?
+                <div className="info-item">
+                  <h3>Price:</h3>
+                  <p className='price'>${selectedGame.price}</p>
+                </div>
+                : null
+              }
             </div>
           </div>
           {selectedGame.summary
@@ -197,7 +198,6 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
           location.pathname === "/library"
             ? <div className="modal-btns">
               <button className="library-remove-btn" onClick={() => handleRemoveFromLibrary()}>Remove from Library</button>
-              <button className="add-to-cart-btn">Review</button>
             </div>
 
             : location.pathname === "/cart"
