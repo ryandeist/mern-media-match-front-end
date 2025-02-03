@@ -21,7 +21,7 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
     const location = useLocation()
     const { user } = useContext(UserContext)
     
-    let productsList
+    let productsList = []
 
     // useEffect
     useEffect(() => {
@@ -39,7 +39,7 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
         const fetchLibrary = async () => {
             try {
                 const libraryData = await getUserLibrary(user._id)
-                // console.log(libraryData)
+                if (!libraryData) setLibrary([])
                 setLibrary(libraryData)
             } catch (err) {
                 console.log('Error Fetching Cart', err)
@@ -49,16 +49,12 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
     }
     }, [location, user._id])
 
-    console.log(library)
-
     if (location.pathname === '/cart') {
         productsList = cart
     } 
     if (location.pathname === '/library') {
         productsList = library
     }
-
-    console.log(productsList)
 
     // return
     if (!productsList) return <Loading />
@@ -73,7 +69,8 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
             {isModalOpen && <CardDetails
                 onClose={onClose}
                 selectedGame={selectedGame}
-                setProductsList={setCart}
+                setCart={setCart}
+                setLibrary={setLibrary}
                 setIsModalOpen={setIsModalOpen}
             />}
             <SettingsDrawer />
