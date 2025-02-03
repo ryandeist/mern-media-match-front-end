@@ -34,9 +34,9 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
     }
   }
 
-  const handleRemoveFromCart = async (buttonName) => {
+  const handleRemoveFromCart = async () => {
     try {
-      if (buttonName === 'remove') await removeFromCart(user._id, selectedGame._id)
+      await removeFromCart(user._id, selectedGame._id)
       setProductsList((prev) => prev.filter((product) => product._id !== selectedGame._id))
       setIsModalOpen(false)
     } catch (err) {
@@ -44,9 +44,10 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
     }
   }
 
-  const handlePurchase = async (buttonName) => {
+  const handlePurchase = async () => {
     try {
-      if (buttonName === 'purchase') await purchase(user._id, selectedGame._id)
+        await purchase(user._id, selectedGame)
+        await removeFromCart(user._id, selectedGame._id)
         setProductsList((prev) => prev.filter((product) => product._id !== selectedGame._id))
         setIsModalOpen(false)
     } catch (err) {
