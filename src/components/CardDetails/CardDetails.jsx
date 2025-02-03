@@ -26,11 +26,15 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
         try {
             const fetchedReview = await findReviews(selectedGame._id)
             console.log(fetchedReview)
-            setReview({
-              text: fetchedReview.text,
-              author: fetchedReview.author,
-              id: fetchedReview.id
-            })
+            if (fetchedReview.err) {
+              serReview(initReviewState)
+            } else {
+              setReview({
+                text: fetchedReview.text,
+                author: fetchedReview.author,
+                id: fetchedReview.id
+              })
+            }
         } catch (err) {
           console.log('Error fetching review', err)
         }
@@ -125,7 +129,7 @@ if (!selectedGame) return setIsModalOpen(false)
           {location.pathname === '/library'
             ?
             <div className='card-modal-review-section'>
-              {!review
+              {!review.text
                 ?
                 <ReviewForm handleAddReview={handleAddReview} setIsModalOpen={setIsModalOpen} />
                 :
