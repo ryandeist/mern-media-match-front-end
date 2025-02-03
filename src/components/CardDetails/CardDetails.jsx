@@ -43,6 +43,16 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
     }
   }
 
+  const purchase = async (buttonName) => {
+    try {
+      if (buttonName === 'purchase') await purchase(user._id, selectedGame)
+      setProductsList((prev) => prev.filter((product) => product._id !== selectedGame._id))
+      setIsModalOpen(false)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div className="modal-overlay">
       <div className="card-details-modal">
@@ -86,12 +96,12 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
               : null
           }
           {selectedGame.genres.length > 0
-              ? <div className="info-item">
-                <h3>Genres:</h3>
-                <p>{selectedGame.genres.map(genre => genre.name).join(', ')}</p>
-              </div>
-              : null
-            }
+            ? <div className="info-item">
+              <h3>Genres:</h3>
+              <p>{selectedGame.genres.map(genre => genre.name).join(', ')}</p>
+            </div>
+            : null
+          }
         </div>
         {
           location.pathname === "/library"
@@ -103,7 +113,7 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
             : location.pathname === "/cart"
               ? <div className="modal-buttons">
                 <button className="remove-btn" onClick={() => handleRemoveFromCart('remove')}>Remove from Cart</button>
-                <button className="add-to-cart-btn">Purchase</button>
+                <button className="add-to-cart-btn" onClick={() => purchase('purchase')}>Purchase</button>
               </div>
 
               : <div className="modal-buttons">
