@@ -98,12 +98,12 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
               : null
           }
           {selectedGame.genres.length > 0
-              ? <div className="info-item">
-                <h3>Genres:</h3>
-                <p>{selectedGame.genres.map(genre => genre.name).join(', ')}</p>
-              </div>
-              : null
-            }
+            ? <div className="info-item">
+              <h3>Genres:</h3>
+              <p>{selectedGame.genres.map(genre => genre.name).join(', ')}</p>
+            </div>
+            : null
+          }
         </div>
         {
           location.pathname === "/library"

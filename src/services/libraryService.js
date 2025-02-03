@@ -18,3 +18,20 @@ export const purchase = async (userId, product) => {
         console.log(err)
     }
 }
+
+export const getUserLibrary = async (userId) => {
+    try {
+        const res = await fetch(BASE_URL, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                userid: userId,
+            },
+        })
+        const userLibrary = await res.json()
+
+        return userLibrary
+    } catch (err) {
+        console.log(err)
+    }
+}

@@ -6,7 +6,8 @@ import CardComponent from "../CardComponent/CardComponent"
 import CardDetails from "../CardDetails/CardDetails"
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
 import Loading from '../Loading/Loading'
-import { getEntireCart } from '../../services/cartService'
+import { getUserCart } from '../../services/cartService'
+import { getUserLibrary } from '../../services/libraryService'
 import { UserContext } from '../../contexts/UserContext'
 
 
@@ -27,7 +28,7 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
         if (location.pathname === '/cart') {
         const fetchCart = async () => {
             try {
-                const cartData = await getEntireCart(user._id)
+                const cartData = await getUserCart(user._id)
                 setCart(cartData.cart)
             } catch (err) {
                 console.log('Error Fetching Cart', err)
@@ -35,15 +36,29 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
         }
         fetchCart()
     } else if (location.pathname === '/library') {
-        console.log('useEffecting the library')
+        const fetchLibrary = async () => {
+            try {
+                const libraryData = await getUserLibrary(user._id)
+                // console.log(libraryData)
+                setLibrary(libraryData)
+            } catch (err) {
+                console.log('Error Fetching Cart', err)
+            }
+        }
+        fetchLibrary()
     }
     }, [location, user._id])
 
+    console.log(library)
+
     if (location.pathname === '/cart') {
         productsList = cart
-    } else if (location.pathname === '/library') {
+    } 
+    if (location.pathname === '/library') {
         productsList = library
     }
+
+    console.log(productsList)
 
     // return
     if (!productsList) return <Loading />
