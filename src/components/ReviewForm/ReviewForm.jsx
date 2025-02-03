@@ -3,19 +3,20 @@ import './ReviewForm.css'
 import { useState } from "react"
 
 // component 
-const ReviewForm = ({ setReview }) => {
+const ReviewForm = ({ setIsModalOpen, handleAddReview }) => {
     // state variables
     const [reviewFormData, setReviewFormData] = useState({ text: '' })
 
     // handler functions
     const handleChange = (evt) => {
-        setReviewFormData({...reviewFormData, [evt.targe.name]: evt.target.value })
+        setReviewFormData({...reviewFormData, [evt.target.name]: evt.target.value })
     }
 
     const handleSubmit = (evt) => {
         evt.preventDefault()
-        setReview(reviewFormData)
-        setFormData({ text: '' })
+        handleAddReview(reviewFormData)
+        setReviewFormData({ text: '' })
+        setIsModalOpen(false)
     }
 
     // return

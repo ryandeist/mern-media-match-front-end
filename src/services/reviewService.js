@@ -21,7 +21,7 @@ export const createReview = async (productId, text) => {
     }
 }
 
-export const allProductReviews = async (productId) => {
+export const findReviews = async (productId) => {
     try {
         const res = await fetch(BASE_URL, {
             method: 'GET',
@@ -37,7 +37,7 @@ export const allProductReviews = async (productId) => {
     }
 }
 
-export const seeYourReview = async (productId, reviewId) => {
+export const findReview = async (productId, reviewId) => {
     try {
         const res = await fetch(`${BASE_URL}/${reviewId}`, {
             method: 'GET',

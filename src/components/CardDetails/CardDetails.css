@@ -77,22 +77,43 @@
     display: flex;
     gap: 20px; 
     margin-top: 10px; 
-    justify-content: space-evenly;
+    justify-content: left;
 }
   
 .info-item {
     display: flex;
     flex-direction: column; 
+    gap: 5px; 
+    border: 1px solid #f0f0f0; 
+    border-radius: 10px;
+    padding: 7px; 
+    background-color: #f9f9f9; 
+    margin-bottom: 15px;
 }
   
 .info-item h3 {
     margin: 0; 
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 600; 
+    text-align: left; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    color: #333; 
+    border-bottom: 2px solid #FF5C5C; 
+    padding-bottom: 5px;
 }
   
 .info-item p {
     margin: 0; 
     font-size: 13px; 
+    color: #555; 
+    line-height: 1.2;
+    text-align: left
+}
+
+.info-item:hover {
+    border: 1px solid #FF5C5C;
+    background-color: #fff;
 }
 
 .card-modal-info .info-item {
@@ -130,7 +151,7 @@
     transition: background-color 0.3s ease;
 }
 
-.remove-btn:hover, .add-to-cart-btn:hover, .library-remove-btn {
+.remove-btn:hover, .add-to-cart-btn:hover, .library-remove-btn:hover,.edit-review-btn:hover, .delete-review-btn:hover {
     background-color: #FF3B3B;
 }
 

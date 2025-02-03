@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../contexts/UserContext"
 import { useLocation } from 'react-router'
 import ReviewForm from '../ReviewForm/ReviewForm'
+import { createReview, deleteReview, findReview, findReviews, updateReview } from '../../services/reviewService'
 
 const media = import.meta.glob('../../assets/*.png')
 
@@ -16,14 +17,24 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
   if (!selectedGame) return setIsModalOpen(false)
 
   // state variables
-  const [review, setReview] = useState(false)
+  const [review, setReview] = useState('')
 
   // use effect 
   useEffect(() => {
     if (location.pathname === '/library') {
       const fetchReview = async() => {
         try {
+
+          // using product id and review id(?)
+          // may be a good idea to rewrite the index so only need product id and user is to findOne
+          // if i use the current routs, it is
+          // const fetchedReview = await findReview(????, ?????)
+          // see your review
+          // but only need to pass product id if i go the other way
+          // i.e. // findReviews(????)
           // pull review from db, if there is one, set Review.
+          // setReview(fetchedReview)
+
           console.log('Prof Plum in Library with Banana')
         } catch (err) {
           console.log('Error fetching review', err)
@@ -31,7 +42,7 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
       }
       fetchReview()
     }
-  }, [])
+  }, [review])
   
   // dynamically render icon
   let currentMedia = ""
@@ -66,6 +77,24 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
     }
   }
 
+  const handleAddReview = async (reviewFormData) => {
+//    await createReview(?????, reviewFormData)
+    setReview(reviewFormData)
+    console.log(review)
+    console.log('reviewFormData', reviewFormData)
+  }
+
+  // may need to be passed into Review Form and rendered conditionally
+  const handleEditReview = async (reviewFormData) => {
+//    await updateReview(?????, ????? , reviewFormData)
+    setReview(reviewFormData)
+  }
+
+  const handleDeleteReview = async () => {
+//    await deleteReview(????, ????)
+    setReview('')
+  }
+
   // return
   return (
     <div className="modal-overlay">
@@ -77,17 +106,21 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
             <button onClick={onClose} className='card-modal-close-btn'>X</button>
           </div>
           <img src={selectedGame.cover} alt="Cover art" className="card-modal-cover" />
-          { location.pathname === '/cart' 
+          { location.pathname === '/library' 
             ? 
               <div className='card-modal-review-section'>
                 {!review
                   ?  
-                    <ReviewForm setReview={setReview} />
+                    <ReviewForm handleAddReview={handleAddReview} setIsModalOpen={setIsModalOpen} />
                   : 
-                     <div className='card-modal-review-btn modal-btns'>
-                       <button className='edit-review-btn'>Edit Review</button>
-                       <button className='delete-review-btn'>Delete Review</button>
-                     </div>
+                    <div>
+                      <p>{review}</p>
+                      <div className='card-modal-review-btn modal-btns'>
+                        <button onClick={() => handleEditReview()} className='edit-review-btn'>Edit Review</button>
+                        <button onClick={() => handleDeleteReview()}className='delete-review-btn'>Delete Review</button>
+                    </div>
+                      
+                    </div>
                 }
                 <div className='card-modal-review-form'>
 
