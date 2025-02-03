@@ -9,7 +9,7 @@ const ReviewForm = ({ setIsModalOpen, handleAddReview }) => {
 
     // handler functions
     const handleChange = (evt) => {
-        setReviewFormData({...reviewFormData, [evt.target.name]: evt.target.value })
+        setReviewFormData({ ...reviewFormData, [evt.target.name]: evt.target.value })
     }
 
     const handleSubmit = (evt) => {
@@ -22,18 +22,18 @@ const ReviewForm = ({ setIsModalOpen, handleAddReview }) => {
     // return
     return (
         <form onSubmit={handleSubmit}>
-            <textarea 
-              required
-              name="text"
-              type="text" 
-              id="text"
-              value={FormData.text}
-              onChange={handleChange}
-              className="review-form"
-              placeholder="Write your review here..."
+            <textarea
+                required
+                name="text"
+                type="text"
+                id="text"
+                value={FormData.text}
+                onChange={handleChange}
+                className="review-form"
+                placeholder="Write your review here..."
             />
             <div className='card-modal-review-btn'>
-              <button type="submit" className='leave-a-review-btn'>Leave a Review</button>
+                <button type="submit" className='leave-a-review-btn'>Leave a Review</button>
             </div>
         </form>
     )
