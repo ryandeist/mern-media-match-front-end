@@ -35,3 +35,22 @@ export const getUserLibrary = async (userId) => {
         console.log(err)
     }
 }
+
+export const removeFromLibrary = async (userId, productId) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${productId}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: productId,
+                userId: userId,
+            })
+        })
+        return res.json()
+    } catch (err) {
+        console.log(err)
+    }
+}

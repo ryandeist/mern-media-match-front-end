@@ -30,6 +30,13 @@ const App = () => {
     setSelectedGame(null)
   }
 
+  // prevent background scrolling
+  if (isModalOpen) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
+
   // return
   return (
     <>
@@ -44,21 +51,19 @@ const App = () => {
               setIsModalOpen={setIsModalOpen}
               selectedGame={selectedGame}
             />} />
-            <Route path='/cart' element={<ProductList 
+            <Route path='/cart' element={<ProductList
               isModalOpen={isModalOpen}
               setIsModalOpen={setIsModalOpen}
               onCardClick={handleCardClick}
               onClose={handleCloseModal}
-              // productsList={cart} 
-              // setProductsList={setCart}
               selectedGame={selectedGame}
             />} />
-            <Route path='/library' element={<ProductList 
+            <Route path='/library' element={<ProductList
               isModalOpen={isModalOpen}
               setIsModalOpen={setIsModalOpen}
-              onCardClick={handleCardClick}   
-              onClose={handleCloseModal} 
-              selectedGame={selectedGame}        
+              onCardClick={handleCardClick}
+              onClose={handleCloseModal}
+              selectedGame={selectedGame}
             />} />
             <Route path='/settings' element={<UserHomePage
               handleCardClick={handleCardClick}

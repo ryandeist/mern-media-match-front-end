@@ -1,16 +1,16 @@
 // imports
 import './CardDetails.css'
 import { addToCart, removeFromCart } from '../../services/cartService'
-import { purchase } from '../../services/libraryService'
+import { purchase, removeFromLibrary } from '../../services/libraryService'
 import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContext"
 
 const media = import.meta.glob('../../assets/*.png')
 
-const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset, setProductsList }) => {
+const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset }) => {
   const { user } = useContext(UserContext)
 
-  if (!selectedGame) return null
+  if (!selectedGame) return setIsModalOpen(false)
 
   // dynamically render icon
   let currentMedia = ""
@@ -37,7 +37,7 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
   const handleRemoveFromCart = async () => {
     try {
       await removeFromCart(user._id, selectedGame._id)
-      setProductsList((prev) => prev.filter((product) => product._id !== selectedGame._id))
+      setCart((prev) => prev.filter((product) => product._id !== selectedGame._id))
       setIsModalOpen(false)
     } catch (err) {
       console.log(err)
@@ -46,17 +46,28 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
 
   const handlePurchase = async () => {
     try {
-        await purchase(user._id, selectedGame)
-        await removeFromCart(user._id, selectedGame._id)
-        setProductsList((prev) => prev.filter((product) => product._id !== selectedGame._id))
-        setIsModalOpen(false)
+      await purchase(user._id, selectedGame)
+      await removeFromCart(user._id, selectedGame._id)
+      setCart((prev) => prev.filter((product) => product._id !== selectedGame._id))
+      setIsModalOpen(false)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleRemoveFromLibrary = async () => {
+    try {
+      await removeFromLibrary(user._id, selectedGame._id)
+      console.log(selectedGame._id)
+      setLibrary((prev) => prev.filter((product) => product._id !== selectedGame._id))
+      setIsModalOpen(false)
     } catch (err) {
       console.log(err)
     }
   }
 
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
       <div className="card-details-modal">
         <div>
           <div className="card-modal-header">
@@ -108,18 +119,18 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
         {
           location.pathname === "/library"
             ? <div className="modal-buttons">
-              <button className="remove-btn" >Remove from Library</button>
+              <button className="remove-btn" onClick={() => handleRemoveFromLibrary()}>Remove from Library</button>
               <button className="add-to-cart-btn">Review</button>
             </div>
 
             : location.pathname === "/cart"
               ? <div className="modal-buttons">
-                <button className="remove-btn" onClick={() => handleRemoveFromCart('remove')}>Remove from Cart</button>
-                <button className="add-to-cart-btn" onClick={() => handlePurchase('purchase')}>Purchase</button>
+                <button className="remove-btn" onClick={() => handleRemoveFromCart()}>Remove from Cart</button>
+                <button className="add-to-cart-btn" onClick={() => handlePurchase()}>Purchase</button>
               </div>
 
               : <div className="modal-buttons">
-                <button className="remove-btn" onClick={() => handleAddToCart('remove')}>Remove</button>
+                <button className="remove-btn" onClick={() => handleAddToCart()}>Remove</button>
                 <button className="add-to-cart-btn" onClick={() => handleAddToCart('add')}>Add to Cart</button>
               </div>
         }
