@@ -134,8 +134,10 @@ if (!selectedGame) return setIsModalOpen(false)
                 <ReviewForm handleAddReview={handleAddReview} setIsModalOpen={setIsModalOpen} />
                 :
                 <div>
-                  <p>{review.author}</p>
-                  <p>{review.text}</p>
+                  <div className='card-modal-review'>
+                    <p className='card-modal-review-text'>"{review.text}"</p>
+                    <p className='card-modal-review-author'>- {review.author}</p>
+                  </div>
                   <div className='card-modal-review-btn modal-btns'>
                     <button onClick={() => handleEditReview()} className='edit-review-btn'>Edit Review</button>
                     <button onClick={() => handleDeleteReview()} className='delete-review-btn'>Delete Review</button>
