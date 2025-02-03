@@ -1,16 +1,38 @@
 // imports
 import './CardDetails.css'
 import { addToCart, removeFromCart } from '../../services/cartService'
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../contexts/UserContext"
+import { useLocation } from 'react-router'
+import ReviewForm from '../ReviewForm/ReviewForm'
 
 const media = import.meta.glob('../../assets/*.png')
 
 const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset, productsList, setProductsList }) => {
+  // hooks
   const { user } = useContext(UserContext)
+  const location = useLocation()
 
-  if (!selectedGame) return null
+  if (!selectedGame) return setIsModalOpen(false)
 
+  // state variables
+  const [review, setReview] = useState(false)
+
+  // use effect 
+  useEffect(() => {
+    if (location.pathname === '/library') {
+      const fetchReview = async() => {
+        try {
+          // pull review from db, if there is one, set Review.
+          console.log('Prof Plum in Library with Banana')
+        } catch (err) {
+          console.log('Error fetching review', err)
+        }
+      }
+      fetchReview()
+    }
+  }, [])
+  
   // dynamically render icon
   let currentMedia = ""
   for (const key of Object.keys(media)) {
@@ -20,6 +42,7 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
     }
   }
 
+  // handler functions
   const handleRemoveFromCart = async (buttonName) => {
     try {
       if (buttonName === 'remove') await removeFromCart(user._id, selectedGame._id)
@@ -43,6 +66,7 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
     }
   }
 
+  // return
   return (
     <div className="modal-overlay">
       <div className="card-details-modal">
@@ -50,9 +74,29 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
           <div className="card-modal-header">
             <img className="card-modal-icon" src={currentMedia} alt={selectedGame.media} />
             <h2>{selectedGame.title} {selectedGame.releaseDate ? `(${selectedGame.releaseDate.slice(0, 4)})` : null}</h2>
-            <button onClick={onClose}>X</button>
+            <button onClick={onClose} className='card-modal-close-btn'>X</button>
           </div>
           <img src={selectedGame.cover} alt="Cover art" className="card-modal-cover" />
+          { location.pathname === '/cart' 
+            ? 
+              <div className='card-modal-review-section'>
+                {!review
+                  ?  
+                    <ReviewForm setReview={setReview} />
+                  : 
+                     <div className='card-modal-review-btn modal-btns'>
+                       <button className='edit-review-btn'>Edit Review</button>
+                       <button className='delete-review-btn'>Delete Review</button>
+                     </div>
+                }
+                <div className='card-modal-review-form'>
+
+                </div>
+             
+            </div>
+            : null
+          }
+
           <div className='card-modal-info'>
             <div className='ratings-price'>
               <div className="info-item">
@@ -71,11 +115,6 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
                 <h3>Price:</h3>
                 <p className='price'>${selectedGame.price}</p>
               </div>
-            </div>
-
-            <div className="info-item">
-              <h3>Price:</h3>
-              <p className='price'>${selectedGame.price}</p>
             </div>
           </div>
           {selectedGame.summary
@@ -100,18 +139,17 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
         </div>
         {
           location.pathname === "/library"
-            ? <div className="modal-buttons">
-              <button className="remove-btn" >Remove from Library</button>
-              <button className="add-to-cart-btn">Review</button>
+            ? <div className="modal-btns">
+              <button className="library-remove-btn" >Remove from Library</button>
             </div>
 
             : location.pathname === "/cart"
-              ? <div className="modal-buttons">
+              ? <div className="modal-btns">
                 <button className="remove-btn" onClick={() => handleRemoveFromCart('remove')}>Remove from Cart</button>
                 <button className="add-to-cart-btn">Purchase</button>
               </div>
 
-              : <div className="modal-buttons">
+              : <div className="modal-btns">
                 <button className="remove-btn" onClick={() => handleAddToCart('remove')}>Remove</button>
                 <button className="add-to-cart-btn" onClick={() => handleAddToCart('add')}>Add to Cart</button>
               </div>
@@ -121,4 +159,5 @@ const CardDetails = ({ gameData, selectedGame, onClose, setGameData, setIsModalO
   )
 }
 
-export default CardDetails;
+// export
+export default CardDetails

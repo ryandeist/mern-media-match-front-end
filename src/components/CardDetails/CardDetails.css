@@ -55,6 +55,14 @@
     border-radius: 50%;
     transform: scale(0.9);
 }
+
+.card-modal-close-btn {
+    width: 10%;
+}
+
+.card-modal-close-btn:focus {
+    outline: none;
+}
   
 .card-modal-cover {
     width: 60%;
@@ -91,13 +99,13 @@
     margin-bottom: 15px; 
 }
 
-.modal-buttons {
+.modal-btns {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    justify-content: space-evenly;
+    margin-top: 7px;
 }
   
-.remove-btn, .add-to-cart-btn {
+.remove-btn, .add-to-cart-btn, .edit-review-btn, .delete-review-btn {
     background-color: #FF5C5C; 
     color: white;
     border: none;
@@ -109,7 +117,20 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-  
-.remove-btn:hover, .add-to-cart-btn:hover {
+
+.leave-a-review-btn, .library-remove-btn {
+    background-color: #FF5C5C; 
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover, .add-to-cart-btn:hover, .library-remove-btn {
     background-color: #FF3B3B;
 }
+

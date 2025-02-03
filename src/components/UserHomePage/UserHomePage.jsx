@@ -20,9 +20,7 @@ const UserHomePage = ({ handleCardClick, handleCloseModal, isModalOpen, setIsMod
     const [reset, setReset] = useState(false)
 
     // use effects
-    useEffect(() => {
-        // if (user) { navigate(`/users/${user._id}`) }
-    
+    useEffect(() => {    
         const fetchSettings = async () => {
           const fetchedSettings = await showSettings(user._id)
 

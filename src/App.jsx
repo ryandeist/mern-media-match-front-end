@@ -76,6 +76,8 @@ const App = () => {
               setIsModalOpen={setIsModalOpen}
               onCardClick={handleCardClick}   
               onClose={handleCloseModal} 
+              productsList={cart}  // put here to test routes
+              setProductsList={setCart} // put here to test routes
               selectedGame={selectedGame}        
             />} />
             <Route path='/settings' element={<UserHomePage
