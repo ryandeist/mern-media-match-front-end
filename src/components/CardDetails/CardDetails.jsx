@@ -1,26 +1,52 @@
 // imports
 import './CardDetails.css'
 import { addToCart, removeFromCart } from '../../services/cartService'
+import { useContext, useEffect, useState } from "react"
 import { purchase, removeFromLibrary } from '../../services/libraryService'
-import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContext"
+import { useLocation } from 'react-router'
+import ReviewForm from '../ReviewForm/ReviewForm'
+import { createReview, deleteReview, findReview, findReviews, updateReview } from '../../services/reviewService'
 
 const media = import.meta.glob('../../assets/*.png')
 
+  // hooks
 const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset }) => {
   const { user } = useContext(UserContext)
+  const location = useLocation()
 
   if (!selectedGame) return setIsModalOpen(false)
 
-  // dynamically render icon
-  let currentMedia = ""
-  for (const key of Object.keys(media)) {
-    if (key === `../../assets/${selectedGame.media}.png`) {
-      currentMedia = `/src/assets/${selectedGame.media}.png`
-      break
-    }
-  }
+  // state variables
+  const [review, setReview] = useState('')
 
+  // use effect 
+  useEffect(() => {
+    if (location.pathname === '/library') {
+      const fetchReview = async() => {
+        try {
+
+          // using product id and review id(?)
+          // may be a good idea to rewrite the index so only need product id and user is to findOne
+          // if i use the current routs, it is
+          // const fetchedReview = await findReview(????, ?????)
+          // see your review
+          // but only need to pass product id if i go the other way
+          // i.e. // findReviews(????)
+          // pull review from db, if there is one, set Review.
+          // setReview(fetchedReview)
+
+          console.log('Prof Plum in Library with Banana')
+        } catch (err) {
+          console.log('Error fetching review', err)
+        }
+      }
+      fetchReview()
+    }
+  }, [review])
+  
+
+  // handler functions
   const handleAddToCart = async (buttonName) => {
     try {
       if (buttonName === 'add') await addToCart(user._id, selectedGame)
@@ -33,8 +59,8 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
       console.log(err)
     }
   }
-
-  const handleRemoveFromCart = async () => {
+  
+    const handleRemoveFromCart = async () => {
     try {
       await removeFromCart(user._id, selectedGame._id)
       setCart((prev) => prev.filter((product) => product._id !== selectedGame._id))
@@ -43,8 +69,8 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
       console.log(err)
     }
   }
-
-  const handlePurchase = async () => {
+   
+    const handlePurchase = async () => {
     try {
       await purchase(user._id, selectedGame)
       await removeFromCart(user._id, selectedGame._id)
@@ -53,6 +79,24 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
     } catch (err) {
       console.log(err)
     }
+  }
+
+  const handleAddReview = async (reviewFormData) => {
+//    await createReview(?????, reviewFormData)
+    setReview(reviewFormData)
+    console.log(review)
+    console.log('reviewFormData', reviewFormData)
+  }
+
+  // may need to be passed into Review Form and rendered conditionally
+  const handleEditReview = async (reviewFormData) => {
+//    await updateReview(?????, ????? , reviewFormData)
+    setReview(reviewFormData)
+  }
+
+  const handleDeleteReview = async () => {
+//    await deleteReview(????, ????)
+    setReview('')
   }
 
   const handleRemoveFromLibrary = async () => {
@@ -65,7 +109,16 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
       console.log(err)
     }
   }
+   // dynamically render icon
+  let currentMedia = ""
+  for (const key of Object.keys(media)) {
+    if (key === `../../assets/${selectedGame.media}.png`) {
+      currentMedia = `/src/assets/${selectedGame.media}.png`
+      break
+    }
+  }
 
+// return
   return (
     <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
       <div className="card-details-modal">
@@ -73,9 +126,33 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
           <div className="card-modal-header">
             <img className="card-modal-icon" src={currentMedia} alt={selectedGame.media} />
             <h2>{selectedGame.title} {selectedGame.releaseDate ? `(${selectedGame.releaseDate.slice(0, 4)})` : null}</h2>
-            <button onClick={onClose}>X</button>
+            <button onClick={onClose} className='card-modal-close-btn'>X</button>
           </div>
           <img src={selectedGame.cover} alt="Cover art" className="card-modal-cover" />
+          { location.pathname === '/library' 
+            ? 
+              <div className='card-modal-review-section'>
+                {!review
+                  ?  
+                    <ReviewForm handleAddReview={handleAddReview} setIsModalOpen={setIsModalOpen} />
+                  : 
+                    <div>
+                      <p>{review}</p>
+                      <div className='card-modal-review-btn modal-btns'>
+                        <button onClick={() => handleEditReview()} className='edit-review-btn'>Edit Review</button>
+                        <button onClick={() => handleDeleteReview()}className='delete-review-btn'>Delete Review</button>
+                    </div>
+                      
+                    </div>
+                }
+                <div className='card-modal-review-form'>
+
+                </div>
+             
+            </div>
+            : null
+          }
+
           <div className='card-modal-info'>
             <div className='ratings-price'>
               <div className="info-item">
@@ -118,18 +195,18 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
         </div>
         {
           location.pathname === "/library"
-            ? <div className="modal-buttons">
-              <button className="remove-btn" onClick={() => handleRemoveFromLibrary()}>Remove from Library</button>
+            ? <div className="modal-btns">
+              <button className="library-remove-btn" onClick={() => handleRemoveFromLibrary()}>Remove from Library</button>
               <button className="add-to-cart-btn">Review</button>
             </div>
 
             : location.pathname === "/cart"
-              ? <div className="modal-buttons">
+              ? <div className="modal-btns">
                 <button className="remove-btn" onClick={() => handleRemoveFromCart()}>Remove from Cart</button>
                 <button className="add-to-cart-btn" onClick={() => handlePurchase()}>Purchase</button>
               </div>
 
-              : <div className="modal-buttons">
+              : <div className="modal-btns">
                 <button className="remove-btn" onClick={() => handleAddToCart()}>Remove</button>
                 <button className="add-to-cart-btn" onClick={() => handleAddToCart('add')}>Add to Cart</button>
               </div>
@@ -139,4 +216,5 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
   )
 }
 
-export default CardDetails;
+// export
+export default CardDetails
