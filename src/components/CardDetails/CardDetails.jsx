@@ -82,10 +82,12 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
   }
 
   const handleAddReview = async (reviewFormData) => {
-    //    await createReview(?????, reviewFormData)
-    setReview(reviewFormData)
-    console.log(review)
-    console.log('reviewFormData', reviewFormData)
+    await createReview(selectedGame._id, reviewFormData.text)
+    // setReview(reviewFormData)
+    // console.log(review)
+    // console.log('reviewFormData', reviewFormData)
+    // console.log('rev data txt', reviewFormData.text)
+    // console.log(selectedGame._id)
   }
 
   // may need to be passed into Review Form and rendered conditionally
@@ -120,7 +122,7 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
 
   // return
   return (
-    <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+    <div className="modal-overlay" >
       <div className="card-details-modal">
         <div>
           <div className="card-modal-header">
