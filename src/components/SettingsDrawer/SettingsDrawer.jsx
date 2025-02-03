@@ -1,14 +1,20 @@
-import { Drawer, Box, Typography, IconButton } from "@mui/material";
-import { useState } from "react";
-import SettingsComponent from "../SettingsComponent/SettingsComponent";
+// import
+import { Drawer, Box, Typography,  } from "@mui/material"
+import { useContext } from "react"
+import SettingsComponent from "../SettingsComponent/SettingsComponent"
+import { SettingsContext } from "../../contexts/SettingsContext"
 
+// component
+const SettingsDrawer = () => {
+    // hooks
+    const { isDrawerOpen, handleSeeSettings } = useContext(SettingsContext)
 
-const SettingsDrawer = ({ isDrawerOpen, setIsDrawerOpen, settings, setSettings, isSettings, setIsSettings }) => {
+    // return
     return (
       <Drawer
         anchor='left'
         open={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
+        onClose={() => handleSeeSettings()}
       >
           <Box 
             p={2}
@@ -18,12 +24,12 @@ const SettingsDrawer = ({ isDrawerOpen, setIsDrawerOpen, settings, setSettings, 
           >
             <Typography variant='h6' component='div'>
                 Settings
-                <SettingsComponent settings={settings} setSettings={setSettings} isSettings={isSettings} setIsSettings={setIsSettings} />
+                <SettingsComponent />
             </Typography>
           </Box>
       </Drawer>
     )
 }
 
-
+// export
 export default SettingsDrawer 

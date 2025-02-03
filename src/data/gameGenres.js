@@ -1,5 +1,4 @@
 // source of truth
-
 const gameGenres = [
     { id: 2,  name: "Point-and-click" },
     { id: 4,  name: "Fighting" },
@@ -22,8 +21,9 @@ const gameGenres = [
     { id: 32, name: "Indie" },
     { id: 33, name: "Arcade" },
     { id: 34, name: "Visual Novel" },
-    { id: 35, name: "Card & Board Game" },
-    { id: 36, name: "MOBA" }
+    // { id: 35, name: "Card & Board Game" }, '&' seems to break fetch from API
+    { id: 36, name: "MOBA" },
 ]
 
+// export
 export default gameGenres

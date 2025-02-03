@@ -1,25 +1,31 @@
-import { useContext } from 'react';
-import { Link } from 'react-router';
-import { UserContext } from '../../contexts/UserContext';
+// imports
 import './NavBar.css'
+import { useContext } from 'react'
+import { Link } from 'react-router'
+import { UserContext } from '../../contexts/UserContext'
+import { SettingsContext } from '../../contexts/SettingsContext'
 
-const NavBar = (props) => {
-  const { user, setUser } = useContext(UserContext);
+// component
+const NavBar = () => {
+  // hooks
+  const { user, setUser } = useContext(UserContext)
+  const { handleSeeSettings } = useContext(SettingsContext)
 
+  // handler functions
   const handleSignOut = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('token')
     setUser(null)
   }
-
+  
+  // return
   return (
     <nav className='navbar'>
       {user ? (
         <ul>
-          <li>Welcome, {user.username}</li>
-          <li><Link to={`/users/${user._id}`}>Dashboard</Link></li>
-          <li><Link to={`/users/${user._id}/shoppingCart`}>Shopping Cart</Link></li>
-          <li><Link to={`/users/${user._id}/library`}>Library</Link></li>
-          <li><button onClick={()=>props.setIsDrawerOpen(true)} className="navbar-settings-btn">Settings</button></li>
+          <li><Link to={'/'}>Dashboard</Link></li>
+          <li><Link to={'/cart'}>Cart</Link></li>
+          <li><Link to={'/library'}>Library</Link></li>
+          <li><button onClick={()=>handleSeeSettings()} className="navbar-settings-btn">Settings</button></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>
       ) : (
@@ -30,7 +36,8 @@ const NavBar = (props) => {
         </ul>
       )}
     </nav>
-  );
-};
+  )
+}
 
-export default NavBar; 
+// export
+export default NavBar

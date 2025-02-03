@@ -1,33 +1,27 @@
-import { useState, useEffect } from 'react'
-// import { useNavigate } from 'react-router'
+// imports
+import { useContext, useState, useEffect } from 'react'
 import { showGame } from '../../services/apiService'
-import { showSettings } from '../../services/settingsService'
 import { UserContext } from '../../contexts/UserContext'
+import { SettingsContext } from '../../contexts/SettingsContext'
+import { showSettings } from '../../services/settingsService'
 import CardComponent from "../CardComponent/CardComponent"
 import CardDetails from "../CardDetails/CardDetails"
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
 
 
-const UserHomePage = (props) => {
+// component
+const UserHomePage = ({ handleCardClick, handleCloseModal, isModalOpen, setIsModalOpen, selectedGame }) => {
     // hooks
     const { user } = useContext(UserContext)
-    const navigate = useNavigate()
+    const { setIsSettings, settings, setSettings } = useContext(SettingsContext)
 
     // state variable
-    const [settings, setSettings] = useState({
-        media: [],
-        genre: [],
-    })
-    const [gameData, setGameData] = useState([])    
+    const [gameData, setGameData] = useState([])
     const [reset, setReset] = useState(false)
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const [isSettings, setIsSettings] = useState(false)
-    const [selectedGame, setSelectedGame] = useState(null)
 
-
-
+    // use effects
     useEffect(() => {
-        if (user) { navigate(`/users/${user._id}`) }
+        // if (user) { navigate(`/users/${user._id}`) }
     
         const fetchSettings = async () => {
           const fetchedSettings = await showSettings(user._id)
@@ -40,11 +34,10 @@ const UserHomePage = (props) => {
                     media: fetchedMedia,
                     genre: fetchedGenres,
                 })
-                setIsSettings(true)
             } else {
                 setSettings({
                     media: [],
-                    genre: []
+                    genre: [],
                 })
                 setIsSettings(false)
             }
@@ -54,15 +47,14 @@ const UserHomePage = (props) => {
         }
 
         if (user) { fetchSettings() }
-      }, [user])
-    
-    
+      }, [user, setSettings, setIsSettings])
+
+
       useEffect(() => {
         const fetchData = async () => {
           try {
             const fetchedData = await showGame(settings.genre)
             setGameData(fetchedData)
-            
           } catch (err) {
             console.log('Error fetching card data:', err)
           }
@@ -70,46 +62,27 @@ const UserHomePage = (props) => {
         fetchData()
       }, [settings, reset])
 
-    // fetch function
-    const fetchData = async () => {
-        const fetchedData = await showGame(settings.genre)
-        setGameData(fetchedData)
-    }
 
-    // handler functions 
-    const handleCardClick = (game) => {
-        setSelectedGame(game)
-        setIsModalOpen(!isModalOpen)
-    }
 
-    const handleCloseModal = () => {
-        setIsModalOpen(!isModalOpen)
-        setSelectedGame(null)
-    }
-
-    // prevent background scrolling
-    if (isModalOpen) {
-        document.body.classList.add('active-modal')
-    } else {
-        document.body.classList.remove('active-modal')
-    }
+    // return
     return (
         <>
             <div className="card-container">
                 <CardComponent gameData={gameData} onCardClick={handleCardClick} />
             </div>
-            {isModalOpen && (<CardDetails gameArray={gameData} gameData={selectedGame} onClose={handleCloseModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setGameData={setGameData} setReset={setReset} reset={reset} />)}
-            <button onClick={fetchData}>Fetch Data</button>
-            <SettingsDrawer
-                settings={settings}
-                setSettings={setSettings}
-                isSettings={isSettings}
-                setIsSettings={setIsSettings}
-                isDrawerOpen={props.isDrawerOpen}
-                setIsDrawerOpen={props.setIsDrawerOpen}
-            />
+            {isModalOpen && (<CardDetails
+              gameData={gameData} 
+              setGameData={setGameData}
+              setIsModalOpen={setIsModalOpen} 
+              onClose={handleCloseModal} 
+              reset={reset}
+              setReset={setReset}   
+              selectedGame={selectedGame} 
+            />)}
+            <SettingsDrawer />
         </>
     )
 }
 
-export default UserHomePage;
+// export
+export default UserHomePage

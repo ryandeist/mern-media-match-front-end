@@ -1,8 +1,6 @@
-// env variables
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/carts`
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/products`
 
-// service functions and exports
-export const addToCart = async (userId, gameData) => {
+export const purchase = async (userId, product) => {
     try {
         const res = await fetch(BASE_URL, {
             method: 'POST',
@@ -11,7 +9,7 @@ export const addToCart = async (userId, gameData) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                cart: gameData,
+                cart: product,
                 userId: userId,
             })
         })
@@ -21,7 +19,7 @@ export const addToCart = async (userId, gameData) => {
     }
 }
 
-export const getUserCart = async (userId) => {
+export const getUserLibrary = async (userId) => {
     try {
         const res = await fetch(BASE_URL, {
             method: 'GET',
@@ -30,22 +28,26 @@ export const getUserCart = async (userId) => {
                 userid: userId,
             },
         })
-        const entireCart = await res.json()
+        const userLibrary = await res.json()
 
-        return entireCart
+        return userLibrary
     } catch (err) {
         console.log(err)
     }
 }
 
-export const removeFromCart = async (userId, cartItemId) => {
+export const removeFromLibrary = async (userId, productId) => {
     try {
-        const res = await fetch(`${BASE_URL}/${cartItemId}`, {
-            method: 'DELETE',
+        const res = await fetch(`${BASE_URL}/${productId}`, {
+            method: 'PUT',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
-                userid: userId,
-            }
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: productId,
+                userId: userId,
+            })
         })
         return res.json()
     } catch (err) {

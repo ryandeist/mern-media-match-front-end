@@ -1,63 +1,80 @@
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router';
-import { UserContext } from '../../contexts/UserContext';
-import { signIn } from '../../services/authService';
+// imports
+import { useState, useContext } from 'react'
+import { useNavigate } from 'react-router'
+import { UserContext } from '../../contexts/UserContext'
+import { signIn } from '../../services/authService'
+import styles from './SignInForm.module.css'
+import VideoGames from '../../assets/VideoGames.png'
 
+// component
 const SignInForm = () => {
-  const [formData, setFormData] = useState({ username: '', password: '' });
-  const [message, setMessage] = useState('');
-  const { setUser } = useContext(UserContext);
-  const navigate = useNavigate();
-  const { username, password } = formData; 
+  // hooks
+  const { setUser } = useContext(UserContext)
+  const navigate = useNavigate()
 
+  // state variables
+  const [formData, setFormData] = useState({ username: '', password: '' })
+  const [message, setMessage] = useState('')
+  const { username, password } = formData
+
+  // handler functions
   const handleChange = (e) => {
-    setMessage('');
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setMessage('')
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (evt) => {
+    evt.preventDefault()
     try {
-      const signedInUser = await signIn(formData);
+      const signedInUser = await signIn(formData)
 
-      setUser(signedInUser);
-      navigate(`/users/${signedInUser._id}`);
-    } catch (error) {
-      setMessage(error.message);
-    };
-  };
+      setUser(signedInUser)
+      navigate('/')
+    } catch (err) {
+      setMessage(err.message)
+    }
+  }
 
+  // return
   return (
     <>
-    <h2>Sign In</h2>
-    <p style={{ color: "red" }}>{message}</p>
-    <form autoComplete="off" onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          value={username}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={password}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button type="submit">Sign In</button>
-    </form>
+      <main className={styles.container}>
+        <section>
+          <img src={VideoGames} alt='A video game controller' />
+        </section>
+        <section>
+          <form autoComplete="off" onSubmit={handleSubmit}>
+          <h2>Sign In</h2>
+          <p style={{ color: "red" }}>{message}</p>
+            <div>
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                name="username"
+                id="username"
+                value={username}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button type="submit">Sign In</button>
+          </form>
+        </section>
+      </main>
     </>
-  );
-};
+  )
+}
 
-export default SignInForm;
+// export
+export default SignInForm
