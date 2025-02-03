@@ -60,12 +60,7 @@ const UserHomePage = ({ handleCardClick, handleCloseModal, isModalOpen, setIsMod
         fetchData()
       }, [settings, reset])
 
-    // prevent background scrolling
-    if (isModalOpen) {
-        document.body.classList.add('active-modal')
-    } else {
-        document.body.classList.remove('active-modal')
-    }
+
 
     // return
     return (

@@ -1,7 +1,7 @@
 // imports
 import './App.css'
-import { useContext, useEffect, useState } from 'react'
-import { useLocation, Route, Routes } from 'react-router'
+import { useContext, useState } from 'react'
+import { Route, Routes } from 'react-router'
 import { UserContext } from './contexts/UserContext'
 import Landing from './components/Landing/Landing'
 import NavBar from './components/NavBar/NavBar'
@@ -9,33 +9,15 @@ import SignUpForm from './components/SignUpForm/SignUpForm'
 import SignInForm from './components/SignInForm/SignInForm'
 import ProductList from './components/ProductList/ProductList'
 import UserHomePage from './components/UserHomePage/UserHomePage'
-import { getEntireCart } from './services/cartService'
 
 // component
 const App = () => {
   // hooks
-  const location = useLocation()
   const { user } = useContext(UserContext)
-  
 
   // state variables
-  const [cart, setCart] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedGame, setSelectedGame] = useState(null)
-
-  // use effect
-  useEffect(() => {
-    const fetchCart = async () => {
-        try {
-        const cartData = await getEntireCart(user._id)
-        setCart(cartData.cart)
-        } catch (err) {
-        console.log('Error Fetching Cart', err)
-        }
-    }
-    fetchCart()
-  }, [location])
-
 
   // handler functions
   const handleCardClick = (game) => {
@@ -46,6 +28,13 @@ const App = () => {
   const handleCloseModal = () => {
     setIsModalOpen(!isModalOpen)
     setSelectedGame(null)
+  }
+
+  // prevent background scrolling
+  if (isModalOpen) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
   }
 
   // return
@@ -62,23 +51,19 @@ const App = () => {
               setIsModalOpen={setIsModalOpen}
               selectedGame={selectedGame}
             />} />
-            <Route path='/cart' element={<ProductList 
+            <Route path='/cart' element={<ProductList
               isModalOpen={isModalOpen}
               setIsModalOpen={setIsModalOpen}
               onCardClick={handleCardClick}
               onClose={handleCloseModal}
-              productsList={cart} 
-              setProductsList={setCart}
               selectedGame={selectedGame}
             />} />
-            <Route path='/library' element={<ProductList 
+            <Route path='/library' element={<ProductList
               isModalOpen={isModalOpen}
               setIsModalOpen={setIsModalOpen}
-              onCardClick={handleCardClick}   
-              onClose={handleCloseModal} 
-              productsList={cart}  // put here to test routes
-              setProductsList={setCart} // put here to test routes
-              selectedGame={selectedGame}        
+              onCardClick={handleCardClick}
+              onClose={handleCloseModal}
+              selectedGame={selectedGame}
             />} />
             <Route path='/settings' element={<UserHomePage
               handleCardClick={handleCardClick}
