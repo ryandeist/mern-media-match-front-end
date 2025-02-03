@@ -6,7 +6,7 @@ import { purchase, removeFromLibrary } from '../../services/libraryService'
 import { UserContext } from "../../contexts/UserContext"
 import { useLocation } from 'react-router'
 import ReviewForm from '../ReviewForm/ReviewForm'
-import { createReview, deleteReview, findReview, findReviews, updateReview } from '../../services/reviewService'
+import { createReview, deleteReview, findReviews, updateReview } from '../../services/reviewService'
 
 const media = import.meta.glob('../../assets/*.png')
 
@@ -15,17 +15,23 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
   const { user } = useContext(UserContext)
   const location = useLocation()
 
-  if (!selectedGame) return setIsModalOpen(false)
-
   // state variables
-  const [review, setReview] = useState('')
+  const [review, setReview] = useState({
+    text: '',
+    author: '',
+  })
 
   // use effect 
   useEffect(() => {
     if (location.pathname === '/library') {
       const fetchReview = async () => {
         try {
-
+            const fetchedReview = await findReviews(selectedGame._id)
+            console.log(fetchedReview)
+            setReview({
+              text: fetchedReview.text,
+              author: fetchedReview.author
+            })
           // using product id and review id(?)
           // may be a good idea to rewrite the index so only need product id and user is to findOne
           // if i use the current routs, it is
@@ -42,9 +48,10 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
         }
       }
       fetchReview()
-    }
-  }, [review])
+    } 
+}, [])
 
+if (!selectedGame) return setIsModalOpen(false)
 
   // handler functions
   const handleAddToCart = async (buttonName) => {
@@ -139,7 +146,8 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
                 <ReviewForm handleAddReview={handleAddReview} setIsModalOpen={setIsModalOpen} />
                 :
                 <div>
-                  <p>{review}</p>
+                  <p>{review.author}</p>
+                  <p>{review.text}</p>
                   <div className='card-modal-review-btn modal-btns'>
                     <button onClick={() => handleEditReview()} className='edit-review-btn'>Edit Review</button>
                     <button onClick={() => handleDeleteReview()} className='delete-review-btn'>Delete Review</button>
