@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import { Link } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { SettingsContext } from '../../contexts/SettingsContext'
+import Logo from '../../assets/Logo.png'
 
 // component
 const NavBar = () => {
@@ -20,8 +21,10 @@ const NavBar = () => {
   // return
   return (
     <nav className='navbar'>
+      
       {user ? (
         <ul>
+          <Link to='/'><img src={Logo} alt='Media Match Logo' /></Link>
           <li><Link to={'/'}>Dashboard</Link></li>
           <li><Link to={'/cart'}>Cart</Link></li>
           <li><Link to={'/library'}>Library</Link></li>
@@ -30,6 +33,7 @@ const NavBar = () => {
         </ul>
       ) : (
         <ul>
+          <Link to='/'><img src={Logo} alt='Media Match Logo' /></Link>
           <li><Link to='/'>Home</Link></li>
           <li><Link to='/sign-up'>Sign Up</Link></li>
           <li><Link to='/sign-in'>Sign In</Link></li>
