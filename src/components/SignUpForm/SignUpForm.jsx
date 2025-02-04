@@ -3,7 +3,7 @@ import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { signUp } from '../../services/authService'
-import VideoGames from '../../assets/VideoGames.png'
+import Logo from '../../assets/Logo.png'
 import styles from './SignUpForm.module.css'
 
 // components
@@ -21,9 +21,6 @@ const SignUpForm = () => {
   const [message, setMessage] = useState('')
   const { username, password, passwordConfirm } = formData
 
-  // source of truth
-  // const allowedCharacters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "_"]
-
   // handler functions
   const handleChange = (evt) => {
     setMessage('')
@@ -32,11 +29,6 @@ const SignUpForm = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault()
-
-    // if (username.includes(!allowedCharacters)) {
-    //   setMessage('Invalid username')
-    //   return
-    // }
 
     try {
       const newUser = await signUp(formData)
@@ -57,7 +49,7 @@ const SignUpForm = () => {
     <>
       <main className={styles.container}>
         <section>
-          <img src={VideoGames} alt="A video game controller" />
+          <img src={Logo} alt="Media Match Logo" />
         </section>
         <section>
           <form onSubmit={handleSubmit}>
@@ -106,3 +98,8 @@ const SignUpForm = () => {
 
 // export
 export default SignUpForm
+
+
+// GRAVEYARD
+// source of truth
+// const allowedCharacters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "_"]

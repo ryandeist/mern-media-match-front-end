@@ -1,13 +1,21 @@
 .navbar ul {
+    margin: 0;
     list-style: none;
     padding-left: 0;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-evenly;
 }
 
 .navbar li {
     margin-bottom: 10px;
+}
+
+.navbar img {
+    display: flex;
+    flex-direction: row;
+    width: 50px;
 }
 
 .navbar a,

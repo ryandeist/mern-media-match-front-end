@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { signIn } from '../../services/authService'
 import styles from './SignInForm.module.css'
-import VideoGames from '../../assets/VideoGames.png'
+import Logo from '../../assets/Logo.png'
 
 // component
 const SignInForm = () => {
@@ -40,7 +40,7 @@ const SignInForm = () => {
     <>
       <main className={styles.container}>
         <section>
-          <img src={VideoGames} alt='A video game controller' />
+          <img src={Logo} alt='Media Match Logo' />
         </section>
         <section>
           <form autoComplete="off" onSubmit={handleSubmit}>
