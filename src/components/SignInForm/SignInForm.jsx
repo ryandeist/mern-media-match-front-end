@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { signIn } from '../../services/authService'
 import styles from './SignInForm.module.css'
-import Logo from '../../assets/Logo.png'
+import Logo from '/public/Logo.png'
 
 // component
 const SignInForm = () => {
