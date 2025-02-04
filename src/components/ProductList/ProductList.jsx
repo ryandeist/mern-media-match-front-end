@@ -7,7 +7,9 @@ import CardDetails from "../CardDetails/CardDetails"
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer'
 import { getUserCart } from '../../services/cartService'
 import { getUserLibrary } from '../../services/libraryService'
+import { showSettings } from '../../services/settingsService'
 import { UserContext } from '../../contexts/UserContext'
+import { SettingsContext } from '../../contexts/SettingsContext'
 
 
 // component
@@ -19,38 +21,66 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
     // hooks
     const location = useLocation()
     const { user } = useContext(UserContext)
-    
+    const { setIsSettings, setSettings } = useContext(SettingsContext)
+
     let productsList = []
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            const fetchedSettings = await showSettings(user._id)
+
+            try {
+                if (fetchedSettings && fetchedSettings.settings && fetchedSettings.settings.length > 0) {
+                    const fetchedMedia = fetchedSettings.settings[0].media || []
+                    const fetchedGenres = fetchedSettings.settings[0].genre || []
+                    setSettings({
+                        media: fetchedMedia,
+                        genre: fetchedGenres,
+                    })
+                } else {
+                    setSettings({
+                        media: [],
+                        genre: [],
+                    })
+                    setIsSettings(false)
+                }
+            } catch (err) {
+                console.log('Error fetching settings:', err)
+            }
+        }
+
+        if (user) { fetchSettings() }
+    }, [user, setSettings, setIsSettings])
 
     // useEffect
     useEffect(() => {
         if (location.pathname === '/cart') {
-        const fetchCart = async () => {
-            try {
-                const cartData = await getUserCart(user._id)
-                setCart(cartData.cart)
-            } catch (err) {
-                console.log('Error Fetching Cart', err)
+            const fetchCart = async () => {
+                try {
+                    const cartData = await getUserCart(user._id)
+                    setCart(cartData.cart)
+                } catch (err) {
+                    console.log('Error Fetching Cart', err)
+                }
             }
-        }
-        fetchCart()
-    } else if (location.pathname === '/library') {
-        const fetchLibrary = async () => {
-            try {
-                const libraryData = await getUserLibrary(user._id)
-                if (!libraryData) setLibrary([])
-                setLibrary(libraryData)
-            } catch (err) {
-                console.log('Error Fetching Cart', err)
+            fetchCart()
+        } else if (location.pathname === '/library') {
+            const fetchLibrary = async () => {
+                try {
+                    const libraryData = await getUserLibrary(user._id)
+                    if (!libraryData) setLibrary([])
+                    setLibrary(libraryData)
+                } catch (err) {
+                    console.log('Error Fetching Cart', err)
+                }
             }
+            fetchLibrary()
         }
-        fetchLibrary()
-    }
     }, [location, user._id])
 
     if (location.pathname === '/cart') {
         productsList = cart
-    } 
+    }
     if (location.pathname === '/library') {
         productsList = library
     }
