@@ -37,25 +37,9 @@ export const findReviews = async (productId) => {
     }
 }
 
-// export const findReview = async (productId, reviewId) => {
-//     try {
-//         const res = await fetch(`${BASE_URL}/${reviewId}`, {
-//             method: 'GET',
-//             headers: {
-//                 Authorization: `Bearer ${localStorage.getItem('token')}`,
-//                 'Content-Type': 'application/json',
-//                 productid: productId,
-//             },
-//         })
-//         return res.json()
-//     } catch (err) {
-//         console.log(err)        
-//     }
-// }
-
-export const updateReview = async (productId, reviewId, text) => {
+export const updateReview = async (productId, text) => {
     try {
-        const res = await fetch(`${BASE_URL}/${reviewId}`, {
+        const res = await fetch(BASE_URL, {
             method: 'PUT',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -72,9 +56,9 @@ export const updateReview = async (productId, reviewId, text) => {
     }
 }
 
-export const deleteReview = async (productId, reviewId) => {
+export const deleteReview = async (productId) => {
     try {
-        const res = await fetch(`${BASE_URL}/${reviewId}`, {
+        const res = await fetch(BASE_URL, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
