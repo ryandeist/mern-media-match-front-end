@@ -68,9 +68,8 @@ const SettingsComponent = () => {
                         type="checkbox"
                         name="media" // change to "media" when more options incorporated 
                         onChange={handleCheckboxChange}
-                        checked={newSettings.media ? newSettings.media.includes("VideoGames") : false} // {settings.media.includes(mediaOption)}
+                        checked={newSettings.media ? newSettings.media.includes("VideoGames") : false} 
                         value="VideoGames" //change to {mediaType}
-                    //   disabled={initSettings.media.length > 0}// will remove when more options available
                     />
                     Video Games {/* mediaOption */}
                 </label>

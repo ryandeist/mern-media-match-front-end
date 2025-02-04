@@ -36,7 +36,6 @@ const ReviewForm = ({  handleAddReview, isEditingReview, review, handleEditRevie
             text: '',
             author: user.username,
         })
-        // setIsModalOpen(false)
     }
 
     // return
