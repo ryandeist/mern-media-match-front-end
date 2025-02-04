@@ -8,7 +8,7 @@ import { useLocation } from 'react-router'
 import ReviewForm from '../ReviewForm/ReviewForm'
 import { createReview, deleteReview, findReviews, updateReview } from '../../services/reviewService'
 
-const media = import.meta.glob('/public/*.png')
+const media = import.meta.glob('/public/logos/*.png')
 
 // hooks
 const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset }) => {
@@ -113,8 +113,8 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
   // dynamically render icon
   let currentMedia = ""
   for (const key of Object.keys(media)) {
-    if (key === `../../assets/${selectedGame.media}.png`) {
-      currentMedia = `/src/assets/${selectedGame.media}.png`
+    if (key === `/public/logos/${selectedGame.media}.png`) {
+      currentMedia = `../logos/${selectedGame.media}.png`
       break
     }
   }
