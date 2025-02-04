@@ -49,7 +49,7 @@ const SignUpForm = () => {
 
   // predicate function
   const isSignUpValid = () => {
-    return !(username && password && password.length > 6 && password === passwordConfirm)
+    return !(username && password && password.length > 5 && password === passwordConfirm)
   }
 
   // return
@@ -69,6 +69,7 @@ const SignUpForm = () => {
                 type="text"
                 id="name"
                 name="username"
+                placeholder="No Special Characters Allowed"
                 value={username}
                 onChange={handleChange}
                 required
@@ -80,6 +81,7 @@ const SignUpForm = () => {
                 type="password"
                 id="password"
                 name="password"
+                placeholder="Must be at least 6 characters"
                 value={password}
                 onChange={handleChange}
                 required
@@ -91,6 +93,7 @@ const SignUpForm = () => {
                 type="password"
                 id="confirm"
                 name="passwordConfirm"
+                placeholder="Must be at least 6 characters"
                 value={passwordConfirm}
                 onChange={handleChange}
                 required
