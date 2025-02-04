@@ -8,7 +8,7 @@ import { useLocation } from 'react-router'
 import ReviewForm from '../ReviewForm/ReviewForm'
 import { createReview, deleteReview, findReviews, updateReview } from '../../services/reviewService'
 
-const media = import.meta.glob('../../assets/*.png')
+const media = import.meta.glob('/public/*.png')
 
 // hooks
 const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset }) => {

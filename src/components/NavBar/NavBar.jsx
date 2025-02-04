@@ -4,8 +4,7 @@ import { useContext } from 'react'
 import { Link } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { SettingsContext } from '../../contexts/SettingsContext'
-import Logo from '../../assets/Logo.png'
-
+import Logo from '/public/Logo.png'
 // component
 const NavBar = () => {
   // hooks
