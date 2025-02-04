@@ -19,10 +19,10 @@
   
 .about {
     height: 430px;
-    background-color: white;
-    box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.15);
-    -webkit-box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.15);
+    /* background-color: white; */
+    /* box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.15); */
+    /* -moz-box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: -1px 5px 19px -5px rgba(0, 0, 0, 0.15); */
 }
   
 .about header {
@@ -50,7 +50,10 @@
 }
 
 .about h3 {
-    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
     color: black
 }
 
@@ -84,12 +87,12 @@
     justify-content: center;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
     .about {
         color: #213547;
         background-color: #ffffff;
     }
-}
+} */
 
   
 @media only screen and (max-width: 1200px) {

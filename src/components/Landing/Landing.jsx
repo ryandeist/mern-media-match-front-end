@@ -27,7 +27,6 @@ const Landing = () => {
                     <h3>
                         Get Started Today!
                         <button onClick={() => navigate('/sign-up')}>Sign Up</button>
-                        or
                         <button onClick={() => navigate('/sign-in')}>Sign In</button>
                     </h3>
                 </section>
