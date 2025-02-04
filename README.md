@@ -1,6 +1,6 @@
 # Media Match App (Front End)
 
-![Show Page Screenshot](public/UserHomePage.png)
+![Show Page Screenshot](public/Library.png)
 
 This repository contains the front-end code for **Media Match**, a MERN stack app that helps users build a game library based on their preferences, with future support for other media. It offers a simple interface for discovering new content.  
 
