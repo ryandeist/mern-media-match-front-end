@@ -4,6 +4,10 @@
     overflow: hidden;
     align-items: center;
 }
+
+.container h1 {
+    margin: auto;
+}
   
 .container p {
     margin: 0;
@@ -35,7 +39,7 @@
   
 .container input,
 button {
-    width: 100%;
+    width: 90%;
     padding: 14px;
     font-size: 14px;
     border-radius: 5px;
@@ -73,6 +77,13 @@ button {
 input:focus {
     outline: none;
     border: 1px solid #00a0df;
+}
+
+@media (prefers-color-scheme: dark) {
+    .container h1 {
+      color: #213547;
+      background-color: #ffffff;
+    }
 }
   
 @media only screen and (max-width: 912px) {

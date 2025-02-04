@@ -1,11 +1,24 @@
 // imports
+import { UserContext } from '../../contexts/UserContext'
 import './ReviewForm.css'
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
 // component 
-const ReviewForm = ({ setIsModalOpen, handleAddReview }) => {
+const ReviewForm = ({  handleAddReview, isEditingReview, review, handleEditReview }) => {
+    // context
+    const { user } = useContext(UserContext)
+
     // state variables
-    const [reviewFormData, setReviewFormData] = useState({ text: '' })
+    const [reviewFormData, setReviewFormData] = useState({
+        text: '',
+        author: user.username,
+    })
+
+    useEffect(() => {
+        if (isEditingReview) {
+            setReviewFormData(review)
+        }
+    }, [isEditingReview, review])
 
     // handler functions
     const handleChange = (evt) => {
@@ -14,9 +27,16 @@ const ReviewForm = ({ setIsModalOpen, handleAddReview }) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault()
-        handleAddReview(reviewFormData)
-        setReviewFormData({ text: '' })
-        setIsModalOpen(false)
+        if (isEditingReview) {
+            handleEditReview(reviewFormData)
+        } else {
+            handleAddReview(reviewFormData)
+        }
+        setReviewFormData({
+            text: '',
+            author: user.username,
+        })
+        // setIsModalOpen(false)
     }
 
     // return
@@ -27,13 +47,13 @@ const ReviewForm = ({ setIsModalOpen, handleAddReview }) => {
                 name="text"
                 type="text"
                 id="text"
-                value={FormData.text}
+                value={reviewFormData.text}
                 onChange={handleChange}
                 className="review-form"
                 placeholder="Write your review here..."
             />
             <div className='card-modal-review-btn'>
-                <button type="submit" className='leave-a-review-btn'>Leave a Review</button>
+                <button type="submit" className='leave-a-review-btn'>{isEditingReview ? 'Update Review' : 'Leave a Review'}</button>
             </div>
         </form>
     )
