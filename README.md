@@ -16,3 +16,5 @@ Currently, two official plugins are available:
 * <a target="_blank" href="https://icons8.com/icon/624/documentary">movie camera</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 * https://mui.com/material-ui/api/drawer/ materail UI for drawer component
 * IGDB for Game API
+
+favicon - [<a href='https://pngtree.com/freepng/red-and-black-logo_5517319.html'>png image from pngtree.com/</a>]
