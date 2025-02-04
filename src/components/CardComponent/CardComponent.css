@@ -10,6 +10,7 @@
     flex-direction: column;
     justify-content: space-between;
     margin: 10px;
+    /* added to set up push */
 }
 
 .card:hover {
