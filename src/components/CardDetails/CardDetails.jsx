@@ -16,34 +16,34 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
   const location = useLocation()
 
   // state variables
-  const initReviewState = { text: '', author: '', id: '' }
+  const initReviewState = { text: '', author: '' }
   const [review, setReview] = useState(initReviewState)
+  const [isEditingReview, setIsEditingReview] = useState(false)
 
   // use effect 
   useEffect(() => {
     if (location.pathname === '/library') {
       const fetchReview = async () => {
         try {
-            const fetchedReview = await findReviews(selectedGame._id)
-            console.log(fetchedReview)
-            if (fetchedReview.err) {
-              serReview(initReviewState)
-            } else {
-              setReview({
-                text: fetchedReview.text,
-                author: fetchedReview.author,
-                id: fetchedReview.id
-              })
-            }
+          const fetchedReview = await findReviews(selectedGame._id)
+          console.log(fetchedReview)
+          if (fetchedReview.err) {
+            setReview(initReviewState)
+          } else {
+            setReview({
+              text: fetchedReview.text,
+              author: fetchedReview.author,
+            })
+          }
         } catch (err) {
           console.log('Error fetching review', err)
         }
       }
       fetchReview()
-    } 
-}, [])
+    }
+  }, [])
 
-if (!selectedGame) return setIsModalOpen(false)
+  if (!selectedGame) return setIsModalOpen(false)
 
   // handler functions
   const handleAddToCart = async (buttonName) => {
@@ -82,24 +82,28 @@ if (!selectedGame) return setIsModalOpen(false)
 
   const handleAddReview = async (reviewFormData) => {
     await createReview(selectedGame._id, reviewFormData.text)
-    // setReview(reviewFormData)
+    setReview(reviewFormData)
   }
 
   // may need to be passed into Review Form and rendered conditionally
   const handleEditReview = async (reviewFormData) => {
-    //    await updateReview(?????, ????? , reviewFormData)
+    await updateReview(selectedGame._id, reviewFormData.text)
     setReview(reviewFormData)
+    setIsEditingReview(false)
+  }
+
+  const handleEditButtonClick = () => {
+    setIsEditingReview(true)
   }
 
   const handleDeleteReview = async () => {
-    await deleteReview(selectedGame._id, review.id)
+    await deleteReview(selectedGame._id)
     setReview(initReviewState)
   }
 
   const handleRemoveFromLibrary = async () => {
     try {
       await removeFromLibrary(user._id, selectedGame._id)
-      console.log(selectedGame._id)
       setLibrary((prev) => prev.filter((product) => product._id !== selectedGame._id))
       setIsModalOpen(false)
     } catch (err) {
@@ -134,22 +138,24 @@ if (!selectedGame) return setIsModalOpen(false)
                 <ReviewForm handleAddReview={handleAddReview} setIsModalOpen={setIsModalOpen} />
                 :
                 <div>
-                  <div className='card-modal-review'>
-                    <p className='card-modal-review-text'>"{review.text}"</p>
-                    <p className='card-modal-review-author'>- {review.author}</p>
-                  </div>
-                  <div className='card-modal-review-btn modal-btns'>
-                    <button onClick={() => handleEditReview()} className='edit-review-btn'>Edit Review</button>
-                    <button onClick={() => handleDeleteReview()} className='delete-review-btn'>Delete Review</button>
-                  </div>
+                  {isEditingReview ?
+                    <ReviewForm setIsEditingReview={setIsEditingReview} isEditingReview={isEditingReview} review={review} handleEditReview={handleEditReview} /> :
+                    <>
+                      <div className='card-modal-review'>
+                        <p className='card-modal-review-text'>"{review.text}"</p>
+                        <p className='card-modal-review-author'>- {review.author}</p>
+                      </div>
+                      <div className='card-modal-review-btn modal-btns'>
+                        <button onClick={() => handleEditButtonClick()} className='edit-review-btn'>Edit Review</button>
+                        <button onClick={() => handleDeleteReview()} className='delete-review-btn'>Delete Review</button>
+                      </div>
+                    </>
+                  }
                 </div>
               }
-              <div className='card-modal-review-form'>
-              </div>
             </div>
             : null
           }
-
           <div className='card-modal-info'>
             <div className='ratings-price'>
               <div className="info-item">

@@ -185,3 +185,9 @@
     background-color: #FF3B3B;
 }
 
+@media (prefers-color-scheme: dark) {
+    .card-modal-close-btn {
+        color: #213547;
+        background-color: #ffffff;
+    }
+}

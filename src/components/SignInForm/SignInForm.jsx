@@ -40,11 +40,11 @@ const SignInForm = () => {
     <>
       <main className={styles.container}>
         <section>
+          <h1>Sign In</h1>
           <img src={VideoGames} alt='A video game controller' />
         </section>
         <section>
           <form autoComplete="off" onSubmit={handleSubmit}>
-          <h2>Sign In</h2>
           <p style={{ color: "red" }}>{message}</p>
             <div>
               <label htmlFor="username">Username:</label>

@@ -57,11 +57,11 @@ const SignUpForm = () => {
     <>
       <main className={styles.container}>
         <section>
+          <h1>Sign Up</h1>
           <img src={VideoGames} alt="A video game controller" />
         </section>
         <section>
           <form onSubmit={handleSubmit}>
-            <h1>Sign Up</h1>
             <p style={{ color: "red" }}>{message}</p>
             <div>
               <label htmlFor="username">Username:</label>
