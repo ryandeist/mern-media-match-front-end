@@ -11,8 +11,10 @@ const Landing = () => {
     // return
     return (
         <>
-            <CardComponent />
             <main className={styles.containter}>
+                <div className="card-container">
+                    <CardComponent />
+                </div>
                 <section className={styles.about}>
                     <header>
                         <h1>Welcome to Media Match!</h1>

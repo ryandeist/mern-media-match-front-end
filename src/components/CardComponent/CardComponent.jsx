@@ -34,7 +34,7 @@ const CardComponent = ({ gameData, onCardClick }) => {
                 <button className="see-more-btn" onClick={() => handleSignUp()}> Sign Up </button>
                 <button className="see-more-btn" onClick={() => handleSignIn()}> Sign In</button>
               </>
-              : <SignUpForm />
+              : <SignInForm />
             }
         </div>
     )
