@@ -13,7 +13,7 @@ const CardComponent = ({ gameData, onCardClick }) => {
     // hooks
     const location = useLocation()
     const { user } = useContext(UserContext)
-    const {isRegister, setIsRegister} = useState(false)
+    const [isRegister, setIsRegister] = useState(false)
 
 
     const handleSignIn = () => {
