@@ -1,6 +1,7 @@
 // imports
 import { useNavigate } from "react-router"
 import styles from './Landing.module.css'
+import CardComponent from "../CardComponent/CardComponent"
 
 // component
 const Landing = () => {
@@ -10,6 +11,7 @@ const Landing = () => {
     // return
     return (
         <>
+            <CardComponent />
             <main className={styles.containter}>
                 <section className={styles.about}>
                     <header>
