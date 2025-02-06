@@ -2,7 +2,7 @@
     width: 300px;
     background-color: white;
     border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 17px 17px 17px 0px rgba(0,0,0,0.75);
     overflow: hidden;
     position: relative;
     padding: 16px;
@@ -10,7 +10,7 @@
     flex-direction: column;
     justify-content: space-between;
     margin: 10px;
-    /* added to set up push */
+    margin-bottom: 30px;
 }
 
 .card:hover {
