@@ -17,11 +17,11 @@ const CardComponent = ({ gameData, onCardClick }) => {
 
 
     const handleSignIn = () => {
-        setIsRegister(true)
+        setIsRegister("Sign In")
     }
 
     const handleSignUp = () => {
-        setIsRegister(true)
+        setIsRegister("Sign Up")
     }
 
     if (!user) return (
@@ -34,7 +34,9 @@ const CardComponent = ({ gameData, onCardClick }) => {
                 <button className="see-more-btn" onClick={() => handleSignUp()}> Sign Up </button>
                 <button className="see-more-btn" onClick={() => handleSignIn()}> Sign In</button>
               </>
-              : <SignInForm />
+              : isRegister === "Sign In"
+              ? <SignInForm />
+              : <SignUpForm />
             }
         </div>
     )
