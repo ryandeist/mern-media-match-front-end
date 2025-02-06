@@ -13,9 +13,11 @@ const CardComponent = ({ gameData, onCardClick }) => {
     // hooks
     const location = useLocation()
     const { user } = useContext(UserContext)
+
+    // state variables
     const [isRegister, setIsRegister] = useState(false)
 
-
+    // handler functions
     const handleSignIn = () => {
         setIsRegister("Sign In")
     }
@@ -24,6 +26,7 @@ const CardComponent = ({ gameData, onCardClick }) => {
         setIsRegister("Sign Up")
     }
 
+    // return
     if (!user) return (
         <div className="card">
             <h3>Welcome to</h3>
