@@ -95,7 +95,7 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
     
     return (
         <>
-            <h1>Your {location.pathname.slice(1).charAt(0).toUpperCase() + location.pathname.slice(2)}</h1>
+            <h1 className='product-list-title'>Your {location.pathname.slice(1).charAt(0).toUpperCase() + location.pathname.slice(2)}</h1>
             <div className="product-list">
                 {productsList.map((product) => (
                     <CardComponent gameData={product} key={product.id} onCardClick={onCardClick} selectedGame={product} className="product-list-card" />
