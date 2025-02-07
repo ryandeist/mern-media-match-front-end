@@ -121,8 +121,8 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
 
   // return
   return (
-    <div className="modal-overlay" >
-      <div className="card-details-modal">
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="card-details-modal" onClick={(evt) => evt.stopPropagation()}>
         <div>
           <div className="card-modal-header">
             <img className="card-modal-icon" src={currentMedia} alt={selectedGame.media} />
