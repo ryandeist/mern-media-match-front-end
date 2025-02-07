@@ -86,7 +86,13 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
     }
 
     // return
-    if (productsList.length === 0) return <h1>Your {location.pathname.slice(1).charAt(0).toUpperCase() + location.pathname.slice(2)} is Empty</h1>
+    if (productsList.length === 0) return (
+        <>
+          <h1>Your {location.pathname.slice(1).charAt(0).toUpperCase() + location.pathname.slice(2)} is Empty</h1>
+          <SettingsDrawer />
+        </>
+    )
+    
     return (
         <>
             <h1>Your {location.pathname.slice(1).charAt(0).toUpperCase() + location.pathname.slice(2)}</h1>
