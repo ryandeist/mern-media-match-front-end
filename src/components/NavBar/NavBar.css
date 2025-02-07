@@ -6,6 +6,10 @@
     z-index: 1000;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
 .navbar ul {
@@ -23,9 +27,8 @@
 }
 
 .navbar img {
-    display: flex;
-    flex-direction: row;
     width: 50px;
+    margin-right: 20px;
 }
 
 .navbar a,
@@ -39,6 +42,8 @@
     cursor: pointer;
     display: inline-block;
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
 .navbar-settings-btn {
@@ -52,4 +57,18 @@
 .navbar a:hover,
 .navbar-settings-btn:hover {
     color: #66AFFF;
+}
+
+.navbar ul li:not(:last-child) {
+    margin-right: 20px;  
+}
+
+.navbar .left {
+    display: flex;
+    align-items: center;
+}
+  
+.navbar .right {
+    display: flex;
+    align-items: center;
 }

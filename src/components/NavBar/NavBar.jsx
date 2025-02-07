@@ -20,23 +20,27 @@ const NavBar = () => {
   // return
   return (
     <nav className='navbar'>
-      
+      <div className='left'>
+        <Link to='/'><img src={Logo} alt='Media Match Logo' /></Link>
+      </div>
       {user ? (
-        <ul>
-          <Link to='/'><img src={Logo} alt='Media Match Logo' /></Link>
-          <li><Link to={'/'}>Dashboard</Link></li>
-          <li><Link to={'/cart'}>Cart</Link></li>
-          <li><Link to={'/library'}>Library</Link></li>
-          <li><button onClick={()=>handleSeeSettings()} className="navbar-settings-btn">Settings</button></li>
-          <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
-        </ul>
+        <div className='right'>
+          <ul>
+            <li><Link to={'/'}>Dashboard</Link></li>
+            <li><Link to={'/cart'}>Cart</Link></li>
+            <li><Link to={'/library'}>Library</Link></li>
+            <li><button onClick={()=>handleSeeSettings()} className="navbar-settings-btn">Settings</button></li>
+            <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
+          </ul>
+        </div>
       ) : (
-        <ul>
-          <Link to='/'><img src={Logo} alt='Media Match Logo' /></Link>
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/sign-up'>Sign Up</Link></li>
-          <li><Link to='/sign-in'>Sign In</Link></li>
-        </ul>
+        <div className='right'>
+          <ul>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/sign-up'>Sign Up</Link></li>
+            <li><Link to='/sign-in'>Sign In</Link></li>
+          </ul>
+        </div>
       )}
     </nav>
   )
