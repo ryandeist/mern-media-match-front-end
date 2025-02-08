@@ -24,6 +24,7 @@
 
 .navbar li {
     margin-bottom: 10px;
+    margin-right: 20px;  
 }
 
 .navbar img {
@@ -57,10 +58,6 @@
 .navbar a:hover,
 .navbar-settings-btn:hover {
     color: #66AFFF;
-}
-
-.navbar ul li:not(:last-child) {
-    margin-right: 20px;  
 }
 
 .navbar .left {
@@ -114,9 +111,6 @@
     z-index: 999;
 }
 
-.nav-links li:last-child {
-    margin-bottom: 0; 
-}
 
 .navbar-settings-btn {
     width: 100%; 

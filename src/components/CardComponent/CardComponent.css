@@ -75,3 +75,35 @@
         background-color: #ffffff;
     }
 }
+
+@media (max-width: 600px) {
+    .card {
+        width: 250px; 
+        padding: 12px; 
+        margin: 5px; 
+        margin-bottom: 20px;
+    }
+
+    .card h3 {
+        font-size: 1.1rem;
+    }
+
+    .card-info {
+        flex-direction: column; 
+        align-items: flex-start;
+    }
+
+    .card-info p {
+        font-size: 0.9rem; 
+        margin-bottom: 5px; 
+    }
+
+    .see-more-btn {
+        font-size: 0.9rem; 
+        padding: 8px; 
+    }
+
+    .card-image {
+        border-radius: 8px; 
+    }
+}

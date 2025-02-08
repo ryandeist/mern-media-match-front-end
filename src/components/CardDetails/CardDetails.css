@@ -21,7 +21,8 @@
     border-radius: 20px;
     overflow: auto;
     transition: all 0.3 ease;
-    max-height: 90vh;
+    max-height: 80vh;
+    margin-top: 5%;
 }
 .card-details-modal::-webkit-scrollbar {
     display: none; 
@@ -32,6 +33,10 @@
     justify-content: space-around;
     align-items: center;
     margin-bottom: 5px;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1;
 }
 
 .card-modal-header h2 {
@@ -163,7 +168,7 @@
     padding: 10px;
     border-radius: 50px;
     text-align: center;
-    width: 30%;
+    width: 40%;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -189,5 +194,93 @@
     .card-modal-close-btn {
         color: #213547;
         background-color: #ffffff;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-details-modal {
+      width: 90%;  
+      max-width: 400px;  
+      padding: 10px; 
+      height: auto;  
+    }
+  
+    .card-modal-header {
+      flex-direction: row; 
+      text-align: center; 
+    }
+  
+    .card-modal-header h2 {
+      font-size: 1.4rem; 
+      margin-bottom: 5px;
+    }
+  
+    .card-modal-cover {
+      width: 60%; 
+      height: auto;
+      margin: 10px 0;
+    }
+  
+    .card-modal-review {
+      padding: 10px;  
+      font-size: 13px;  
+    }
+  
+    .ratings-price {
+      flex-direction: row; 
+      gap: 10px;  
+      align-items: flex-start;  
+    }
+  
+    .info-item {
+      padding: 5px; 
+    }
+  
+    .info-item h3 {
+      font-size: 14px; 
+      text-align: left;  
+    }
+  
+    .info-item p {
+      font-size: 12px;  
+    }
+
+    .remove-btn, .add-to-cart-btn, .edit-review-btn, .delete-review-btn, .library-remove-btn {
+      font-size: 0.9rem;  
+      padding: 12px;  
+    }
+  }
+
+@media (max-width: 480px) {
+    .card-details-modal {
+      max-width: 375px;
+      padding: 8px;  
+      width: 95%;  
+    }
+  
+    .card-modal-header h2 {
+      font-size: 1.2rem;  
+    }
+  
+    .card-modal-icon {
+      width: 50px;  
+      height: 50px; 
+    }
+  
+    .card-modal-cover {
+      width: 60%; 
+      height: auto;
+    }
+  
+    .ratings-price {
+      gap: 15px; 
+    }
+  
+    .card-modal-review {
+      padding: 8px;  
+    }
+  
+    .info-item {
+      padding: 5px; 
     }
 }
