@@ -40,12 +40,12 @@
     max-height: 70vh;
 }
 
-.save-button {
+.save-btn {
     position: sticky;
     bottom: 0;
     padding: 10px;
     background-color: #1976d2;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -53,7 +53,7 @@
     box-sizing: border-box;
 }
 
-.save-button:hover {
+.save-btn:hover {
     background-color: #155a8a;
 }
 
@@ -79,17 +79,13 @@
       gap: 5px; 
     }
   
-    .save-button {
+    .save-btn {
       padding: 12px;
       font-size: 16px;
       width: 100%;
     }
-  
-    .save-button:hover {
-      background-color: #155a8a;
-    }
 
-    .checkbox-grid::-webkit-scrollbar {
+    .checkbox-grid::-webkit-scrollbar, .settings-form::-webkit-scrollbar {
         display: none;
     }
 }
