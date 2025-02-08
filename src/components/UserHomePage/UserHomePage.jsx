@@ -1,4 +1,5 @@
 // imports
+import './UserHomePage.css'
 import { useContext, useState, useEffect } from 'react'
 import { showGame } from '../../services/apiService'
 import { UserContext } from '../../contexts/UserContext'
@@ -65,6 +66,7 @@ const UserHomePage = ({ handleCardClick, handleCloseModal, isModalOpen, setIsMod
     // return
     return (
         <>
+            <h1 className='home-page-title'>Discover and Swipe!</h1>
             <div className="card-container">
                 <CardComponent gameData={gameData} onCardClick={handleCardClick} />
             </div>

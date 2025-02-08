@@ -1,4 +1,5 @@
 // import
+import './SettingsDrawer.css'
 import { Drawer, Box, Typography,  } from "@mui/material"
 import { useContext } from "react"
 import SettingsComponent from "../SettingsComponent/SettingsComponent"

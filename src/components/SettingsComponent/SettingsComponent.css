@@ -56,3 +56,40 @@
 .save-button:hover {
     background-color: #155a8a;
 }
+
+@media (max-width: 600px) {
+    .settings-form {
+      padding: 10px;
+      height: auto; 
+    }
+  
+    .section-heading {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+  
+    .checkbox-label {
+      font-size: 14px; 
+      margin-bottom: 8px;
+    }
+  
+    .checkbox-grid {
+      grid-template-columns: 1fr; 
+      overflow: auto;
+      gap: 5px; 
+    }
+  
+    .save-button {
+      padding: 12px;
+      font-size: 16px;
+      width: 100%;
+    }
+  
+    .save-button:hover {
+      background-color: #155a8a;
+    }
+
+    .checkbox-grid::-webkit-scrollbar {
+        display: none;
+    }
+}
