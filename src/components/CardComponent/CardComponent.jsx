@@ -18,28 +18,32 @@ const CardComponent = ({ gameData, onCardClick }) => {
     const [isRegister, setIsRegister] = useState(false)
 
     // handler functions
-    const handleSignIn = () => {
-        setIsRegister("Sign In")
-    }
-
-    const handleSignUp = () => {
-        setIsRegister("Sign Up")
+    const handleAuth = (selection) => {
+        setIsRegister(selection)
     }
 
     // return
     if (!user) return (
-        <div className="card">
+        <div className="registration-card">
             <h3>Welcome to</h3>
             <img className="card-image" src={Logo} alt="cover image" /> 
             { !isRegister 
               ? 
               <>
-                <button className="see-more-btn" onClick={() => handleSignUp()}> Sign Up </button>
-                <button className="see-more-btn" onClick={() => handleSignIn()}> Sign In</button>
+                <p>Looking for something new or a piece of nostalgia to enjoy?</p>
+                <p><strong>Media Match</strong> will bring it to you!</p>
+                <button className="sign-up-btn" onClick={() => handleAuth("Sign Up")}> Sign Up </button>
+                <button className="sign-in-btn" onClick={() => handleAuth("Sign In")}> Sign In</button>
               </>
               : isRegister === "Sign In"
-              ? <SignInForm />
-              : <SignUpForm />
+              ? <>
+                  <SignInForm />
+                  <button className='back-btn' onClick={() => handleAuth('')}>Back</button>
+                </>
+              : <>
+                  <SignUpForm />
+                  <button className='see-more-btn' onClick={() => handleAuth('')}>Back</button>
+                </>
             }
         </div>
     )

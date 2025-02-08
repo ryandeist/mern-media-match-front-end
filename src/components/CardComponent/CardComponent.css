@@ -1,4 +1,4 @@
-.card {
+.card, .registration-card {
     width: 300px;
     background-color: white;
     border-radius: 20px;
@@ -13,15 +13,22 @@
     /* added to set up push */
 }
 
-.card:hover {
+.card:hover, .registration-card:hover {
     transform: translateY(-10px);
 }
 
-.card h3 {
+.card h3, .registration-card h3 {
     font-size: 1.25rem;
     margin: 0;
     font-weight: bold;
     text-align: center;
+}
+
+.registration-card p {
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    margin-bottom: 10px; 
+    line-height: 1.5;
 }
 
 .card-image {
@@ -51,7 +58,7 @@
     font-weight: bold;
 }
 
-.see-more-btn {
+.see-more-btn, .sign-up-btn, .sign-in-btn, .back-btn {
     background-color: #FF5C5C;
     color: white;
     border: none;
@@ -65,7 +72,7 @@
     transition: background-color 0.3s ease;
 }
 
-.see-more-btn:hover {
+.see-more-btn:hover, .sign-up-btn:hover, .sign-in-btn:hover, .back-btn:hover {
     background-color: #FF3B3B;
 }
 

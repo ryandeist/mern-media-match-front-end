@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { Link } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { SettingsContext } from '../../contexts/SettingsContext'
-import Logo from '/logos/Logo.png'
+import Icon from '/logos/MediaMatchIcon.png'
 // component
 const NavBar = () => {
   // hooks
@@ -23,7 +23,7 @@ const NavBar = () => {
       
       {user ? (
         <ul>
-          <Link to='/'><img src={Logo} alt='Media Match Logo' /></Link>
+          <Link to='/'><img src={Icon} alt='Media Match Icon' /></Link>
           <li><Link to={'/'}>Dashboard</Link></li>
           <li><Link to={'/cart'}>Cart</Link></li>
           <li><Link to={'/library'}>Library</Link></li>
@@ -32,7 +32,7 @@ const NavBar = () => {
         </ul>
       ) : (
         <ul>
-          <Link to='/'><img src={Logo} alt='Media Match Logo' /></Link>
+          <Link to='/'><img src={Icon} alt='Media Match Icon' /></Link>
           <li><Link to='/'>Home</Link></li>
           <li><Link to='/sign-up'>Sign Up</Link></li>
           <li><Link to='/sign-in'>Sign In</Link></li>
