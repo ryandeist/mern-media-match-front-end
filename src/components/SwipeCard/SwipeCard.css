@@ -1,0 +1,40 @@
+.min-h-screen {
+    min-height: 100vh;
+}
+
+.bg-neutral-100 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(245 245 245 / var(--tw-bg-opacity));
+}
+
+.h-96 {
+    height: 24rem;
+}
+
+.w-72 {
+    width: 288px;
+}
+
+.object-cover {
+    object-fit: cover;
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.grid {
+    display: grid;
+}
+
+.place-items-center {
+    place-items: center;
+}
+
+.hover\:cursor-grab:hover {
+    cursor: grab;
+}
+
+.active\:cursor-grabbing:active {
+    cursor: grabbing;
+}
