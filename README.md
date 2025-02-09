@@ -48,7 +48,7 @@ Developing this app allowed our team to showcase React’s strengths, including 
 - [Settings Drawer UI](https://mui.com/material-ui/api/drawer/) by [Material UI](https://mui.com/)
 - [Page Icon](https://pngtree.com/freepng/red-and-black-logo_5517319.html) by [PNG Tree](https://pngtree.com/)
 
-### Library Attribution
+### Libraries 
 - Drawer component from [Material UI](https://mui.com/material-ui/react-drawer/)
 - Swipe functionality from [Motion](https://motion.dev/docs/react-gestures)
 
