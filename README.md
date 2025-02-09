@@ -23,6 +23,7 @@ Developing this app allowed our team to showcase React’s strengths, including 
   - **Library**: Shows (`READ`) purchased items. Users can remove (`UPDATE`) items or leave a review. The component is shared with the cart view, rendering conditionally.  
   - **Review**: Users can write (`CREATE`), read (`READ`), edit (`UPDATE`), or delete (`DELETE`) reviews.  
 - User data, including settings, cart and purchases, persist after sign-out.
+- Fully functional swipe allowing user to add product to cart or remove them.
 
 [**Deployed App**](https://media-match.netlify.app/)
 
@@ -34,7 +35,11 @@ Developing this app allowed our team to showcase React’s strengths, including 
 - [Trello Board](https://trello.com/b/a6q0CveD/mediamatch)
 - [Excalidraw](https://excalidraw.com/#room=e85b8168469433527c79,5qeao3pG57lc7VZd0PgBRg)
 
-## Assets Attribution:
+## Attributions:
+### APIs
+- Game data is pulled from [IGDB API](https://api-docs.igdb.com/#getting-started)
+
+### Assets
 - [Nintendo Switch Pro Controller Icon](https://icons8.com/icon/51F0o6bWwYMt/nintendo-switch-pro-controller) by [Icons8](https://icons8.com)
 - [Books Icon](https://icons8.com/icon/37814/books) by [Icons8](https://icons8.com)
 - [Retro TV Icon](https://icons8.com/icon/2772/retro-tv) by [Icons8](https://icons8.com)
@@ -42,7 +47,10 @@ Developing this app allowed our team to showcase React’s strengths, including 
 - [Movie Camera Icon](https://icons8.com/icon/624/documentary) by [Icons8](https://icons8.com)
 - [Settings Drawer UI](https://mui.com/material-ui/api/drawer/) by [Material UI](https://mui.com/)
 - [Page Icon](https://pngtree.com/freepng/red-and-black-logo_5517319.html) by [PNG Tree](https://pngtree.com/)
-- Game data is pulled from [IGDB API](https://api-docs.igdb.com/#getting-started)
+
+## Library Attribution
+- Drawer component from [Material UI](https://mui.com/material-ui/react-drawer/)
+- Swipe functionality from [Motion](https://motion.dev/docs/react-gestures)
 
 
 ## Built with:
@@ -59,10 +67,10 @@ Developing this app allowed our team to showcase React’s strengths, including 
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
 ## Next Steps:
-- Drag and Drop/Swipe UI for main page
-- Styling improvements (sticky NavBar, Responsive Design, onClickModal fix, filter products by year, General UI improvements)
+- Styling improvements (filter products by year, General UI improvements)
 - Integrate Stripe Purchase Workflow
 - Add Books, TV, Music, and Movies to available products.
 - Social Network Functionality (Friend Feed, Friend List, Like/Dislike)
+- Refined querying
 - Useage of additional React features like useMemo and useCallback
 - Unit Testing 
