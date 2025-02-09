@@ -23,6 +23,7 @@ Developing this app allowed our team to showcase React’s strengths, including 
   - **Library**: Shows (`READ`) purchased items. Users can remove (`UPDATE`) items or leave a review. The component is shared with the cart view, rendering conditionally.  
   - **Review**: Users can write (`CREATE`), read (`READ`), edit (`UPDATE`), or delete (`DELETE`) reviews.  
 - User data, including settings, cart and purchases, persist after sign-out.
+- Fully functional swipe allowing user to add product to cart or remove them.
 
 [**Deployed App**](https://media-match.netlify.app/)
 
@@ -59,10 +60,10 @@ Developing this app allowed our team to showcase React’s strengths, including 
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
 ## Next Steps:
-- Drag and Drop/Swipe UI for main page
-- Styling improvements (sticky NavBar, Responsive Design, onClickModal fix, filter products by year, General UI improvements)
+- Styling improvements (filter products by year, General UI improvements)
 - Integrate Stripe Purchase Workflow
 - Add Books, TV, Music, and Movies to available products.
 - Social Network Functionality (Friend Feed, Friend List, Like/Dislike)
+- Refined querying
 - Useage of additional React features like useMemo and useCallback
 - Unit Testing 
