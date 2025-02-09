@@ -15,6 +15,11 @@
 
 .card:hover {
     transform: translateY(-10px);
+    cursor: grab;
+}
+
+.card:active {
+    cursor: grabbing;
 }
 
 .card h3 {
@@ -30,6 +35,8 @@
     border-radius: 10px;
     object-fit: cover;
     margin-top: 10px;
+    user-drag: none;
+    pointer-events: none;
 }
 
 .card-info {

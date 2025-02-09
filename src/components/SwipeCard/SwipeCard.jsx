@@ -1,5 +1,4 @@
 // imports 
-import './SwipeCard.css'
 import { motion, useMotionValue } from 'framer-motion'
 import CardComponent from '../CardComponent/CardComponent'
 
