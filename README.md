@@ -35,7 +35,11 @@ Developing this app allowed our team to showcase React’s strengths, including 
 - [Trello Board](https://trello.com/b/a6q0CveD/mediamatch)
 - [Excalidraw](https://excalidraw.com/#room=e85b8168469433527c79,5qeao3pG57lc7VZd0PgBRg)
 
-## Assets Attribution:
+## Attributions:
+### APIs
+- Game data is pulled from [IGDB API](https://api-docs.igdb.com/#getting-started)
+
+### Assets
 - [Nintendo Switch Pro Controller Icon](https://icons8.com/icon/51F0o6bWwYMt/nintendo-switch-pro-controller) by [Icons8](https://icons8.com)
 - [Books Icon](https://icons8.com/icon/37814/books) by [Icons8](https://icons8.com)
 - [Retro TV Icon](https://icons8.com/icon/2772/retro-tv) by [Icons8](https://icons8.com)
@@ -43,7 +47,10 @@ Developing this app allowed our team to showcase React’s strengths, including 
 - [Movie Camera Icon](https://icons8.com/icon/624/documentary) by [Icons8](https://icons8.com)
 - [Settings Drawer UI](https://mui.com/material-ui/api/drawer/) by [Material UI](https://mui.com/)
 - [Page Icon](https://pngtree.com/freepng/red-and-black-logo_5517319.html) by [PNG Tree](https://pngtree.com/)
-- Game data is pulled from [IGDB API](https://api-docs.igdb.com/#getting-started)
+
+## Library Attribution
+- Drawer component from [Material UI](https://mui.com/material-ui/react-drawer/)
+- Swipe functionality from [Motion](https://motion.dev/docs/react-gestures)
 
 
 ## Built with:
