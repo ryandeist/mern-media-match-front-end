@@ -15,7 +15,7 @@
 .navbar img {
     display: flex;
     flex-direction: row;
-    width: 50px;
+    width: 30px;
 }
 
 .navbar a,

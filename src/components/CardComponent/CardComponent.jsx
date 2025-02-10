@@ -3,7 +3,7 @@ import './CardComponent.css'
 import { useLocation } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { useContext, useState } from 'react'
-import Logo from '../../../public/MediaMatchLogo22.png' 
+import Logo from '../../../public/MediaMatchLogoHomePage.png' 
 import SignInForm from '../SignInForm/SignInForm'
 import SignUpForm from '../SignUpForm/SignUpForm'
 
