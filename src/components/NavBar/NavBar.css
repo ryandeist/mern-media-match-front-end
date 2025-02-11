@@ -28,8 +28,11 @@
 }
 
 .navbar img {
-    width: 50px;
+    width: 28px;
+    height: auto;
     margin-right: 20px;
+    user-drag: none;
+    pointer-events: none;
 }
 
 .navbar a,
@@ -64,7 +67,7 @@
     display: flex;
     align-items: center;
 }
-  
+
 .navbar .right {
     display: flex;
     align-items: center;

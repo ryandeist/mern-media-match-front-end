@@ -19,9 +19,13 @@ const NavBar = () => {
     const handleResize = () => {
       if (window.innerWidth > 768) {
         setIsNavOpen(false)
+      } else {
+        setIsNavOpen(false)
       }
     }
     window.addEventListener('resize', handleResize)
+
+    handleResize()
 
     return () => {
       window.addEventListener('resize', handleResize)
@@ -34,6 +38,12 @@ const NavBar = () => {
     setUser(null)
   }
 
+  const handleNavClose = () => {
+    if (window.innerWidth <= 768) {
+      setIsNavOpen(false)
+    }
+  }
+
   const handleToggleNav = () => {
     setIsNavOpen(!isNavOpen)
   }
@@ -42,17 +52,17 @@ const NavBar = () => {
   return (
     <nav className='navbar'>
       <div className='left'>
-        <Link to='/'><img src={Icon} alt='Media Match Icon' /></Link>
+        <Link to='/'><img src={Icon} alt='Media Match Icon'/></Link>
       </div>
       {user ? (
 
         <div className='right'>
           <ul className={`nav-links ${isNavOpen ? 'active' : ''}`}>
-            <li><Link to={'/'}>Dashboard</Link></li>
-            <li><Link to={'/cart'}>Cart</Link></li>
-            <li><Link to={'/library'}>Library</Link></li>
-            <li><button onClick={()=>handleSeeSettings()} className="navbar-settings-btn">Settings</button></li>
-            <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
+            <li><Link to={'/'} onClick={handleNavClose}>Dashboard</Link></li>
+            <li><Link to={'/cart'} onClick={handleNavClose}>Cart</Link></li>
+            <li><Link to={'/library'} onClick={handleNavClose}>Library</Link></li>
+            <li><button onClick={()=>{handleSeeSettings(); handleNavClose()}} className="navbar-settings-btn">Settings</button></li>
+            <li><Link to='/' onClick={() => {handleSignOut; handleNavClose() }}>Sign Out</Link></li>
           </ul>
         </div>
       ) : (
