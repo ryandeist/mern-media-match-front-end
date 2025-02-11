@@ -1,11 +1,11 @@
 // import
 import './CardComponent.css'
+import { useContext, useState } from 'react'
 import { useLocation } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
-import { useContext, useState } from 'react'
-import Logo from '../../../public/MediaMatchLogoHomePage.png' 
 import SignInForm from '../SignInForm/SignInForm'
 import SignUpForm from '../SignUpForm/SignUpForm'
+import Logo from '../../../public/MediaMatchLogoHomePage.png' 
 
 // component
 const CardComponent = ({ gameData, onCardClick }) => {
@@ -17,12 +17,26 @@ const CardComponent = ({ gameData, onCardClick }) => {
     // state variables
     const [isRegister, setIsRegister] = useState(false)
 
-    // handler functions
+    // source of truth
+    let card
+    if (user) {
+        if (location.pathname === '/cart' || location.pathname === '/library') {
+            card = gameData
+        } else {
+            card = gameData[0]
+        }
+    }
+
+    // handler functions    
     const handleAuth = (selection) => {
         setIsRegister(selection)
     }
 
-    // return
+    const handleClick = () => {
+        onCardClick(card)
+    }
+
+    // return 
     if (!user) return (
         <div className="registration-card">
             <h3>Welcome to</h3>
@@ -47,21 +61,6 @@ const CardComponent = ({ gameData, onCardClick }) => {
             }
         </div>
     )
-    // source of truth
-    let card
-
-    if (location.pathname === '/cart' || location.pathname === '/library') {
-        card = gameData
-    } else {
-        card = gameData[0]
-    }
-
-    // handler functions
-    const handleClick = () => {
-        onCardClick(card)
-    }
-
-    // return 
     if (!card) return <div>Loading...</div>
     return (
         <div className="card">

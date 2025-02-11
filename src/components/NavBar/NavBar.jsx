@@ -33,11 +33,6 @@ const NavBar = () => {
   }, [])
 
   // handler functions
-  const handleSignOut = () => {
-    localStorage.removeItem('token')
-    setUser(null)
-  }
-
   const handleNavClose = () => {
     if (window.innerWidth <= 768) {
       setIsNavOpen(false)
@@ -46,6 +41,11 @@ const NavBar = () => {
 
   const handleToggleNav = () => {
     setIsNavOpen(!isNavOpen)
+  }
+
+  const handleSignOut = () => {
+    localStorage.removeItem('token')
+    setUser(null)
   }
   
   // return
@@ -62,7 +62,7 @@ const NavBar = () => {
             <li><Link to={'/cart'} onClick={handleNavClose}>Cart</Link></li>
             <li><Link to={'/library'} onClick={handleNavClose}>Library</Link></li>
             <li><button onClick={()=>{handleSeeSettings(); handleNavClose()}} className="navbar-settings-btn">Settings</button></li>
-            <li><Link to='/' onClick={() => {handleSignOut; handleNavClose() }}>Sign Out</Link></li>
+            <li><Link to='/' onClick={() => {handleSignOut(); handleNavClose() }}>Sign Out</Link></li>
           </ul>
         </div>
       ) : (

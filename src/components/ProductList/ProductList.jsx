@@ -23,8 +23,10 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
     const { user } = useContext(UserContext)
     const { setIsSettings, setSettings } = useContext(SettingsContext)
 
+    // variables
     let productsList = []
 
+    // use effects
     useEffect(() => {
         const fetchSettings = async () => {
             const fetchedSettings = await showSettings(user._id)
@@ -52,7 +54,6 @@ const ProductList = ({ setIsModalOpen, isModalOpen, onCardClick, onClose, select
         if (user) { fetchSettings() }
     }, [user, setSettings, setIsSettings])
 
-    // useEffect
     useEffect(() => {
         if (location.pathname === '/cart') {
             const fetchCart = async () => {
