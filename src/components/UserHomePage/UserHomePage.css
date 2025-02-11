@@ -1,20 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 
-.product-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin-bottom: 30px;
-}
-
-.product-list-title {
+.home-page-title {
     color: white;
     font-family: "Geist", serif;
     text-shadow: 4px 3px 2px rgba(255,92,92,0.38);
     padding: 12px 0 0 0;
-}
-
-.product-list-card {
-    margin-bottom: 60px;
 }

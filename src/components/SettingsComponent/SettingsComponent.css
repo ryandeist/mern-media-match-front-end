@@ -40,12 +40,12 @@
     max-height: 70vh;
 }
 
-.save-button {
+.save-btn {
     position: sticky;
     bottom: 0;
     padding: 10px;
     background-color: #1976d2;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -53,6 +53,39 @@
     box-sizing: border-box;
 }
 
-.save-button:hover {
+.save-btn:hover {
     background-color: #155a8a;
+}
+
+@media (max-width: 600px) {
+    .settings-form {
+      padding: 10px;
+      height: auto; 
+    }
+  
+    .section-heading {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+  
+    .checkbox-label {
+      font-size: 14px; 
+      margin-bottom: 8px;
+    }
+  
+    .checkbox-grid {
+      grid-template-columns: 1fr; 
+      overflow: auto;
+      gap: 5px; 
+    }
+  
+    .save-btn {
+      padding: 12px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .checkbox-grid::-webkit-scrollbar, .settings-form::-webkit-scrollbar {
+        display: none;
+    }
 }

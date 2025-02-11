@@ -16,8 +16,8 @@ const SettingsComponent = () => {
     const [newSettings, setNewSettings] = useState(settings)
 
     //handler functions
-    const handleCheckboxChange = async (evt) => {
-        await setNewSettings((prev) => {
+    const handleCheckboxChange = (evt) => {
+        setNewSettings((prev) => {
             if (evt.target.name === "media") { // change to media when rendering dynamically
                 const selectedMedia = evt.target.value
                 const updatedMedia = prev.media.includes(selectedMedia)

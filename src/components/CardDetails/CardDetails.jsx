@@ -1,6 +1,6 @@
 // imports
 import './CardDetails.css'
-import { addToCart, removeFromCart } from '../../services/cartService'
+import { removeFromCart } from '../../services/cartService'
 import { useContext, useEffect, useState } from "react"
 import { purchase, removeFromLibrary } from '../../services/libraryService'
 import { UserContext } from "../../contexts/UserContext"
@@ -11,7 +11,7 @@ import { createReview, deleteReview, findReviews, updateReview } from '../../ser
 const media = import.meta.glob('/public/logos/*.png')
 
 // hooks
-const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, setGameData, setIsModalOpen, setReset, reset }) => {
+const CardDetails = ({ setLibrary, setCart, selectedGame, onAddToCart, onClose, setIsModalOpen }) => {
   const { user } = useContext(UserContext)
   const location = useLocation()
 
@@ -26,7 +26,6 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
       const fetchReview = async () => {
         try {
           const fetchedReview = await findReviews(selectedGame._id)
-          console.log(fetchedReview)
           if (fetchedReview.err) {
             setReview(initReviewState)
           } else {
@@ -46,19 +45,6 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
   if (!selectedGame) return setIsModalOpen(false)
 
   // handler functions
-  const handleAddToCart = async (buttonName) => {
-    try {
-      if (buttonName === 'add') await addToCart(user._id, selectedGame)
-      setGameData((prev) => prev.filter((game) => game.id !== selectedGame.id))
-      setTimeout(setIsModalOpen(false), "1500")
-      if (gameData.length === 1) { // due to lag of "setGameData", array length will read as 1 when we are emptying it
-        setReset(!reset)
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
   const handleRemoveFromCart = async () => {
     try {
       await removeFromCart(user._id, selectedGame._id)
@@ -121,8 +107,8 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
 
   // return
   return (
-    <div className="modal-overlay" >
-      <div className="card-details-modal">
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="card-details-modal" onClick={(evt) => evt.stopPropagation()}>
         <div>
           <div className="card-modal-header">
             <img className="card-modal-icon" src={currentMedia} alt={selectedGame.media} />
@@ -213,8 +199,8 @@ const CardDetails = ({ setLibrary, setCart, gameData, selectedGame, onClose, set
               </div>
 
               : <div className="modal-btns">
-                <button className="remove-btn" onClick={() => handleAddToCart()}>Remove</button>
-                <button className="add-to-cart-btn" onClick={() => handleAddToCart('add')}>Add to Cart</button>
+                <button className="remove-btn" onClick={() => onAddToCart('', selectedGame)}>Remove</button>
+                <button className="add-to-cart-btn" onClick={() => onAddToCart('add', selectedGame)}>Add to Cart</button>
               </div>
         }
       </div>

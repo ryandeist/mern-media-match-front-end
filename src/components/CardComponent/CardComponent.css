@@ -2,7 +2,7 @@
     width: 300px;
     background-color: white;
     border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 17px 17px 17px 0px rgba(0,0,0,0.75);
     overflow: hidden;
     position: relative;
     padding: 16px;
@@ -10,11 +10,16 @@
     flex-direction: column;
     justify-content: space-between;
     margin: 10px;
-    /* added to set up push */
+    margin-bottom: 30px;
 }
 
 .card:hover, .registration-card:hover {
     transform: translateY(-10px);
+    cursor: grab;
+}
+
+.card:active {
+    cursor: grabbing;
 }
 
 .card h3, .registration-card h3 {
@@ -37,6 +42,8 @@
     border-radius: 10px;
     object-fit: cover;
     margin-top: 10px;
+    user-drag: none;
+    pointer-events: none;
 }
 
 .card-info {
@@ -80,5 +87,37 @@
     .card {
         color: #213547;
         background-color: #ffffff;
+    }
+}
+
+@media (max-width: 600px) {
+    .card {
+        width: 250px; 
+        padding: 12px; 
+        margin: 5px; 
+        margin-bottom: 20px;
+    }
+
+    .card h3 {
+        font-size: 1.1rem;
+    }
+
+    .card-info {
+        flex-direction: column; 
+        align-items: flex-start;
+    }
+
+    .card-info p {
+        font-size: 0.9rem; 
+        margin-bottom: 5px; 
+    }
+
+    .see-more-btn {
+        font-size: 0.9rem; 
+        padding: 8px; 
+    }
+
+    .card-image {
+        border-radius: 8px; 
     }
 }
