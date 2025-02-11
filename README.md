@@ -44,6 +44,13 @@ Developing this app allowed our team to showcase React’s strengths, including 
 - [Page Icon](https://pngtree.com/freepng/red-and-black-logo_5517319.html) by [PNG Tree](https://pngtree.com/)
 - Game data is pulled from [IGDB API](https://api-docs.igdb.com/#getting-started)
 
+    #### Icon and Logo
+    - [Game Controller Icon](https://icons8.com/icon/JtRYpjtdhzhs/game-controller) by [Icons8](https://icons8.com)
+    - [Book Stack Icon](https://icons8.com/icon/37815/book-stack) by [Icon8](https://icons8.com)
+    - [Headphones Icon](https://icons8.com/icon/2768/headphones) by [Icon8](https://icons8.com)
+    - [Remote Control Icon](https://icons8.com/icon/3703/remote-control) by [Icon8](https://icons8.com)
+    - [Clapper Board Icon](https://icons8.com/icon/iCYNK0OSIxsw/clapper-board) by [Icon8](https://icons8.com)
+    - [Tinder Icon](https://icons8.com/icon/118608/tinder) by [Icon8](https://icons8.com)
 
 ## Built with:
 ![React](https://img.shields.io/badge/react-%2361DAFB?style=for-the-badge&logo=react&logoColor=black)
