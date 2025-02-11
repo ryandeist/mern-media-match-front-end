@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { SettingsContext } from '../../contexts/SettingsContext'
-import Logo from '/logos/Logo.png'
+import Icon from '/logos/MediaMatchIcon.png'
 // component
 const NavBar = () => {
   // hooks
@@ -42,9 +42,10 @@ const NavBar = () => {
   return (
     <nav className='navbar'>
       <div className='left'>
-        <Link to='/'><img src={Logo} alt='Media Match Logo' /></Link>
+        <Link to='/'><img src={Icon} alt='Media Match Icon' /></Link>
       </div>
       {user ? (
+
         <div className='right'>
           <ul className={`nav-links ${isNavOpen ? 'active' : ''}`}>
             <li><Link to={'/'}>Dashboard</Link></li>

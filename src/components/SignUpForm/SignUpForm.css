@@ -1,43 +1,39 @@
-.container {
+.sign-up-page {
     height: 100%;
     display: flex;
     overflow: hidden;
     align-items: center;
+    flex-direction: column;
 }
 
-.container h1 {
+.sign-up-header {
     margin: auto;
 }
-  
-.container p {
+
+.sign-up-page p {
     margin: 0;
-    padding: 0px 0 10px;
+    padding: 0 0 10px;
+    color: red;
 }
-  
-.container img {
-    width: 65%;
+
+.sign-up-row {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 90%;
+    align-items: center;
+}
+
+.media-match-logo img {
+    width: 90%;
     max-width: 500px;
 }
-  
-.container section {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    padding: 28px 21px;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-}
-  
-.container section:first-child {
-    background-color: #fdfeff;
-}
-  
-.container input {
+
+.sign-up-page input {
     margin: 7px 0px 14px 0px;
 }
-  
-.container input,
+
+.sign-up-page input,
 button {
     width: 90%;
     padding: 14px;
@@ -45,26 +41,28 @@ button {
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
 }
-  
-.container div {
+
+.sign-up-page div {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
-  
-.container label {
+
+.sign-up-page label {
     font-weight: 600;
     margin: 7px 0px 14px 0px;
 }
-  
-.container button {
+
+.sign-up-page button {
+    width: 100%;
+    font-size: 20px;
     color: white;
     font-weight: 600;
     background: #00a0df;
     margin: 21px 0px 0px 0px;
 }
-  
-.container a {
+
+.sign-up-page a {
     border: none;
     font-size: 14px;
     background: none;
@@ -73,28 +71,26 @@ button {
     text-align: center;
     color: rgb(200, 200, 200);
 }
-  
+
 input:focus {
     outline: none;
     border: 1px solid #00a0df;
 }
 
 @media (prefers-color-scheme: dark) {
-    .container h1 {
+    .sign-up-header {
       color: #213547;
       background-color: #ffffff;
     }
 }
-  
+
 @media only screen and (max-width: 912px) {
-    .container section {
+    .sign-up-row {
       width: 100%;
       justify-content: flex-start;
     }
-    .container section:first-child {
-      display: none;
-    }
-    .container form {
+
+    .sign-up-form {
       min-width: 100%;
     }
 }

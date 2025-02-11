@@ -1,16 +1,17 @@
 // imports
+import './SignInForm.css'
 import { useState, useContext } from 'react'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { signIn } from '../../services/authService'
-import styles from './SignInForm.module.css'
-import Logo from '/logos/Logo.png'
+import Logo from '/MediaMatchLogo22.png'
 
 // component
 const SignInForm = () => {
   // hooks
   const { setUser } = useContext(UserContext)
   const navigate = useNavigate()
+  const location = useLocation()
 
   // state variables
   const [formData, setFormData] = useState({ username: '', password: '' })
@@ -38,38 +39,42 @@ const SignInForm = () => {
   // return
   return (
     <>
-      <main className={styles.container}>
-        <section>
-          <h1>Sign In</h1>
-          <img src={Logo} alt='Media Match Logo' />
-        </section>
-        <section>
-          <form autoComplete="off" onSubmit={handleSubmit}>
-          <p style={{ color: "red" }}>{message}</p>
-            <div>
-              <label htmlFor="username">Username:</label>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                value={username}
-                onChange={handleChange}
-                required
-              />
+      <main className='sign-in-page'>
+        <h1 className='sign-in-header'>Sign In</h1>
+        <section className='sign-in-row'>
+          {location.pathname === "/sign-in" &&
+            <div className='media-match-logo'>
+              <img src={Logo} alt='Media Match Logo' />
             </div>
-            <div>
-              <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                value={password}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <button type="submit">Sign In</button>
-          </form>
+          }
+          <div className='sign-in-form'>
+            <form autoComplete="off" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="username">Username:</label>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  value={username}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="password">Password:</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  value={password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <p>{message}</p>
+              <button type="submit">Sign In</button>
+            </form>
+          </div>
         </section>
       </main>
     </>
