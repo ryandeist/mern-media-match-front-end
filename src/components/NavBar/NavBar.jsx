@@ -68,9 +68,9 @@ const NavBar = () => {
       ) : (
         <div className='right'>
           <ul className={`nav-links ${isNavOpen ? 'active' : ''}`}>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/sign-up'>Sign Up</Link></li>
-            <li><Link to='/sign-in'>Sign In</Link></li>
+            <li><Link to='/' onClick={handleNavClose}>Home</Link></li>
+            <li><Link to='/sign-up' onClick={handleNavClose}>Sign Up</Link></li>
+            <li><Link to='/sign-in' onClick={handleNavClose}>Sign In</Link></li>
           </ul>
         </div>
       )}
