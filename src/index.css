@@ -23,12 +23,21 @@ a:hover {
 }
 
 body {
+  background-color: #7a7a7a;
+  min-height: 100vh;
   margin: 0;
   display: flex;
   place-items: center;
   padding-top: 80px;
   min-width: 320px;
-  height: calc(100vh - 80px);
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.no-overflow {
+  overflow: hidden;
 }
 
 h1 {

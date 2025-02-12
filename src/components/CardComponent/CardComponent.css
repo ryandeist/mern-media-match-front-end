@@ -13,7 +13,7 @@
     margin-bottom: 30px;
 }
 
-.card:hover, .registration-card:hover {
+.hover-effect:hover {
     transform: translateY(-10px);
     cursor: grab;
 }
