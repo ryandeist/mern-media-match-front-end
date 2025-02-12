@@ -97,7 +97,13 @@ input:focus {
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
+    .sign-in-page {
+      padding: 20px;
+    }
+    .sign-in-header {
+      font-size: 40px; 
+    }
     .sign-in-row {
       justify-content: flex-start;
     }

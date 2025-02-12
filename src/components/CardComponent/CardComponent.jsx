@@ -17,9 +17,6 @@ const CardComponent = ({ gameData, onCardClick }) => {
     // state variables
     const [isRegister, setIsRegister] = useState(false)
 
-    // variables
-    const applyTransform = location.pathname !== '/'
-
     // source of truth
     let card
     if (user) {
@@ -59,14 +56,14 @@ const CardComponent = ({ gameData, onCardClick }) => {
                 </>
               : <>
                   <SignUpForm />
-                  <button className='see-more-btn' onClick={() => handleAuth('')}>Back</button>
+                  <button className='back-btn' onClick={() => handleAuth('')}>Back</button>
                 </>
             }
         </div>
     )
     if (!card) return <div>Loading...</div>
     return (
-        <div className={`card ${applyTransform ? "hover-effect" : ""}`}>
+        <div className="card">
             <h3>{card?.title || "Untitled"}</h3>
             <img className="card-image" src={card?.cover} alt="cover image" />
             <button className="see-more-btn" onClick={handleClick}>See More</button>

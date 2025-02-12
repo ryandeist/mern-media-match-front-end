@@ -72,7 +72,6 @@
     object-fit: cover;
     margin: 10px 0;
     border: 1px solid black;
-    user-drag: none;
     pointer-events: none;
 }
 

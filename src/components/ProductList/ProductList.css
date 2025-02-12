@@ -12,6 +12,7 @@
     color: white;
     font-family: "Geist", serif;
     text-shadow: 4px 3px 2px rgba(255,92,92,0.38);
+    margin-bottom: 5px;
 }
 
 .product-list-card {
