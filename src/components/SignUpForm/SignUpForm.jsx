@@ -101,7 +101,7 @@ const SignUpForm = () => {
                 />
               </div>
               <p>{message}</p>
-              <button disabled={isSignUpValid()}>Sign Up</button>
+              <button disabled={isSignUpValid()} >Sign Up</button>
             </form>
           </div>
         </section>

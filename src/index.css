@@ -26,8 +26,9 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  padding-top: 80px;
   min-width: 320px;
-  min-height: 100vh;
+  height: calc(100vh - 80px);
 }
 
 h1 {

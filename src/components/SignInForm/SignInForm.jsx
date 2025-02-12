@@ -36,6 +36,15 @@ const SignInForm = () => {
     }
   }
 
+  // predicate function
+  const isSignUpValid = () => {
+    return !(
+      username &&
+      password 
+    )
+  }
+
+
   // return
   return (
     <>
@@ -72,7 +81,7 @@ const SignInForm = () => {
                 />
               </div>
               <p>{message}</p>
-              <button type="submit">Sign In</button>
+              <button disabled={isSignUpValid()}>Sign In</button>
             </form>
           </div>
         </section>

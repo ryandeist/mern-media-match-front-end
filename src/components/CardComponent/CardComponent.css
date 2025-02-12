@@ -73,6 +73,8 @@
     border-radius: 50px;
     text-align: center;
     width: 100%;
+    max-width: 270px;
+    margin: auto;
     font-size: 1rem;
     cursor: pointer;
     margin-top: 15px;

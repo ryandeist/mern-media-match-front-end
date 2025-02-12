@@ -49,16 +49,7 @@ button {
 
 .sign-in-page label {
     font-weight: 600;
-    margin: 7px 0px 14px 0px;
-}
-
-.sign-in-page button {
-    width: 100%;
-    font-size: 20px;
-    color: white;
-    font-weight: 600;
-    background: #00a0df;
-    margin: 21px 0px 0px 0px;
+    text-align: left;
 }
 
 .sign-in-page a {
@@ -76,6 +67,29 @@ input:focus {
     border: 1px solid #00a0df;
 }
 
+.sign-in-page button {
+    background-color: #FF5C5C;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50px;
+    text-align: center;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.sign-in-page button:hover {
+    background-color: #FF3B3B;
+}
+
+.sign-in-page button:disabled:hover {
+    background-color: #FF5C5C;
+    cursor: not-allowed
+}
+
 @media (prefers-color-scheme: dark) {
     .sign-in-header {
       color: #213547;
@@ -83,9 +97,8 @@ input:focus {
     }
 }
 
-@media only screen and (max-width: 912px) {
+@media only screen and (max-width: 768px) {
     .sign-in-row {
-      width: 100%;
       justify-content: flex-start;
     }
 

@@ -50,16 +50,30 @@ button {
 
 .sign-up-page label {
     font-weight: 600;
-    margin: 7px 0px 14px 0px;
+    text-align: left;
 }
 
 .sign-up-page button {
-    width: 100%;
-    font-size: 20px;
+    background-color: #FF5C5C;
     color: white;
-    font-weight: 600;
-    background: #00a0df;
-    margin: 21px 0px 0px 0px;
+    border: none;
+    padding: 10px;
+    border-radius: 50px;
+    text-align: center;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.sign-up-page button:hover {
+    background-color: #FF3B3B;
+}
+
+.sign-up-page button:disabled:hover {
+    background-color: #FF5C5C;
+    cursor: not-allowed
 }
 
 .sign-up-page a {
@@ -86,7 +100,6 @@ input:focus {
 
 @media only screen and (max-width: 912px) {
     .sign-up-row {
-      width: 100%;
       justify-content: flex-start;
     }
 
