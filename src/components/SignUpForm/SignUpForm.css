@@ -98,9 +98,19 @@ input:focus {
     }
 }
 
-@media only screen and (max-width: 912px) {
+@media (max-width: 768px) {
+    .sign-up-page {
+      padding: 20px;
+    }
+    .sign-up-header {
+      font-size: 40px; 
+    }
     .sign-up-row {
       justify-content: flex-start;
+    }
+
+    .sign-up-page input, button {
+      font-size: 16px;
     }
 
     .sign-up-form {

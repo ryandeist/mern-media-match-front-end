@@ -11,9 +11,10 @@
     justify-content: space-between;
     margin: 10px;
     margin-bottom: 30px;
+    transform: translateY(0);
 }
 
-.hover-effect:hover {
+.card:hover, .registration-card:hover {
     transform: translateY(-10px);
     cursor: grab;
 }
@@ -42,7 +43,6 @@
     border-radius: 10px;
     object-fit: cover;
     margin-top: 10px;
-    user-drag: none;
     pointer-events: none;
 }
 
@@ -94,10 +94,10 @@
 
 @media (max-width: 768px) {
     .card, .registration-card {
-        transform: scale(0.75);
+        width: 275px;
         padding: 12px; 
         margin: 5px; 
-        margin-bottom: 20px;
+        margin-bottom: 8px;
     }
 
     .card h3 {
@@ -118,8 +118,14 @@
         font-size: 0.9rem; 
         padding: 8px; 
     }
-
+    .back-btn {
+        width: 211.5px;
+        margin: auto;
+    }
     .card-image {
+        width: 270px;
+        height: auto;
+        margin: auto;
         border-radius: 8px; 
     }
 }

@@ -1,7 +1,7 @@
 // imports
 import './App.css'
-import { useContext, useEffect, useState } from 'react'
-import { Route, Routes, useLocation } from 'react-router'
+import { useContext, useState } from 'react'
+import { Route, Routes } from 'react-router'
 import { UserContext } from './contexts/UserContext'
 import Landing from './components/Landing/Landing'
 import NavBar from './components/NavBar/NavBar'
@@ -14,21 +14,10 @@ import UserHomePage from './components/UserHomePage/UserHomePage'
 const App = () => {
   // hooks
   const { user } = useContext(UserContext)
-  const location = useLocation()
 
   // state variables
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedGame, setSelectedGame] = useState(null)
-
-  // use effect
-  useEffect(() => {
-    document.body.classList.remove('no-overflow')
-
-    if (location.pathname === '/' && window.innerWidth > 768) {
-      document.body.classList.add('no-overflow') 
-    }
-  }, [location.pathname])
-
 
   // handler functions
   const handleCardClick = (game) => {
