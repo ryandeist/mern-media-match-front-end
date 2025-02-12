@@ -99,7 +99,10 @@
         margin: 5px; 
         margin-bottom: 8px;
     }
-
+    .card:hover, .registration-card:hover {
+        transform: none; 
+    }
+    
     .card h3 {
         font-size: 1.1rem;
     }
