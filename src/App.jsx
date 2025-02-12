@@ -24,7 +24,7 @@ const App = () => {
   useEffect(() => {
     document.body.classList.remove('no-overflow')
 
-    if (location.pathname === '/') {
+    if (location.pathname === '/' && window.innerWidth > 768) {
       document.body.classList.add('no-overflow') 
     }
   }, [location.pathname])

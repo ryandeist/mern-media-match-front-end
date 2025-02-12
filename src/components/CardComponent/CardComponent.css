@@ -92,9 +92,9 @@
     }
 }
 
-@media (max-width: 600px) {
-    .card {
-        width: 250px; 
+@media (max-width: 768px) {
+    .card, .registration-card {
+        transform: scale(0.75);
         padding: 12px; 
         margin: 5px; 
         margin-bottom: 20px;
