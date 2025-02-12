@@ -13,7 +13,7 @@
     margin-bottom: 30px;
 }
 
-.card:hover, .registration-card:hover {
+.hover-effect:hover {
     transform: translateY(-10px);
     cursor: grab;
 }
@@ -73,6 +73,8 @@
     border-radius: 50px;
     text-align: center;
     width: 100%;
+    max-width: 270px;
+    margin: auto;
     font-size: 1rem;
     cursor: pointer;
     margin-top: 15px;
